@@ -1,4 +1,4 @@
-package us.coastalhacking.corvus.eclipse.ui.impl;
+package us.coastalhacking.corvus.eclipse.test.utils;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;

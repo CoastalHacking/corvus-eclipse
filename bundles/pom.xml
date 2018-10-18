@@ -17,5 +17,8 @@
 		<module>us.coastalhacking.corvus.eclipse.ui.api</module>
 		<module>us.coastalhacking.corvus.eclipse.ui.impl</module>
 		<module>us.coastalhacking.corvus.eclipse.resources</module>
+		<module>us.coastalhacking.corvus.eclipse.launcher</module>
+		<module>us.coastalhacking.corvus.eclipse.launcher.provider</module>
+		<module>us.coastalhacking.corvus.eclipse.test.utils</module>
 	</modules>
 </project>

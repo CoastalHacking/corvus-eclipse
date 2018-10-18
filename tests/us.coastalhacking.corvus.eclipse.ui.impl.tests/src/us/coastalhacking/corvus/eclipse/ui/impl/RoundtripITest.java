@@ -39,6 +39,7 @@ import org.junit.jupiter.api.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
+import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
 import us.coastalhacking.corvus.eclipse.ui.api.EclipseUiApi;
 
 @SuppressWarnings("restriction")

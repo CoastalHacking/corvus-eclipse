@@ -29,6 +29,6 @@
 
 	<modules>
 		<module>us.coastalhacking.corvus.eclipse.ui.impl.tests</module>
-		<!-- <module>us.coastalhacking.corvus.eclipse.ui.di.tests</module> -->
+		<module>us.coastalhacking.corvus.eclipse.launcher.provider.tests</module>
 	</modules>
 </project>
