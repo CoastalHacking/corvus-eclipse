@@ -1,4 +1,4 @@
-package us.coastalhacking.corvus.eclipse.launcher;
+package us.coastalhacking.corvus.eclipse.transaction;
 
 import org.eclipse.emf.ecore.EObject;
 

@@ -17,18 +17,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
+import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
-import us.coastalhacking.corvus.eclipse.launcher.EclipseLauncherApi.Properties;
-import us.coastalhacking.corvus.eclipse.launcher.ResourceInitializer;
+import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
+import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
 public class CorvusLauncherBaseTest {
 
 	@Rule
 	TemporaryFolder tempFolder = new TemporaryFolder();
-	
 
 	public CorvusLauncherBaseTest() throws Exception {
 		tempFolder.create();
@@ -39,17 +41,17 @@ public class CorvusLauncherBaseTest {
 		Map<String, Object> props = new HashMap<>();
 		String transactionId = getClass().getName() + ".shouldActivate";
 
-		props.put(Properties.CORVUS_TRANSACTION_ID, transactionId);
+		props.put(EclipseTransactionApi.Properties.CORVUS_TRANSACTION_ID, transactionId);
 
 		final List<ResourceInitializer> initializers = new ArrayList<>();
-		
+
 		String uriKey = "test:should.activate";
 		String pathKey = "test.should.activate";
 
 		Path xmi = Paths.get(tempFolder.getRoot().getAbsolutePath(), "test.xmi");
 		String pathValue = xmi.toFile().getAbsolutePath();
 		props.put(pathKey, pathValue);
-		
+
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.getEClassifiers().add(eClass);
@@ -77,6 +79,16 @@ public class CorvusLauncherBaseTest {
 			@Override
 			protected Collection<ResourceInitializer> getInitializers() {
 				return initializers;
+			}
+
+			@Override
+			protected TransactionalEditingDomain.Registry getDomainRegistry() {
+				return Registry.INSTANCE;
+			}
+
+			@Override
+			protected WorkspaceEditingDomainFactory getDomainFactory() {
+				return WorkspaceEditingDomainFactory.INSTANCE;
 			}
 		};
 

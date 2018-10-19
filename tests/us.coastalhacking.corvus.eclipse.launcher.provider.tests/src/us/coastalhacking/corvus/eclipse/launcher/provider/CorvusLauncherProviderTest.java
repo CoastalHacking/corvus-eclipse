@@ -28,9 +28,10 @@ import org.osgi.service.component.ComponentFactory;
 import org.osgi.service.component.ComponentInstance;
 
 import us.coastalhacking.corvus.eclipse.launcher.EclipseLauncherApi;
-import us.coastalhacking.corvus.eclipse.launcher.ResourceInitializer;
-import us.coastalhacking.corvus.eclipse.launcher.ResourceInitializerBase;
 import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
+import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
+import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
+import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializerBase;
 
 class CorvusLauncherProviderTest {
 
@@ -59,7 +60,7 @@ class CorvusLauncherProviderTest {
 	void shouldCreateResource() throws Exception {
 
 		Map<String, Object> props = new HashMap<>();
-		props.put(EclipseLauncherApi.Properties.CORVUS_TRANSACTION_ID,
+		props.put(EclipseTransactionApi.Properties.CORVUS_TRANSACTION_ID,
 				getClass().getName() + UUID.randomUUID().toString());
 
 		// Create and prep service

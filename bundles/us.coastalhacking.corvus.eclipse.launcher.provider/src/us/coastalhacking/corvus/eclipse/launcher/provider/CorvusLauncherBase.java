@@ -23,8 +23,8 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.AbstractEMFOperation;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 
-import us.coastalhacking.corvus.eclipse.launcher.EclipseLauncherApi.Properties;
-import us.coastalhacking.corvus.eclipse.launcher.ResourceInitializer;
+import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
+import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
 public abstract class CorvusLauncherBase {
 
@@ -35,7 +35,7 @@ public abstract class CorvusLauncherBase {
 	protected String transactionId;
 
 	protected void baseActivate(Map<String, ?> props) throws Exception {
-		this.transactionId = (String) props.get(Properties.CORVUS_TRANSACTION_ID);
+		this.transactionId = (String) props.get(EclipseTransactionApi.Properties.CORVUS_TRANSACTION_ID);
 
 		for (ResourceInitializer ri : getInitializers()) {
 
@@ -104,13 +104,9 @@ public abstract class CorvusLauncherBase {
 		return undoContext;
 	}
 
-	protected WorkspaceEditingDomainFactory getDomainFactory() {
-		return WorkspaceEditingDomainFactory.INSTANCE;
-	}
+	protected abstract WorkspaceEditingDomainFactory getDomainFactory();
 
-	protected TransactionalEditingDomain.Registry getDomainRegistry() {
-		return TransactionalEditingDomain.Registry.INSTANCE;
-	}
+	protected abstract TransactionalEditingDomain.Registry getDomainRegistry();
 
 	protected abstract Collection<ResourceInitializer> getInitializers();
 }

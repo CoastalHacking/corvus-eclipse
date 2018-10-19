@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Corvus Eclipse EMF Transaction
+Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.transaction
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Coastal Hacking
+Automatic-Module-Name: us.coastalhacking.corvus.eclipse.transaction
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: us.coastalhacking.corvus.eclipse.transaction
+Require-Bundle: org.eclipse.emf.transaction;bundle-version="1.9.1",
+ org.eclipse.emf.workspace;bundle-version="1.5.1"
