@@ -58,6 +58,15 @@ public interface EclipseResourcesFactory extends EFactory {
 	IProject createIProject();
 
 	/**
+	 * Returns a new object of class '<em>IWorkspace Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>IWorkspace Root</em>'.
+	 * @generated
+	 */
+	IWorkspaceRoot createIWorkspaceRoot();
+
+	/**
 	 * Returns a new object of class '<em>IFile</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

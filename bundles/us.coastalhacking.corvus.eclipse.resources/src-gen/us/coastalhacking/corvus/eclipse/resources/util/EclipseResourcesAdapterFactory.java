@@ -94,6 +94,10 @@ public class EclipseResourcesAdapterFactory extends AdapterFactoryImpl {
 				return createIProjectAdapter();
 			}
 			@Override
+			public Adapter caseIWorkspaceRoot(IWorkspaceRoot object) {
+				return createIWorkspaceRootAdapter();
+			}
+			@Override
 			public Adapter caseIFile(IFile object) {
 				return createIFileAdapter();
 			}
@@ -200,6 +204,20 @@ public class EclipseResourcesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIProjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot <em>IWorkspace Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot
+	 * @generated
+	 */
+	public Adapter createIWorkspaceRootAdapter() {
 		return null;
 	}
 

@@ -30,6 +30,11 @@ class IResource extends Semiotics {
 			parent.project
 		}
 	}
+	
+	op IWorkspaceRoot getWorkspaceRoot() {
+		project.workspaceRoot
+	}
+	
 	contains IPath fullPath
 }
 
@@ -38,6 +43,11 @@ class IContainer extends IResource {
 }
 
 class IProject extends IContainer {
+	refers IWorkspaceRoot root opposite projects
+}
+
+class IWorkspaceRoot extends IContainer {
+	refers IProject[] projects opposite root
 }
 
 class IFile extends IResource {

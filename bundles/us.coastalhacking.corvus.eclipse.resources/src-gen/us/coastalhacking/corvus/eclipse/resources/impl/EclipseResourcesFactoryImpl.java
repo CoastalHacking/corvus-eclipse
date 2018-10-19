@@ -63,6 +63,7 @@ public class EclipseResourcesFactoryImpl extends EFactoryImpl implements Eclipse
 			case EclipseResourcesPackage.IRESOURCE: return createIResource();
 			case EclipseResourcesPackage.ICONTAINER: return createIContainer();
 			case EclipseResourcesPackage.IPROJECT: return createIProject();
+			case EclipseResourcesPackage.IWORKSPACE_ROOT: return createIWorkspaceRoot();
 			case EclipseResourcesPackage.IFILE: return createIFile();
 			case EclipseResourcesPackage.IFOLDER: return createIFolder();
 			default:
@@ -118,6 +119,16 @@ public class EclipseResourcesFactoryImpl extends EFactoryImpl implements Eclipse
 	public IProject createIProject() {
 		IProjectImpl iProject = new IProjectImpl();
 		return iProject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IWorkspaceRoot createIWorkspaceRoot() {
+		IWorkspaceRootImpl iWorkspaceRoot = new IWorkspaceRootImpl();
+		return iWorkspaceRoot;
 	}
 
 	/**

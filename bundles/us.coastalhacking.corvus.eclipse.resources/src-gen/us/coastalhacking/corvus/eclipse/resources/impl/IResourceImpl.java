@@ -27,6 +27,7 @@ import us.coastalhacking.corvus.eclipse.resources.IContainer;
 import us.coastalhacking.corvus.eclipse.resources.IMarker;
 import us.coastalhacking.corvus.eclipse.resources.IProject;
 import us.coastalhacking.corvus.eclipse.resources.IResource;
+import us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot;
 
 import us.coastalhacking.corvus.eclipse.runtime.IPath;
 
@@ -306,6 +307,15 @@ public class IResourceImpl extends MinimalEObjectImpl.Container implements IReso
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public IWorkspaceRoot getWorkspaceRoot() {
+		return this.getProject().getWorkspaceRoot();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -515,6 +525,8 @@ public class IResourceImpl extends MinimalEObjectImpl.Container implements IReso
 		switch (operationID) {
 			case EclipseResourcesPackage.IRESOURCE___GET_PROJECT:
 				return getProject();
+			case EclipseResourcesPackage.IRESOURCE___GET_WORKSPACE_ROOT:
+				return getWorkspaceRoot();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

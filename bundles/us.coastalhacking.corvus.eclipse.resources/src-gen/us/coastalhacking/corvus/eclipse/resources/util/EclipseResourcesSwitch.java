@@ -117,6 +117,17 @@ public class EclipseResourcesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EclipseResourcesPackage.IWORKSPACE_ROOT: {
+				IWorkspaceRoot iWorkspaceRoot = (IWorkspaceRoot)theEObject;
+				T result = caseIWorkspaceRoot(iWorkspaceRoot);
+				if (result == null) result = caseIContainer(iWorkspaceRoot);
+				if (result == null) result = caseIResource(iWorkspaceRoot);
+				if (result == null) result = caseSemiotics(iWorkspaceRoot);
+				if (result == null) result = caseSignifier(iWorkspaceRoot);
+				if (result == null) result = caseSignified(iWorkspaceRoot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EclipseResourcesPackage.IFILE: {
 				IFile iFile = (IFile)theEObject;
 				T result = caseIFile(iFile);
@@ -214,6 +225,21 @@ public class EclipseResourcesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIProject(IProject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IWorkspace Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IWorkspace Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIWorkspaceRoot(IWorkspaceRoot object) {
 		return null;
 	}
 
