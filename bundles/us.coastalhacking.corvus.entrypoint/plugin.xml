@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EntryPoint -->
+      <package
+            uri="https://model.coastalhacking.us/corvus/entrypoint/0.1"
+            class="us.coastalhacking.corvus.entrypoint.EntrypointPackage"
+            genModel="model/EntryPoint.xcore"/>
+   </extension>
+
+</plugin>

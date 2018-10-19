@@ -1,0 +1,8 @@
+@Ecore(nsURI="https://model.coastalhacking.us/corvus/entrypoint/0.1")
+package us.coastalhacking.corvus.entrypoint
+
+import us.coastalhacking.corvus.semiotics.Semiotics
+
+class EntryPoint extends Semiotics {
+	
+}

@@ -16,5 +16,6 @@
 	<modules>
 		<module>us.coastalhacking.corvus.eclipse.dependencies.feature</module>
 		<module>us.coastalhacking.corvus.eclipse.ui.feature</module>
+		<module>us.coastalhacking.corvus.eclipse.model.feature</module>
 	</modules>
 </project>

@@ -1,0 +1,9 @@
+@GenModel(fileExtensions="eclipseRuntime", prefix="EclipseRuntime", modelName="EclipseRuntime")
+@Ecore(nsURI="https://model.coastalhacking.us/corvus/eclipseRuntime/0.1", nsPrefix="eclipseRuntime")
+package us.coastalhacking.corvus.eclipse.runtime
+
+import us.coastalhacking.corvus.semiotics.Semiotics
+
+class IPath extends Semiotics {
+	String portable
+}

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="us.coastalhacking.corvus.eclipse.ui.feature"
-      label="Corvus Eclipse UI"
+      id="us.coastalhacking.corvus.eclipse.model.feature"
+      label="Corvus Eclipse Model Feature"
       version="0.1.0.qualifier"
-      provider-name="Coastal Hacking"
-      license-feature="org.eclipse.license"
-      license-feature-version="2.0.1.v20180423-1114">
+      provider-name="Coastal Hacking">
 
-   <description url="https://github.com/CoastalHacking/corvus-eclipse">
-      Corvus Eclipse UI components
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -19,19 +17,15 @@
       [Enter License Description here.]
    </license>
 
-   <includes
-         id="us.coastalhacking.corvus.eclipse.model.feature"
-         version="0.0.0"/>
-
    <plugin
-         id="us.coastalhacking.corvus.eclipse.ui.api"
+         id="us.coastalhacking.corvus.entrypoint"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="us.coastalhacking.corvus.eclipse.ui.impl"
+         id="us.coastalhacking.corvus.eclipse.runtime"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -45,14 +39,7 @@
          unpack="false"/>
 
    <plugin
-         id="us.coastalhacking.corvus.eclipse.launcher"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="us.coastalhacking.corvus.eclipse.launcher.provider"
+         id="us.coastalhacking.corvus.semiotics"
          download-size="0"
          install-size="0"
          version="0.0.0"

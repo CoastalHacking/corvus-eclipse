@@ -1,0 +1,13 @@
+@Ecore(nsURI="https://model.coastalhacking.us/corvus/semiotics/0.1")
+package us.coastalhacking.corvus.semiotics
+
+interface Semiotics extends Signifier, Signified {
+}
+
+interface Signifier {
+	refers Signified[] signifieds opposite signifiers
+}
+
+interface Signified {
+	refers Signifier[] signifiers opposite signifieds
+}

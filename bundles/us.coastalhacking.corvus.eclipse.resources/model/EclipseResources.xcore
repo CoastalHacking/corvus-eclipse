@@ -1,0 +1,47 @@
+@GenModel(fileExtensions="eclipseResources", prefix="EclipseResources", modelName="EclipseResources")
+@Ecore(nsURI="https://model.coastalhacking.us/corvus/eclipseResources/0.1", nsPrefix="eclipseResources")
+package us.coastalhacking.corvus.eclipse.resources
+
+import us.coastalhacking.corvus.semiotics.Semiotics
+import us.coastalhacking.corvus.eclipse.runtime.IPath
+
+class Attribute wraps java.util.Map$Entry { 
+    String key
+    String value
+}
+
+class IMarker extends Semiotics {
+	long ^id
+	long creationTime
+	String ^type
+	contains Attribute[] attributes
+	container IResource resource opposite markers
+}
+
+class IResource extends Semiotics {
+	String name
+	contains IMarker[] markers opposite resource
+	container IContainer parent opposite members
+
+	op IProject getProject() {
+		if (parent instanceof IProject) {
+			parent as IProject			
+		} else {
+			parent.project
+		}
+	}
+	contains IPath fullPath
+}
+
+class IContainer extends IResource {
+	contains IResource[] members opposite parent
+}
+
+class IProject extends IContainer {
+}
+
+class IFile extends IResource {
+}
+
+class IFolder extends IContainer {
+}

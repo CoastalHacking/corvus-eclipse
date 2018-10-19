@@ -149,6 +149,8 @@
         name="org.eclipse.oomph.setup.pde"/>
     <requirement
         name="org.eclipse.m2e.feature.feature.group"/>
+    <requirement
+        name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
     <repository
         url="http://download.eclipse.org/technology/m2e/releases"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
@@ -205,6 +207,8 @@
           name="org.eclipse.emf.transaction.feature.group"/>
       <requirement
           name="org.eclipse.emf.workspace.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.ecore.xcore.feature.group"/>
       <sourceLocator
           rootFolder="${git.clone.location}"
           locateNestedProjects="true"/>

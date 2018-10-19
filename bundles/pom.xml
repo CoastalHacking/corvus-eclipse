@@ -20,5 +20,8 @@
 		<module>us.coastalhacking.corvus.eclipse.launcher</module>
 		<module>us.coastalhacking.corvus.eclipse.launcher.provider</module>
 		<module>us.coastalhacking.corvus.eclipse.test.utils</module>
+		<module>us.coastalhacking.corvus.semiotics</module>
+		<module>us.coastalhacking.corvus.eclipse.runtime</module>
+		<module>us.coastalhacking.corvus.entrypoint</module>
 	</modules>
 </project>
