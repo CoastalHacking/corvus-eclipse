@@ -59,6 +59,7 @@ class CorvusLauncherProviderTest {
 	@Test
 	void shouldCreateResource() throws Exception {
 
+
 		Map<String, Object> props = new HashMap<>();
 		props.put(EclipseTransactionApi.Properties.CORVUS_TRANSACTION_ID,
 				getClass().getName() + UUID.randomUUID().toString());
@@ -82,12 +83,16 @@ class CorvusLauncherProviderTest {
 		service.setRoot(eObject);
 
 		// Register service
-		bundleContext.registerService(ResourceInitializer.class, service, new Hashtable<>());
+		Map<String, Object> initProps = new HashMap<>();
+		initProps.put("test.foo", "test.bar");
+		props.put("initializers.target", "(test.foo=test.bar)");
+		bundleContext.registerService(ResourceInitializer.class, service, new Hashtable<>(initProps));
 
 		// Acquire CorvusLauncher ComponentFactory
 		ComponentFactory launcherFactory = TestUtils.getService(bundleContext, ComponentFactory.class, 250,
 				MessageFormat.format("(component.factory={0})", EclipseLauncherApi.Component.CORVUS_LAUNCHER_FACTORY));
 		assertNotNull(launcherFactory);
+		// FIXME: properties need to target ResourceInitializer
 		ComponentInstance instance = launcherFactory.newInstance(new Hashtable<>(props));
 		CorvusLauncherProvider provider = (CorvusLauncherProvider) instance.getInstance();
 		assertNotNull(provider);
