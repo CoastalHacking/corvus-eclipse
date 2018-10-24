@@ -17,6 +17,5 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="3.13.0",
  org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore.xcore.lib,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- us.coastalhacking.corvus.semiotics;bundle-version="0.1.0";visibility:=reexport,
- us.coastalhacking.corvus.eclipse.runtime;bundle-version="0.1.0";visibility:=reexport
+ us.coastalhacking.corvus.semiotics;bundle-version="0.1.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

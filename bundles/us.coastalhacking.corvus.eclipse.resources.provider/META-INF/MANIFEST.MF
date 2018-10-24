@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Corvus Eclipse Resources Provider
+Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.resources.provider
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Coastal Hacking
+Automatic-Module-Name: us.coastalhacking.corvus.eclipse.resources.provider
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: org.eclipse.core.commands.operations,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.osgi.service.component.annotations;version="1.3.0"
+Service-Component: OSGI-INF/us.coastalhacking.corvus.eclipse.resources.provider.EclipseResourcesResourceInitializerProvider.xml,
+ OSGI-INF/us.coastalhacking.corvus.eclipse.resources.provider.MarkerSupportProvider.xml
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.emf.workspace,
+ org.eclipse.emf.transaction,
+ us.coastalhacking.corvus.eclipse.resources;bundle-version="0.1.0",
+ us.coastalhacking.corvus.eclipse.transaction;bundle-version="0.1.0",
+ org.eclipse.emf.ecore,
+ com.google.guava

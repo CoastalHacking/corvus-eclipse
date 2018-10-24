@@ -10,6 +10,8 @@ import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.commands.operations.ObjectUndoContext;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -34,11 +36,14 @@ public abstract class CorvusLauncherBase {
 	protected ResourceSet resourceSet;
 	protected String transactionId;
 
+	// TODO: change to ctor when DS 1.4 is in target platform
+	// TODO: refactor to just a Command and ignore workspace stuff
 	protected void baseActivate(Map<String, ?> props) throws Exception {
 		this.transactionId = (String) props.get(EclipseTransactionApi.Properties.CORVUS_TRANSACTION_ID);
 
+		// TODO: make testable
+		// Initialize resources
 		for (ResourceInitializer ri : getInitializers()) {
-
 			final String pathValue = (String) props.get(ri.getPathKey());
 			final IUndoableOperation operation = new AbstractEMFOperation(getDomain(),
 					MessageFormat.format("Initalizing Corvus Launcher URI {0}", ri.getUriKey())) {
@@ -68,9 +73,14 @@ public abstract class CorvusLauncherBase {
 			getOperationHistory().execute(operation, new NullProgressMonitor(), null);
 		}
 
+		// TODO: Add adapters
+
+		// Add marker listener
+//		getWorkspace().addResourceChangeListener(getChangeListener());
 	}
 
 	protected void baseDeactivate(Map<String, ?> props) {
+//		getWorkspace().removeResourceChangeListener(getChangeListener());
 		getDomainRegistry().remove(transactionId);
 		getDomain().dispose();
 	}
@@ -109,4 +119,8 @@ public abstract class CorvusLauncherBase {
 	protected abstract TransactionalEditingDomain.Registry getDomainRegistry();
 
 	protected abstract Collection<ResourceInitializer> getInitializers();
+	
+//	protected abstract IWorkspace getWorkspace();
+//	
+//	protected abstract IResourceChangeListener getChangeListener(); 
 }

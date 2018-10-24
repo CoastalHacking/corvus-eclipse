@@ -3,7 +3,6 @@
 package us.coastalhacking.corvus.eclipse.resources
 
 import us.coastalhacking.corvus.semiotics.Semiotics
-import us.coastalhacking.corvus.eclipse.runtime.IPath
 
 class Attribute wraps java.util.Map$Entry { 
     String key
@@ -19,39 +18,13 @@ class IMarker extends Semiotics {
 }
 
 class IResource extends Semiotics {
-	String name
-	contains IMarker[] markers opposite resource
-	container IContainer parent opposite members
+	String fullPath
+	contains IMarker[] markers opposite resource keys ^id
+	container IWorkspaceRoot root opposite members
 
-	op IProject getProject() {
-		if (parent instanceof IProject) {
-			parent as IProject			
-		} else {
-			parent.project
-		}
-	}
-	
-	op IWorkspaceRoot getWorkspaceRoot() {
-		project.workspaceRoot
-	}
-	
-	contains IPath fullPath
 }
 
-class IContainer extends IResource {
-	contains IResource[] members opposite parent
+class IWorkspaceRoot {
+	contains IResource[] members opposite root keys fullPath
 }
 
-class IProject extends IContainer {
-	refers IWorkspaceRoot root opposite projects
-}
-
-class IWorkspaceRoot extends IContainer {
-	refers IProject[] projects opposite root
-}
-
-class IFile extends IResource {
-}
-
-class IFolder extends IContainer {
-}

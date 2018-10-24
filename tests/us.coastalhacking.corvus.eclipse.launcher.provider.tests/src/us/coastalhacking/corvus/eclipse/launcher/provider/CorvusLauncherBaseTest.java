@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -90,6 +92,16 @@ public class CorvusLauncherBaseTest {
 			protected WorkspaceEditingDomainFactory getDomainFactory() {
 				return WorkspaceEditingDomainFactory.INSTANCE;
 			}
+
+//			@Override
+//			protected IWorkspace getWorkspace() {
+//				return null;
+//			}
+//
+//			@Override
+//			protected IResourceChangeListener getChangeListener() {
+//				return null;
+//			}
 		};
 
 		// Test

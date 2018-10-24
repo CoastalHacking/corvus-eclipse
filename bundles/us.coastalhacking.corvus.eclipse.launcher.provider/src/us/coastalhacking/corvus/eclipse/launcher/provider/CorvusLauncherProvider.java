@@ -3,6 +3,8 @@ package us.coastalhacking.corvus.eclipse.launcher.provider;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.osgi.service.component.annotations.Activate;
@@ -22,6 +24,12 @@ public class CorvusLauncherProvider extends CorvusLauncherBase {
 
 	@Reference
 	TransactionalRegistrar registrar;
+	
+	@Reference
+	IWorkspace workspace;
+	
+	@Reference(target="(corvus.domain=org.eclipse.core.resources)")
+	IResourceChangeListener changeListener;
 
 	@Activate
 	void activate(Map<String, ?> props) throws Exception {
@@ -47,5 +55,15 @@ public class CorvusLauncherProvider extends CorvusLauncherBase {
 	protected WorkspaceEditingDomainFactory getDomainFactory() {
 		return registrar.workspaceFactory();
 	}
+
+//	@Override
+//	protected IWorkspace getWorkspace() {
+//		return workspace;
+//	}
+//
+//	@Override
+//	protected IResourceChangeListener getChangeListener() {
+//		return changeListener;
+//	}
 
 }

@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 
 import org.eclipse.core.resources.IResource;
 
+@Deprecated
 public interface MarkerSupport {
 
 	interface Coordinate {

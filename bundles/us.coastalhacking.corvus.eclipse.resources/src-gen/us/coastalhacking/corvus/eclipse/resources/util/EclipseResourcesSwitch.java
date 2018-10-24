@@ -96,56 +96,9 @@ public class EclipseResourcesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EclipseResourcesPackage.ICONTAINER: {
-				IContainer iContainer = (IContainer)theEObject;
-				T result = caseIContainer(iContainer);
-				if (result == null) result = caseIResource(iContainer);
-				if (result == null) result = caseSemiotics(iContainer);
-				if (result == null) result = caseSignifier(iContainer);
-				if (result == null) result = caseSignified(iContainer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case EclipseResourcesPackage.IPROJECT: {
-				IProject iProject = (IProject)theEObject;
-				T result = caseIProject(iProject);
-				if (result == null) result = caseIContainer(iProject);
-				if (result == null) result = caseIResource(iProject);
-				if (result == null) result = caseSemiotics(iProject);
-				if (result == null) result = caseSignifier(iProject);
-				if (result == null) result = caseSignified(iProject);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case EclipseResourcesPackage.IWORKSPACE_ROOT: {
 				IWorkspaceRoot iWorkspaceRoot = (IWorkspaceRoot)theEObject;
 				T result = caseIWorkspaceRoot(iWorkspaceRoot);
-				if (result == null) result = caseIContainer(iWorkspaceRoot);
-				if (result == null) result = caseIResource(iWorkspaceRoot);
-				if (result == null) result = caseSemiotics(iWorkspaceRoot);
-				if (result == null) result = caseSignifier(iWorkspaceRoot);
-				if (result == null) result = caseSignified(iWorkspaceRoot);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case EclipseResourcesPackage.IFILE: {
-				IFile iFile = (IFile)theEObject;
-				T result = caseIFile(iFile);
-				if (result == null) result = caseIResource(iFile);
-				if (result == null) result = caseSemiotics(iFile);
-				if (result == null) result = caseSignifier(iFile);
-				if (result == null) result = caseSignified(iFile);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case EclipseResourcesPackage.IFOLDER: {
-				IFolder iFolder = (IFolder)theEObject;
-				T result = caseIFolder(iFolder);
-				if (result == null) result = caseIContainer(iFolder);
-				if (result == null) result = caseIResource(iFolder);
-				if (result == null) result = caseSemiotics(iFolder);
-				if (result == null) result = caseSignifier(iFolder);
-				if (result == null) result = caseSignified(iFolder);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,36 +152,6 @@ public class EclipseResourcesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IContainer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IContainer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIContainer(IContainer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IProject</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IProject</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIProject(IProject object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>IWorkspace Root</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -240,36 +163,6 @@ public class EclipseResourcesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIWorkspaceRoot(IWorkspaceRoot object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IFile</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IFile</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIFile(IFile object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IFolder</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IFolder</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIFolder(IFolder object) {
 		return null;
 	}
 

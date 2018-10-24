@@ -86,24 +86,8 @@ public class EclipseResourcesAdapterFactory extends AdapterFactoryImpl {
 				return createIResourceAdapter();
 			}
 			@Override
-			public Adapter caseIContainer(IContainer object) {
-				return createIContainerAdapter();
-			}
-			@Override
-			public Adapter caseIProject(IProject object) {
-				return createIProjectAdapter();
-			}
-			@Override
 			public Adapter caseIWorkspaceRoot(IWorkspaceRoot object) {
 				return createIWorkspaceRootAdapter();
-			}
-			@Override
-			public Adapter caseIFile(IFile object) {
-				return createIFileAdapter();
-			}
-			@Override
-			public Adapter caseIFolder(IFolder object) {
-				return createIFolderAdapter();
 			}
 			@Override
 			public Adapter caseSignifier(Signifier object) {
@@ -180,34 +164,6 @@ public class EclipseResourcesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.eclipse.resources.IContainer <em>IContainer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IContainer
-	 * @generated
-	 */
-	public Adapter createIContainerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.eclipse.resources.IProject <em>IProject</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IProject
-	 * @generated
-	 */
-	public Adapter createIProjectAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot <em>IWorkspace Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -218,34 +174,6 @@ public class EclipseResourcesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIWorkspaceRootAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.eclipse.resources.IFile <em>IFile</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IFile
-	 * @generated
-	 */
-	public Adapter createIFileAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.eclipse.resources.IFolder <em>IFolder</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IFolder
-	 * @generated
-	 */
-	public Adapter createIFolderAdapter() {
 		return null;
 	}
 

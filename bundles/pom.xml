@@ -17,11 +17,11 @@
 		<module>us.coastalhacking.corvus.eclipse.ui.api</module>
 		<module>us.coastalhacking.corvus.eclipse.ui.impl</module>
 		<module>us.coastalhacking.corvus.eclipse.resources</module>
+		<module>us.coastalhacking.corvus.eclipse.resources.provider</module>
 		<module>us.coastalhacking.corvus.eclipse.launcher</module>
 		<module>us.coastalhacking.corvus.eclipse.launcher.provider</module>
 		<module>us.coastalhacking.corvus.eclipse.test.utils</module>
 		<module>us.coastalhacking.corvus.semiotics</module>
-		<module>us.coastalhacking.corvus.eclipse.runtime</module>
 		<module>us.coastalhacking.corvus.entrypoint</module>
 		<module>us.coastalhacking.corvus.eclipse.transaction</module>
 		<module>us.coastalhacking.corvus.eclipse.transaction.provider</module>

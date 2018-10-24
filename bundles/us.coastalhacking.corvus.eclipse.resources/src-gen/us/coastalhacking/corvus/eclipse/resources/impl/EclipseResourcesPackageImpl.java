@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -15,15 +14,9 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesFactory;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage;
-import us.coastalhacking.corvus.eclipse.resources.IContainer;
-import us.coastalhacking.corvus.eclipse.resources.IFile;
-import us.coastalhacking.corvus.eclipse.resources.IFolder;
 import us.coastalhacking.corvus.eclipse.resources.IMarker;
-import us.coastalhacking.corvus.eclipse.resources.IProject;
 import us.coastalhacking.corvus.eclipse.resources.IResource;
 import us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot;
-
-import us.coastalhacking.corvus.eclipse.runtime.EclipseRuntimePackage;
 
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
 
@@ -60,35 +53,7 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass iContainerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass iProjectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass iWorkspaceRootEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass iFileEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass iFolderEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -140,7 +105,6 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 		// Initialize simple dependencies
 		EcorePackage.eINSTANCE.eClass();
 		SemioticsPackage.eINSTANCE.eClass();
-		EclipseRuntimePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theEclipseResourcesPackage.createPackageContents();
@@ -251,7 +215,7 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIResource_Name() {
+	public EAttribute getIResource_FullPath() {
 		return (EAttribute)iResourceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -269,71 +233,8 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIResource_Parent() {
+	public EReference getIResource_Root() {
 		return (EReference)iResourceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIResource_FullPath() {
-		return (EReference)iResourceEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIResource__GetProject() {
-		return iResourceEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getIResource__GetWorkspaceRoot() {
-		return iResourceEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIContainer() {
-		return iContainerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIContainer_Members() {
-		return (EReference)iContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIProject() {
-		return iProjectEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIProject_Root() {
-		return (EReference)iProjectEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -350,26 +251,8 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIWorkspaceRoot_Projects() {
+	public EReference getIWorkspaceRoot_Members() {
 		return (EReference)iWorkspaceRootEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIFile() {
-		return iFileEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIFolder() {
-		return iFolderEClass;
 	}
 
 	/**
@@ -412,25 +295,12 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 		createEReference(iMarkerEClass, IMARKER__RESOURCE);
 
 		iResourceEClass = createEClass(IRESOURCE);
-		createEAttribute(iResourceEClass, IRESOURCE__NAME);
+		createEAttribute(iResourceEClass, IRESOURCE__FULL_PATH);
 		createEReference(iResourceEClass, IRESOURCE__MARKERS);
-		createEReference(iResourceEClass, IRESOURCE__PARENT);
-		createEReference(iResourceEClass, IRESOURCE__FULL_PATH);
-		createEOperation(iResourceEClass, IRESOURCE___GET_PROJECT);
-		createEOperation(iResourceEClass, IRESOURCE___GET_WORKSPACE_ROOT);
-
-		iContainerEClass = createEClass(ICONTAINER);
-		createEReference(iContainerEClass, ICONTAINER__MEMBERS);
-
-		iProjectEClass = createEClass(IPROJECT);
-		createEReference(iProjectEClass, IPROJECT__ROOT);
+		createEReference(iResourceEClass, IRESOURCE__ROOT);
 
 		iWorkspaceRootEClass = createEClass(IWORKSPACE_ROOT);
-		createEReference(iWorkspaceRootEClass, IWORKSPACE_ROOT__PROJECTS);
-
-		iFileEClass = createEClass(IFILE);
-
-		iFolderEClass = createEClass(IFOLDER);
+		createEReference(iWorkspaceRootEClass, IWORKSPACE_ROOT__MEMBERS);
 	}
 
 	/**
@@ -459,7 +329,6 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 		// Obtain other dependent packages
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		SemioticsPackage theSemioticsPackage = (SemioticsPackage)EPackage.Registry.INSTANCE.getEPackage(SemioticsPackage.eNS_URI);
-		EclipseRuntimePackage theEclipseRuntimePackage = (EclipseRuntimePackage)EPackage.Registry.INSTANCE.getEPackage(EclipseRuntimePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -468,11 +337,6 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 		// Add supertypes to classes
 		iMarkerEClass.getESuperTypes().add(theSemioticsPackage.getSemiotics());
 		iResourceEClass.getESuperTypes().add(theSemioticsPackage.getSemiotics());
-		iContainerEClass.getESuperTypes().add(this.getIResource());
-		iProjectEClass.getESuperTypes().add(this.getIContainer());
-		iWorkspaceRootEClass.getESuperTypes().add(this.getIContainer());
-		iFileEClass.getESuperTypes().add(this.getIResource());
-		iFolderEClass.getESuperTypes().add(this.getIContainer());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(attributeEClass, Map.Entry.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
@@ -487,27 +351,14 @@ public class EclipseResourcesPackageImpl extends EPackageImpl implements Eclipse
 		initEReference(getIMarker_Resource(), this.getIResource(), this.getIResource_Markers(), "resource", null, 0, 1, IMarker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(iResourceEClass, IResource.class, "IResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIResource_Name(), theEcorePackage.getEString(), "name", null, 0, 1, IResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIResource_FullPath(), theEcorePackage.getEString(), "fullPath", null, 0, 1, IResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIResource_Markers(), this.getIMarker(), this.getIMarker_Resource(), "markers", null, 0, -1, IResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIResource_Parent(), this.getIContainer(), this.getIContainer_Members(), "parent", null, 0, 1, IResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIResource_FullPath(), theEclipseRuntimePackage.getIPath(), null, "fullPath", null, 0, 1, IResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getIResource__GetProject(), this.getIProject(), "getProject", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
-		initEOperation(getIResource__GetWorkspaceRoot(), this.getIWorkspaceRoot(), "getWorkspaceRoot", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
-		initEClass(iContainerEClass, IContainer.class, "IContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIContainer_Members(), this.getIResource(), this.getIResource_Parent(), "members", null, 0, -1, IContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(iProjectEClass, IProject.class, "IProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIProject_Root(), this.getIWorkspaceRoot(), this.getIWorkspaceRoot_Projects(), "root", null, 0, 1, IProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getIResource_Markers().getEKeys().add(this.getIMarker_Id());
+		initEReference(getIResource_Root(), this.getIWorkspaceRoot(), this.getIWorkspaceRoot_Members(), "root", null, 0, 1, IResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(iWorkspaceRootEClass, IWorkspaceRoot.class, "IWorkspaceRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIWorkspaceRoot_Projects(), this.getIProject(), this.getIProject_Root(), "projects", null, 0, -1, IWorkspaceRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(iFileEClass, IFile.class, "IFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(iFolderEClass, IFolder.class, "IFolder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIWorkspaceRoot_Members(), this.getIResource(), this.getIResource_Root(), "members", null, 0, -1, IWorkspaceRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getIWorkspaceRoot_Members().getEKeys().add(this.getIResource_FullPath());
 
 		// Create resource
 		createResource(eNS_URI);

@@ -4,7 +4,6 @@ package us.coastalhacking.corvus.eclipse.resources;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -226,13 +225,13 @@ public interface EclipseResourcesPackage extends EPackage {
 	int IRESOURCE__SIGNIFIERS = SemioticsPackage.SEMIOTICS__SIGNIFIERS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Full Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IRESOURCE__NAME = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 0;
+	int IRESOURCE__FULL_PATH = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Markers</b></em>' containment reference list.
@@ -244,22 +243,13 @@ public interface EclipseResourcesPackage extends EPackage {
 	int IRESOURCE__MARKERS = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * The feature id for the '<em><b>Root</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IRESOURCE__PARENT = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IRESOURCE__FULL_PATH = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 3;
+	int IRESOURCE__ROOT = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>IResource</em>' class.
@@ -268,25 +258,7 @@ public interface EclipseResourcesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IRESOURCE_FEATURE_COUNT = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Get Project</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IRESOURCE___GET_PROJECT = SemioticsPackage.SEMIOTICS_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Workspace Root</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IRESOURCE___GET_WORKSPACE_ROOT = SemioticsPackage.SEMIOTICS_OPERATION_COUNT + 1;
+	int IRESOURCE_FEATURE_COUNT = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>IResource</em>' class.
@@ -295,234 +267,7 @@ public interface EclipseResourcesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IRESOURCE_OPERATION_COUNT = SemioticsPackage.SEMIOTICS_OPERATION_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IContainerImpl <em>IContainer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.IContainerImpl
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIContainer()
-	 * @generated
-	 */
-	int ICONTAINER = 3;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__SIGNIFIEDS = IRESOURCE__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__SIGNIFIERS = IRESOURCE__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__NAME = IRESOURCE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Markers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__MARKERS = IRESOURCE__MARKERS;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__PARENT = IRESOURCE__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__FULL_PATH = IRESOURCE__FULL_PATH;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER__MEMBERS = IRESOURCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>IContainer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER_FEATURE_COUNT = IRESOURCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Project</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER___GET_PROJECT = IRESOURCE___GET_PROJECT;
-
-	/**
-	 * The operation id for the '<em>Get Workspace Root</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER___GET_WORKSPACE_ROOT = IRESOURCE___GET_WORKSPACE_ROOT;
-
-	/**
-	 * The number of operations of the '<em>IContainer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICONTAINER_OPERATION_COUNT = IRESOURCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IProjectImpl <em>IProject</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.IProjectImpl
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIProject()
-	 * @generated
-	 */
-	int IPROJECT = 4;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__SIGNIFIEDS = ICONTAINER__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__SIGNIFIERS = ICONTAINER__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__NAME = ICONTAINER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Markers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__MARKERS = ICONTAINER__MARKERS;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__PARENT = ICONTAINER__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__FULL_PATH = ICONTAINER__FULL_PATH;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__MEMBERS = ICONTAINER__MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Root</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT__ROOT = ICONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>IProject</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT_FEATURE_COUNT = ICONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Project</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT___GET_PROJECT = ICONTAINER___GET_PROJECT;
-
-	/**
-	 * The operation id for the '<em>Get Workspace Root</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT___GET_WORKSPACE_ROOT = ICONTAINER___GET_WORKSPACE_ROOT;
-
-	/**
-	 * The number of operations of the '<em>IProject</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IPROJECT_OPERATION_COUNT = ICONTAINER_OPERATION_COUNT + 0;
+	int IRESOURCE_OPERATION_COUNT = SemioticsPackage.SEMIOTICS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IWorkspaceRootImpl <em>IWorkspace Root</em>}' class.
@@ -532,61 +277,7 @@ public interface EclipseResourcesPackage extends EPackage {
 	 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIWorkspaceRoot()
 	 * @generated
 	 */
-	int IWORKSPACE_ROOT = 5;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__SIGNIFIEDS = ICONTAINER__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__SIGNIFIERS = ICONTAINER__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__NAME = ICONTAINER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Markers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__MARKERS = ICONTAINER__MARKERS;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__PARENT = ICONTAINER__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__FULL_PATH = ICONTAINER__FULL_PATH;
+	int IWORKSPACE_ROOT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -595,16 +286,7 @@ public interface EclipseResourcesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IWORKSPACE_ROOT__MEMBERS = ICONTAINER__MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Projects</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT__PROJECTS = ICONTAINER_FEATURE_COUNT + 0;
+	int IWORKSPACE_ROOT__MEMBERS = 0;
 
 	/**
 	 * The number of structural features of the '<em>IWorkspace Root</em>' class.
@@ -613,25 +295,7 @@ public interface EclipseResourcesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IWORKSPACE_ROOT_FEATURE_COUNT = ICONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Project</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT___GET_PROJECT = ICONTAINER___GET_PROJECT;
-
-	/**
-	 * The operation id for the '<em>Get Workspace Root</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IWORKSPACE_ROOT___GET_WORKSPACE_ROOT = ICONTAINER___GET_WORKSPACE_ROOT;
+	int IWORKSPACE_ROOT_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>IWorkspace Root</em>' class.
@@ -640,216 +304,7 @@ public interface EclipseResourcesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IWORKSPACE_ROOT_OPERATION_COUNT = ICONTAINER_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IFileImpl <em>IFile</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.IFileImpl
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIFile()
-	 * @generated
-	 */
-	int IFILE = 6;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE__SIGNIFIEDS = IRESOURCE__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE__SIGNIFIERS = IRESOURCE__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE__NAME = IRESOURCE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Markers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE__MARKERS = IRESOURCE__MARKERS;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE__PARENT = IRESOURCE__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE__FULL_PATH = IRESOURCE__FULL_PATH;
-
-	/**
-	 * The number of structural features of the '<em>IFile</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE_FEATURE_COUNT = IRESOURCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Project</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE___GET_PROJECT = IRESOURCE___GET_PROJECT;
-
-	/**
-	 * The operation id for the '<em>Get Workspace Root</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE___GET_WORKSPACE_ROOT = IRESOURCE___GET_WORKSPACE_ROOT;
-
-	/**
-	 * The number of operations of the '<em>IFile</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFILE_OPERATION_COUNT = IRESOURCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IFolderImpl <em>IFolder</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.IFolderImpl
-	 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIFolder()
-	 * @generated
-	 */
-	int IFOLDER = 7;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__SIGNIFIEDS = ICONTAINER__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__SIGNIFIERS = ICONTAINER__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__NAME = ICONTAINER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Markers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__MARKERS = ICONTAINER__MARKERS;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__PARENT = ICONTAINER__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__FULL_PATH = ICONTAINER__FULL_PATH;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER__MEMBERS = ICONTAINER__MEMBERS;
-
-	/**
-	 * The number of structural features of the '<em>IFolder</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER_FEATURE_COUNT = ICONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Project</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER___GET_PROJECT = ICONTAINER___GET_PROJECT;
-
-	/**
-	 * The operation id for the '<em>Get Workspace Root</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER___GET_WORKSPACE_ROOT = ICONTAINER___GET_WORKSPACE_ROOT;
-
-	/**
-	 * The number of operations of the '<em>IFolder</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IFOLDER_OPERATION_COUNT = ICONTAINER_OPERATION_COUNT + 0;
+	int IWORKSPACE_ROOT_OPERATION_COUNT = 0;
 
 
 	/**
@@ -962,15 +417,15 @@ public interface EclipseResourcesPackage extends EPackage {
 	EClass getIResource();
 
 	/**
-	 * Returns the meta object for the attribute '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath <em>Full Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getName()
+	 * @return the meta object for the attribute '<em>Full Path</em>'.
+	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath()
 	 * @see #getIResource()
 	 * @generated
 	 */
-	EAttribute getIResource_Name();
+	EAttribute getIResource_FullPath();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getMarkers <em>Markers</em>}'.
@@ -984,88 +439,15 @@ public interface EclipseResourcesPackage extends EPackage {
 	EReference getIResource_Markers();
 
 	/**
-	 * Returns the meta object for the container reference '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the container reference '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getRoot <em>Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getParent()
+	 * @return the meta object for the container reference '<em>Root</em>'.
+	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getRoot()
 	 * @see #getIResource()
 	 * @generated
 	 */
-	EReference getIResource_Parent();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath <em>Full Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Full Path</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath()
-	 * @see #getIResource()
-	 * @generated
-	 */
-	EReference getIResource_FullPath();
-
-	/**
-	 * Returns the meta object for the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getProject() <em>Get Project</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Project</em>' operation.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getProject()
-	 * @generated
-	 */
-	EOperation getIResource__GetProject();
-
-	/**
-	 * Returns the meta object for the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getWorkspaceRoot() <em>Get Workspace Root</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Workspace Root</em>' operation.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IResource#getWorkspaceRoot()
-	 * @generated
-	 */
-	EOperation getIResource__GetWorkspaceRoot();
-
-	/**
-	 * Returns the meta object for class '{@link us.coastalhacking.corvus.eclipse.resources.IContainer <em>IContainer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IContainer</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IContainer
-	 * @generated
-	 */
-	EClass getIContainer();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link us.coastalhacking.corvus.eclipse.resources.IContainer#getMembers <em>Members</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Members</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IContainer#getMembers()
-	 * @see #getIContainer()
-	 * @generated
-	 */
-	EReference getIContainer_Members();
-
-	/**
-	 * Returns the meta object for class '{@link us.coastalhacking.corvus.eclipse.resources.IProject <em>IProject</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IProject</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IProject
-	 * @generated
-	 */
-	EClass getIProject();
-
-	/**
-	 * Returns the meta object for the reference '{@link us.coastalhacking.corvus.eclipse.resources.IProject#getRoot <em>Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Root</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IProject#getRoot()
-	 * @see #getIProject()
-	 * @generated
-	 */
-	EReference getIProject_Root();
+	EReference getIResource_Root();
 
 	/**
 	 * Returns the meta object for class '{@link us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot <em>IWorkspace Root</em>}'.
@@ -1078,35 +460,15 @@ public interface EclipseResourcesPackage extends EPackage {
 	EClass getIWorkspaceRoot();
 
 	/**
-	 * Returns the meta object for the reference list '{@link us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot#getProjects <em>Projects</em>}'.
+	 * Returns the meta object for the containment reference list '{@link us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Projects</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot#getProjects()
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
+	 * @see us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot#getMembers()
 	 * @see #getIWorkspaceRoot()
 	 * @generated
 	 */
-	EReference getIWorkspaceRoot_Projects();
-
-	/**
-	 * Returns the meta object for class '{@link us.coastalhacking.corvus.eclipse.resources.IFile <em>IFile</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IFile</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IFile
-	 * @generated
-	 */
-	EClass getIFile();
-
-	/**
-	 * Returns the meta object for class '{@link us.coastalhacking.corvus.eclipse.resources.IFolder <em>IFolder</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IFolder</em>'.
-	 * @see us.coastalhacking.corvus.eclipse.resources.IFolder
-	 * @generated
-	 */
-	EClass getIFolder();
+	EReference getIWorkspaceRoot_Members();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1218,12 +580,12 @@ public interface EclipseResourcesPackage extends EPackage {
 		EClass IRESOURCE = eINSTANCE.getIResource();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Full Path</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IRESOURCE__NAME = eINSTANCE.getIResource_Name();
+		EAttribute IRESOURCE__FULL_PATH = eINSTANCE.getIResource_FullPath();
 
 		/**
 		 * The meta object literal for the '<em><b>Markers</b></em>' containment reference list feature.
@@ -1234,72 +596,12 @@ public interface EclipseResourcesPackage extends EPackage {
 		EReference IRESOURCE__MARKERS = eINSTANCE.getIResource_Markers();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Root</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IRESOURCE__PARENT = eINSTANCE.getIResource_Parent();
-
-		/**
-		 * The meta object literal for the '<em><b>Full Path</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IRESOURCE__FULL_PATH = eINSTANCE.getIResource_FullPath();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Project</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IRESOURCE___GET_PROJECT = eINSTANCE.getIResource__GetProject();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Workspace Root</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IRESOURCE___GET_WORKSPACE_ROOT = eINSTANCE.getIResource__GetWorkspaceRoot();
-
-		/**
-		 * The meta object literal for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IContainerImpl <em>IContainer</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.IContainerImpl
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIContainer()
-		 * @generated
-		 */
-		EClass ICONTAINER = eINSTANCE.getIContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ICONTAINER__MEMBERS = eINSTANCE.getIContainer_Members();
-
-		/**
-		 * The meta object literal for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IProjectImpl <em>IProject</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.IProjectImpl
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIProject()
-		 * @generated
-		 */
-		EClass IPROJECT = eINSTANCE.getIProject();
-
-		/**
-		 * The meta object literal for the '<em><b>Root</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IPROJECT__ROOT = eINSTANCE.getIProject_Root();
+		EReference IRESOURCE__ROOT = eINSTANCE.getIResource_Root();
 
 		/**
 		 * The meta object literal for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IWorkspaceRootImpl <em>IWorkspace Root</em>}' class.
@@ -1312,32 +614,12 @@ public interface EclipseResourcesPackage extends EPackage {
 		EClass IWORKSPACE_ROOT = eINSTANCE.getIWorkspaceRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>Projects</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IWORKSPACE_ROOT__PROJECTS = eINSTANCE.getIWorkspaceRoot_Projects();
-
-		/**
-		 * The meta object literal for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IFileImpl <em>IFile</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.IFileImpl
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIFile()
-		 * @generated
-		 */
-		EClass IFILE = eINSTANCE.getIFile();
-
-		/**
-		 * The meta object literal for the '{@link us.coastalhacking.corvus.eclipse.resources.impl.IFolderImpl <em>IFolder</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.IFolderImpl
-		 * @see us.coastalhacking.corvus.eclipse.resources.impl.EclipseResourcesPackageImpl#getIFolder()
-		 * @generated
-		 */
-		EClass IFOLDER = eINSTANCE.getIFolder();
+		EReference IWORKSPACE_ROOT__MEMBERS = eINSTANCE.getIWorkspaceRoot_Members();
 
 	}
 

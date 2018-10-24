@@ -4,8 +4,6 @@ package us.coastalhacking.corvus.eclipse.resources;
 
 import org.eclipse.emf.common.util.EList;
 
-import us.coastalhacking.corvus.eclipse.runtime.IPath;
-
 import us.coastalhacking.corvus.semiotics.Semiotics;
 
 /**
@@ -17,10 +15,9 @@ import us.coastalhacking.corvus.semiotics.Semiotics;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link us.coastalhacking.corvus.eclipse.resources.IResource#getName <em>Name</em>}</li>
- *   <li>{@link us.coastalhacking.corvus.eclipse.resources.IResource#getMarkers <em>Markers</em>}</li>
- *   <li>{@link us.coastalhacking.corvus.eclipse.resources.IResource#getParent <em>Parent</em>}</li>
  *   <li>{@link us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath <em>Full Path</em>}</li>
+ *   <li>{@link us.coastalhacking.corvus.eclipse.resources.IResource#getMarkers <em>Markers</em>}</li>
+ *   <li>{@link us.coastalhacking.corvus.eclipse.resources.IResource#getRoot <em>Root</em>}</li>
  * </ul>
  *
  * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource()
@@ -29,30 +26,30 @@ import us.coastalhacking.corvus.semiotics.Semiotics;
  */
 public interface IResource extends Semiotics {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Full Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Full Path</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource_Name()
+	 * @return the value of the '<em>Full Path</em>' attribute.
+	 * @see #setFullPath(String)
+	 * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource_FullPath()
 	 * @model unique="false"
 	 * @generated
 	 */
-	String getName();
+	String getFullPath();
 
 	/**
-	 * Sets the value of the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath <em>Full Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Full Path</em>' attribute.
+	 * @see #getFullPath()
 	 * @generated
 	 */
-	void setName(String value);
+	void setFullPath(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Markers</b></em>' containment reference list.
@@ -67,81 +64,37 @@ public interface IResource extends Semiotics {
 	 * @return the value of the '<em>Markers</em>' containment reference list.
 	 * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource_Markers()
 	 * @see us.coastalhacking.corvus.eclipse.resources.IMarker#getResource
-	 * @model opposite="resource" containment="true"
+	 * @model opposite="resource" containment="true" keys="id"
 	 * @generated
 	 */
 	EList<IMarker> getMarkers();
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link us.coastalhacking.corvus.eclipse.resources.IContainer#getMembers <em>Members</em>}'.
+	 * Returns the value of the '<em><b>Root</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Root</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' container reference.
-	 * @see #setParent(IContainer)
-	 * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource_Parent()
-	 * @see us.coastalhacking.corvus.eclipse.resources.IContainer#getMembers
+	 * @return the value of the '<em>Root</em>' container reference.
+	 * @see #setRoot(IWorkspaceRoot)
+	 * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource_Root()
+	 * @see us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot#getMembers
 	 * @model opposite="members" transient="false"
 	 * @generated
 	 */
-	IContainer getParent();
+	IWorkspaceRoot getRoot();
 
 	/**
-	 * Sets the value of the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getParent <em>Parent</em>}' container reference.
+	 * Sets the value of the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getRoot <em>Root</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' container reference.
-	 * @see #getParent()
+	 * @param value the new value of the '<em>Root</em>' container reference.
+	 * @see #getRoot()
 	 * @generated
 	 */
-	void setParent(IContainer value);
-
-	/**
-	 * Returns the value of the '<em><b>Full Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Full Path</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Full Path</em>' containment reference.
-	 * @see #setFullPath(IPath)
-	 * @see us.coastalhacking.corvus.eclipse.resources.EclipseResourcesPackage#getIResource_FullPath()
-	 * @model containment="true"
-	 * @generated
-	 */
-	IPath getFullPath();
-
-	/**
-	 * Sets the value of the '{@link us.coastalhacking.corvus.eclipse.resources.IResource#getFullPath <em>Full Path</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Full Path</em>' containment reference.
-	 * @see #getFullPath()
-	 * @generated
-	 */
-	void setFullPath(IPath value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" unique="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%us.coastalhacking.corvus.eclipse.resources.IProject%&gt; _xifexpression = null;\n&lt;%us.coastalhacking.corvus.eclipse.resources.IContainer%&gt; _parent = this.getParent();\nif ((_parent instanceof &lt;%us.coastalhacking.corvus.eclipse.resources.IProject%&gt;))\n{\n\t&lt;%us.coastalhacking.corvus.eclipse.resources.IContainer%&gt; _parent_1 = this.getParent();\n\t_xifexpression = ((&lt;%us.coastalhacking.corvus.eclipse.resources.IProject%&gt;) _parent_1);\n}\nelse\n{\n\t_xifexpression = this.getParent().getProject();\n}\nreturn _xifexpression;'"
-	 * @generated
-	 */
-	IProject getProject();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" unique="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return this.getProject().getWorkspaceRoot();'"
-	 * @generated
-	 */
-	IWorkspaceRoot getWorkspaceRoot();
+	void setRoot(IWorkspaceRoot value);
 
 } // IResource

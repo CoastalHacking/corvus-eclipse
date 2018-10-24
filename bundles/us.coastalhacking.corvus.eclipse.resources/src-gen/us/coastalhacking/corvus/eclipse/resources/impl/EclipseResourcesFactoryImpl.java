@@ -61,11 +61,7 @@ public class EclipseResourcesFactoryImpl extends EFactoryImpl implements Eclipse
 			case EclipseResourcesPackage.ATTRIBUTE: return (EObject)createAttribute();
 			case EclipseResourcesPackage.IMARKER: return createIMarker();
 			case EclipseResourcesPackage.IRESOURCE: return createIResource();
-			case EclipseResourcesPackage.ICONTAINER: return createIContainer();
-			case EclipseResourcesPackage.IPROJECT: return createIProject();
 			case EclipseResourcesPackage.IWORKSPACE_ROOT: return createIWorkspaceRoot();
-			case EclipseResourcesPackage.IFILE: return createIFile();
-			case EclipseResourcesPackage.IFOLDER: return createIFolder();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -106,49 +102,9 @@ public class EclipseResourcesFactoryImpl extends EFactoryImpl implements Eclipse
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IContainer createIContainer() {
-		IContainerImpl iContainer = new IContainerImpl();
-		return iContainer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IProject createIProject() {
-		IProjectImpl iProject = new IProjectImpl();
-		return iProject;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public IWorkspaceRoot createIWorkspaceRoot() {
 		IWorkspaceRootImpl iWorkspaceRoot = new IWorkspaceRootImpl();
 		return iWorkspaceRoot;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IFile createIFile() {
-		IFileImpl iFile = new IFileImpl();
-		return iFile;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IFolder createIFolder() {
-		IFolderImpl iFolder = new IFolderImpl();
-		return iFolder;
 	}
 
 	/**
