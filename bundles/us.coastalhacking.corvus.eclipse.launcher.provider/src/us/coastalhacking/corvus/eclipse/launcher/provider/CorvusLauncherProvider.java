@@ -25,11 +25,11 @@ public class CorvusLauncherProvider extends CorvusLauncherBase {
 	@Reference
 	TransactionalRegistrar registrar;
 	
-	@Reference
-	IWorkspace workspace;
-	
-	@Reference(target="(corvus.domain=org.eclipse.core.resources)")
-	IResourceChangeListener changeListener;
+//	@Reference
+//	IWorkspace workspace;
+//	
+//	@Reference(target="(corvus.domain=org.eclipse.core.resources)")
+//	IResourceChangeListener changeListener;
 
 	@Activate
 	void activate(Map<String, ?> props) throws Exception {

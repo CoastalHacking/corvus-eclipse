@@ -59,8 +59,6 @@ class CorvusLauncherProviderTest {
 		bundleContext = null;
 	}
 
-	// TODO: figure out!
-	@Disabled(value="assertNotNull(launcherFactory);")
 	@Test
 	void shouldCreateResource() throws Exception {
 
