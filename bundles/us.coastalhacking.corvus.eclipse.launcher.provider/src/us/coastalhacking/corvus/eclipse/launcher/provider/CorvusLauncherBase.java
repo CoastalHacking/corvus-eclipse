@@ -15,6 +15,7 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
 import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
+import us.coastalhacking.corvus.eclipse.transaction.InitializingCommand;
 import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
 public abstract class CorvusLauncherBase {
@@ -37,25 +38,7 @@ public abstract class CorvusLauncherBase {
 			URI key = URI.createURI(ri.getUriKey());
 			URI value = URI.createFileURI(pathValue);
 
-			final Command command = new RecordingCommand(getDomain()) {
-				@Override
-				protected void doExecute() {
-					getResourceSet().getURIConverter().getURIMap().put(key, value);
-					Resource resource;
-					try {
-						resource = getResourceSet().getResource(key, true);
-					} catch (Exception e) {
-						resource = getResourceSet().getResource(key, false);
-					}
-					resource.getContents().add(ri.getRoot());
-					// TODO: get XMI options and pass here via properties
-					try {
-						resource.save(null);
-					} catch (IOException e) {
-						throw new RuntimeException(e);
-					}
-				}
-			};
+			final Command command = new InitializingCommand(getDomain(), key, value, ri.getRoot());
 			getDomain().getCommandStack().execute(command);
 		}
 
@@ -86,9 +69,13 @@ public abstract class CorvusLauncherBase {
 		return domain;
 	}
 
-	protected abstract TransactionalEditingDomain.Factory getDomainFactory();
+	protected TransactionalEditingDomain.Factory getDomainFactory() {
+		return TransactionalEditingDomain.Factory.INSTANCE;
+	}
 
-	protected abstract TransactionalEditingDomain.Registry getDomainRegistry();
+	protected TransactionalEditingDomain.Registry getDomainRegistry() {
+		return TransactionalEditingDomain.Registry.INSTANCE;
+	}
 
 	protected abstract Collection<ResourceInitializer> getInitializers();
 }

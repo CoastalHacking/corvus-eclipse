@@ -5,11 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -34,7 +32,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -46,6 +43,7 @@ import us.coastalhacking.corvus.eclipse.resources.IMarker;
 import us.coastalhacking.corvus.eclipse.resources.IResource;
 import us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot;
 import us.coastalhacking.corvus.eclipse.resources.util.EclipseResourcesSwitch;
+import us.coastalhacking.corvus.eclipse.transaction.InitializingCommand;
 
 class EclipseResourcesChangeListenerBaseTest {
 
@@ -438,32 +436,16 @@ class EclipseResourcesChangeListenerBaseTest {
 
 	@Test
 	void shouldActivateAndResourceChanged() throws Exception {
+		// Initialize TED
 		Path xmi = Paths.get(tempFolder.getRoot().getAbsolutePath(), "shouldResourceChanged.xmi");
 		String file = xmi.toFile().getAbsolutePath();
-		URI uri = URI.createFileURI(file);
-
+		URI key = URI.createURI("test:shouldActivateAndResourceChanged");
+		URI value = URI.createFileURI(file);
 		final IWorkspaceRoot root = factory.createIWorkspaceRoot();
 		final TransactionalEditingDomain domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain();
-		// TODO: put this somewhere else
-		final Command command = new RecordingCommand(domain) {
-			@Override
-			protected void doExecute() {
-				Resource resource;
-				try {
-					resource = domain.getResourceSet().getResource(uri, true);
-				} catch (Exception e) {
-					resource = domain.getResourceSet().getResource(uri, false);
-				}
-				resource.getContents().add(root);
-				// TODO: get XMI options and pass here via properties
-				try {
-					resource.save(null);
-				} catch (IOException e) {
-					fail(e);
-				}
-			}
-		};
+		final Command command = new InitializingCommand(domain, key, value, root); 
 		domain.getCommandStack().execute(command);
+
 		EclipseResourcesChangeListenerBase base = new EclipseResourcesChangeListenerBase();
 		base.baseActivate(MARKER_TYPE, domain, file, factory);
 
@@ -477,7 +459,7 @@ class EclipseResourcesChangeListenerBaseTest {
 		when(mockEvent.findMarkerDeltas(MARKER_TYPE, true)).thenReturn(deltas);
 
 		// Test & verify
-		RunSwitch beforeSwitch = new RunSwitch(domain, uri) {
+		RunSwitch beforeSwitch = new RunSwitch(domain, value) {
 			@Override
 			void caseIMarker(IMarker object) {
 				assertTrue(object.getId() == removeId || object.getId() == changeId);
@@ -487,7 +469,7 @@ class EclipseResourcesChangeListenerBaseTest {
 
 		base.resourceChanged(mockEvent);
 
-		RunSwitch afterSwitch = new RunSwitch(domain, uri) {
+		RunSwitch afterSwitch = new RunSwitch(domain, value) {
 			@Override
 			void caseIMarker(IMarker object) {
 				assertTrue(object.getId() == addId || object.getId() == changeId);
