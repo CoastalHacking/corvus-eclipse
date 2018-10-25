@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.2.0" activate="activate" configuration-pid="corvus.eclipse.resources.initializer" configuration-policy="require" name="us.coastalhacking.corvus.eclipse.resources.provider.EclipseResourcesInitializerProvider">
+   <service>
+      <provide interface="us.coastalhacking.corvus.eclipse.resources.EclipseResourcesInitializer"/>
+   </service>
+   <implementation class="us.coastalhacking.corvus.eclipse.resources.provider.EclipseResourcesInitializerProvider"/>
+</scr:component>
