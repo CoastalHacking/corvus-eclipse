@@ -21,7 +21,7 @@
 <booleanAttribute key="includeOptional" value="false"/>
 <stringAttribute key="location" value="${workspace_loc}/../junit-workspace"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/us.coastalhacking.corvus.eclipse.resources.provider.tests/src/us/coastalhacking/corvus/eclipse/resources/provider/EclipseResourcesInitializerProviderTest.java"/>
+<listEntry value="/us.coastalhacking.corvus.eclipse.resources.provider.tests/src/us/coastalhacking/corvus/eclipse/resources/provider/EclipseResourcesChangeListenerProviderTest.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -32,7 +32,7 @@
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit5"/>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="us.coastalhacking.corvus.eclipse.resources.provider.EclipseResourcesInitializerProviderTest"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="us.coastalhacking.corvus.eclipse.resources.provider.EclipseResourcesChangeListenerProviderTest"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog -console"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="us.coastalhacking.corvus.eclipse.resources.provider.tests"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
@@ -45,7 +45,7 @@
 <stringAttribute key="selected_workspace_plugins" value="us.coastalhacking.corvus.eclipse.resources.provider.tests@default:false,us.coastalhacking.corvus.eclipse.resources.provider@default:default,us.coastalhacking.corvus.eclipse.resources@default:default,us.coastalhacking.corvus.eclipse.test.utils@default:default,us.coastalhacking.corvus.eclipse.transaction.provider@default:default,us.coastalhacking.corvus.eclipse.transaction@default:default,us.coastalhacking.corvus.semiotics@default:default"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <booleanAttribute key="tracing" value="false"/>
-<booleanAttribute key="useCustomFeatures" value="true"/>
+<booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfig" value="true"/>
 <booleanAttribute key="useDefaultConfigArea" value="false"/>
 <booleanAttribute key="useProduct" value="false"/>

@@ -6,20 +6,27 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
+import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalFactory;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
 import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
 
-@Component(service=CorvusTransactionalRegistry.class, configurationPid=EclipseTransactionApi.CorvusTransactionalRegistry.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE)
+@Component(service = CorvusTransactionalRegistry.class, configurationPid = EclipseTransactionApi.CorvusTransactionalRegistry.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE)
 public class CorvusTransactionalRegistryProvider implements CorvusTransactionalRegistry {
 
 	final Map<String, TransactionalEditingDomain> registries = new ConcurrentHashMap<>();
-	
-	@Reference(name=EclipseTransactionApi.CorvusTransactionalRegistry.Reference.FACTORY)
+
+	@Reference(name = EclipseTransactionApi.CorvusTransactionalRegistry.Reference.FACTORY)
 	CorvusTransactionalFactory factory;
-	
+
+	@Deactivate
+	void deactivate() {
+		registries.values().stream().forEach(ted -> ted.dispose());
+		registries.clear();
+	}
+
 	@Override
 	public TransactionalEditingDomain getEditingDomain(String id) {
 		if (registries.containsKey(id)) {
@@ -27,7 +34,7 @@ public class CorvusTransactionalRegistryProvider implements CorvusTransactionalR
 		}
 		TransactionalEditingDomain domain = factory.createEditingDomain();
 		add(id, domain);
-		return domain;	
+		return domain;
 	}
 
 	@Override

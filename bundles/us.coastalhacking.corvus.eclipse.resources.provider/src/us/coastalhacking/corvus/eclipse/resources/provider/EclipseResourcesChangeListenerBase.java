@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
@@ -18,28 +17,28 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
+import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesChangeListener;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesFactory;
 import us.coastalhacking.corvus.eclipse.resources.IMarker;
 import us.coastalhacking.corvus.eclipse.resources.IResource;
 import us.coastalhacking.corvus.eclipse.resources.IWorkspaceRoot;
 
-class EclipseResourcesChangeListenerBase implements IResourceChangeListener {
+class EclipseResourcesChangeListenerBase implements EclipseResourcesChangeListener {
 
 	private String markerType;
 	private TransactionalEditingDomain domain;
 	private URI uri;
-	private EclipseResourcesFactory factory;
+	private EclipseResourcesFactory factory = EclipseResourcesFactory.eINSTANCE;
 	static final String UNCONTAINED = "/-1";
 	static final String EMPTY = "";
 
 	/**
 	 * Shall be called prior to any other methods
 	 */
-	void baseActivate(String markerType, TransactionalEditingDomain domain, String resourceUri, EclipseResourcesFactory factory) {
+	void baseActivate(String markerType, TransactionalEditingDomain domain, String uriKey) {
 		this.markerType = markerType;
 		this.domain = domain;
-		this.uri = URI.createURI(resourceUri);
-		this.factory = factory;
+		this.uri = URI.createURI(uriKey);
 	}
 
 	// TODO: process IResource changes.

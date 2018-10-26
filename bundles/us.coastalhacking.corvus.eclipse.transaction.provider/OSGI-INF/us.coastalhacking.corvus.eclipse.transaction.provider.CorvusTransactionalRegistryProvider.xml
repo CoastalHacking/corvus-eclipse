@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" configuration-pid="corvus.transaction.registry" configuration-policy="require" name="us.coastalhacking.corvus.eclipse.transaction.provider.CorvusTransactionalRegistryProvider">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" configuration-pid="corvus.transaction.registry" configuration-policy="require" deactivate="deactivate" name="us.coastalhacking.corvus.eclipse.transaction.provider.CorvusTransactionalRegistryProvider">
    <service>
       <provide interface="us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry"/>
    </service>

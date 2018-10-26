@@ -3,16 +3,17 @@ package us.coastalhacking.corvus.eclipse.transaction;
 public interface EclipseTransactionApi {
 
 	interface TransactionalEditingDomain {
+		@Deprecated
 		String ID = "corvus.transaction.id";
+		
+		interface Properties {
+			String ID = "corvus.transaction.id";
+		}
 	}
 
 	interface CorvusTransactionalFactory {
 		interface Component {
 			String CONFIG_PID = "corvus.transaction.factory";
-		}
-
-		interface Properties {
-
 		}
 
 		interface Reference {

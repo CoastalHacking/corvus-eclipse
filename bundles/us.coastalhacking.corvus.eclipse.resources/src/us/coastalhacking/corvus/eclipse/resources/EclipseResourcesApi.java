@@ -1,23 +1,32 @@
 package us.coastalhacking.corvus.eclipse.resources;
 
-public interface EclipseResourcesApi {
+import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
 
-	@Deprecated
-	String URI_KEY = "corvus:eclipse.resources";
-	
-	@Deprecated
-	String PATH_KEY = "corvus.eclipse.resources.path";
+public interface EclipseResourcesApi extends EclipseTransactionApi {
 
 	interface EclipseResourcesInitializer {
-		
 		interface Component {
-			String CONFIG_PID = "corvus.eclipse.resources.initializer";
+			String CONFIG_PID = "corvus.eclipseresources.initializer";
 		}
 		
 		interface Properties {
-			String URI_KEY = "corvus:eclipse.resources";
-			String PATH_KEY = "corvus.eclipse.resources.path";
+			String URI_KEY = "corvus:eclipseresources";
+			String PATH_KEY = "corvus.eclipseresources.path";
 		}		
 	}	
 
+	interface EclipseResourcesChangeListener {
+		interface Component {
+			String CONFIG_PID = "corvus.eclipseresources.listener";
+		}
+		
+		interface Properties {
+			String MARKER_TYPE = "corvus.eclipseresources.listener.markertype";
+		}
+		
+		interface Reference {
+			String REGISTRY = "corvus.eclipseresources.listener.registry";
+		}
+	}
+	
 }

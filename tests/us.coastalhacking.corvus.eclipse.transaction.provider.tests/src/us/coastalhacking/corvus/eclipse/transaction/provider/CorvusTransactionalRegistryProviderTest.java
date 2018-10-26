@@ -1,8 +1,9 @@
 package us.coastalhacking.corvus.eclipse.transaction.provider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -19,7 +20,6 @@ import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
 import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
 import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
-// TODO: copypasta'd code from the sibling factory test
 class CorvusTransactionalRegistryProviderTest extends AbstractCMTest {
 
 	public CorvusTransactionalRegistryProviderTest() throws Exception {
@@ -27,6 +27,7 @@ class CorvusTransactionalRegistryProviderTest extends AbstractCMTest {
 		// TODO Auto-generated constructor stub
 	}
 
+	// TODO: copypasta'd code from the sibling factory test
 	@Test
 	void shouldConfigure() throws Exception {
 		// Create and register a resource initializer
@@ -62,19 +63,29 @@ class CorvusTransactionalRegistryProviderTest extends AbstractCMTest {
 				EclipseTransactionApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 
 		// Configure registry
-		CorvusTransactionalRegistry service = configurationHelper(CorvusTransactionalRegistry.class,
+		CorvusTransactionalRegistryProvider provider = (CorvusTransactionalRegistryProvider)configurationHelper(CorvusTransactionalRegistry.class,
 				EclipseTransactionApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props, timeout);
-		assertNotNull(service);
+		
+		// Verify
+		assertNotNull(provider);
+		assertTrue(provider.registries.isEmpty());
 		String transactionalId = "this.dose.not.exist";
-		TransactionalEditingDomain domain = service.getEditingDomain(transactionalId);
+		TransactionalEditingDomain domain = provider.getEditingDomain(transactionalId);
 		assertNotNull(domain);
-		TransactionalEditingDomain removedDomain = service.remove(transactionalId);
+		assertFalse(provider.registries.isEmpty());
+		assertEquals(domain, provider.registries.get(transactionalId));
+
+		TransactionalEditingDomain removedDomain = provider.remove(transactionalId);
+		assertTrue(provider.registries.isEmpty());		
 		assertNotNull(removedDomain);
 		assertEquals(domain, removedDomain);
-		removedDomain = service.remove(transactionalId);
-		assertNull(removedDomain);
-		service.add(transactionalId, domain);
-		assertEquals(domain, service.remove(transactionalId));
+		
+		// Simulate clean-up
+		provider.add(transactionalId, domain);
+		assertFalse(provider.registries.isEmpty());
+		provider.deactivate();
+		assertTrue(provider.registries.isEmpty());
+		
 	}
 
 }

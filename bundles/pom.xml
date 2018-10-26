@@ -24,5 +24,6 @@
 		<module>us.coastalhacking.corvus.semiotics</module>
 		<module>us.coastalhacking.corvus.entrypoint</module>
 		<module>us.coastalhacking.corvus.eclipse.transaction</module>
+		<module>us.coastalhacking.corvus.eclipse.transaction.provider</module>
 	</modules>
 </project>

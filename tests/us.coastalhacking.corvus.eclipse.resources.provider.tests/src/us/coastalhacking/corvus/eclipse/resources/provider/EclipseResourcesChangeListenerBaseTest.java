@@ -447,7 +447,7 @@ class EclipseResourcesChangeListenerBaseTest {
 		domain.getCommandStack().execute(command);
 
 		EclipseResourcesChangeListenerBase base = new EclipseResourcesChangeListenerBase();
-		base.baseActivate(MARKER_TYPE, domain, file, factory);
+		base.baseActivate(MARKER_TYPE, domain, file);
 
 		long changeId = MARKER_ID;
 		long addId = changeId + 1;
