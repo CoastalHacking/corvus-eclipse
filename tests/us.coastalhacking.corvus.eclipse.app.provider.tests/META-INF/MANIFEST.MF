@@ -1,18 +1,20 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Corvus Eclipse Resources Provider Test
-Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.resources.provider.tests
+Bundle-Name: Corvus Eclipse App Provider Tests
+Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.app.provider.tests
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Coastal Hacking
-Fragment-Host: us.coastalhacking.corvus.eclipse.resources.provider;bundle-version="0.1.0"
-Automatic-Module-Name: us.coastalhacking.corvus.eclipse.resources.provider.tests
+Fragment-Host: us.coastalhacking.corvus.eclipse.app.provider
+Automatic-Module-Name: us.coastalhacking.corvus.eclipse.app.provider.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: org.junit;version="4.12.0",
+Import-Package: org.eclipse.core.resources,
+ org.junit;version="4.12.0",
  org.junit.jupiter.api,
  org.junit.jupiter.api.function,
  org.junit.platform.commons,
  org.junit.rules,
  org.mockito,
  org.mockito.stubbing,
+ org.osgi.framework;version="1.9.0",
  us.coastalhacking.corvus.eclipse.resources,
  us.coastalhacking.corvus.eclipse.test.utils
