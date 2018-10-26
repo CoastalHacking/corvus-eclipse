@@ -31,5 +31,6 @@
 		<module>us.coastalhacking.corvus.eclipse.ui.impl.tests</module>
 		<module>us.coastalhacking.corvus.eclipse.launcher.provider.tests</module>
 		<module>us.coastalhacking.corvus.eclipse.resources.provider.tests</module>
+		<module>us.coastalhacking.corvus.eclipse.transaction.provider.tests</module>
 	</modules>
 </project>
