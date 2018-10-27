@@ -7,6 +7,5 @@ Bundle-Vendor: Coastal Hacking
 Automatic-Module-Name: us.coastalhacking.corvus.eclipse.app
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: us.coastalhacking.corvus.eclipse.app
-Import-Package: org.owasp.prevent.ldap,
- us.coastalhacking.corvus.eclipse.resources,
+Import-Package: us.coastalhacking.corvus.eclipse.resources,
  us.coastalhacking.corvus.eclipse.transaction

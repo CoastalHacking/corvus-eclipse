@@ -1,4 +1,4 @@
-package us.coastalhacking.corvus.eclipse.ui.api;
+package us.coastalhacking.corvus.eclipse.ui;
 
 public interface EclipseUiApi {
 

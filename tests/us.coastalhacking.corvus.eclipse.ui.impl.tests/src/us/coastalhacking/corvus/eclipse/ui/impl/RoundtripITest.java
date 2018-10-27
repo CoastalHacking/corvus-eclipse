@@ -40,7 +40,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
 import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
-import us.coastalhacking.corvus.eclipse.ui.api.EclipseUiApi;
+import us.coastalhacking.corvus.eclipse.ui.EclipseUiApi;
 
 @SuppressWarnings("restriction")
 class RoundtripITest {

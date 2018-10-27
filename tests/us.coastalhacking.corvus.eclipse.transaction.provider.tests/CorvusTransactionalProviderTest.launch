@@ -13,7 +13,7 @@
 <booleanAttribute key="clearwslog" value="false"/>
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/pde-junit"/>
 <booleanAttribute key="default" value="false"/>
-<stringAttribute key="deselected_workspace_plugins" value="org.bndtools.rt.caffeine,us.coastalhacking.corvus.eclipse.launcher,us.coastalhacking.corvus.eclipse.launcher.provider,us.coastalhacking.corvus.eclipse.launcher.provider.tests,us.coastalhacking.corvus.eclipse.resources,us.coastalhacking.corvus.eclipse.resources.provider,us.coastalhacking.corvus.eclipse.resources.provider.tests,us.coastalhacking.corvus.eclipse.ui.api,us.coastalhacking.corvus.eclipse.ui.impl,us.coastalhacking.corvus.eclipse.ui.impl.tests,us.coastalhacking.corvus.entrypoint,us.coastalhacking.corvus.semiotics"/>
+<stringAttribute key="deselected_workspace_plugins" value="org.bndtools.rt.caffeine,us.coastalhacking.corvus.eclipse.launcher,us.coastalhacking.corvus.eclipse.launcher.provider,us.coastalhacking.corvus.eclipse.launcher.provider.tests,us.coastalhacking.corvus.eclipse.resources,us.coastalhacking.corvus.eclipse.resources.provider,us.coastalhacking.corvus.eclipse.resources.provider.tests,us.coastalhacking.corvus.eclipse.ui,us.coastalhacking.corvus.eclipse.ui.impl,us.coastalhacking.corvus.eclipse.ui.impl.tests,us.coastalhacking.corvus.entrypoint,us.coastalhacking.corvus.semiotics"/>
 <stringAttribute key="featureDefaultLocation" value="workspace"/>
 <stringAttribute key="featurePluginResolution" value="workspace"/>
 <booleanAttribute key="includeOptional" value="true"/>

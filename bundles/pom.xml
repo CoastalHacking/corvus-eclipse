@@ -25,6 +25,8 @@
 		<module>us.coastalhacking.corvus.eclipse.ui.api</module>
 		<module>us.coastalhacking.corvus.eclipse.ui.impl</module>
 		<module>us.coastalhacking.corvus.entrypoint</module>
+		<module>us.coastalhacking.corvus.osgi.utils</module>
+		<module>us.coastalhacking.corvus.osgi.utils.provider</module>
 		<module>us.coastalhacking.corvus.semiotics</module>
 	</modules>
 </project>

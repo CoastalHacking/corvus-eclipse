@@ -3,6 +3,6 @@
    <service>
       <provide interface="us.coastalhacking.corvus.eclipse.app.CorvusApp"/>
    </service>
-   <reference cardinality="1..1" field="configAdmin" interface="org.osgi.service.cm.ConfigurationAdmin" name="configAdmin"/>
+   <reference cardinality="1..1" field="helper" interface="us.coastalhacking.corvus.osgi.utils.ConfigurationAdminHelper" name="helper"/>
    <implementation class="us.coastalhacking.corvus.eclipse.app.provider.CorvusAppProvider"/>
 </scr:component>

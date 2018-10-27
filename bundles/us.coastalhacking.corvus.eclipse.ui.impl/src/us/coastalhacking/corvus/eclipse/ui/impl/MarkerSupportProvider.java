@@ -8,10 +8,10 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
-import us.coastalhacking.corvus.eclipse.ui.api.MarkerSupport;
+import us.coastalhacking.corvus.eclipse.ui.MarkerSupport;
 import us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportImpl;
 
-@Component(configurationPid = "us.coastalhacking.corvus.eclipse.ui.api.MarkerSupport", configurationPolicy = ConfigurationPolicy.OPTIONAL, service = MarkerSupport.class, property = {
+@Component(configurationPid = "us.coastalhacking.corvus.eclipse.ui.MarkerSupport", configurationPolicy = ConfigurationPolicy.OPTIONAL, service = MarkerSupport.class, property = {
 		"markerKeys=entrypoint", "markerIds=us.coastalhacking.corvus.eclipse.resources.entrypoint" })
 public class MarkerSupportProvider extends MarkerSupportImpl {
 

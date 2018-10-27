@@ -23,9 +23,8 @@
 <stringAttribute key="pde.version" value="3.3"/>
 <stringAttribute key="product" value="org.eclipse.platform.ide"/>
 <setAttribute key="selected_features">
-<setEntry value="org.eclipse.platform:default"/>
 <setEntry value="us.coastalhacking.corvus.eclipse.dependencies.feature:default"/>
-<setEntry value="us.coastalhacking.corvus.eclipse.ui.feature:default"/>
+<setEntry value="us.coastalhacking.corvus.eclipse.runtime.feature:default"/>
 </setAttribute>
 <stringAttribute key="selected_target_plugins" value="org.eclipse.equinox.console@default:default"/>
 <stringAttribute key="selected_workspace_plugins" value="us.coastalhacking.corvus.eclipse.ui.api@default:default,us.coastalhacking.corvus.eclipse.ui.di@default:default,us.coastalhacking.corvus.eclipse.ui.impl.tests@default:false,us.coastalhacking.corvus.eclipse.ui.impl@default:default"/>

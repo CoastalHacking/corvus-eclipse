@@ -11,9 +11,9 @@ import java.util.Map;
 import org.junit.Test;
 import org.osgi.service.event.Event;
 
-import us.coastalhacking.corvus.eclipse.ui.api.MarkerSupport;
+import us.coastalhacking.corvus.eclipse.ui.EclipseUiApi;
+import us.coastalhacking.corvus.eclipse.ui.MarkerSupport;
 import us.coastalhacking.corvus.eclipse.ui.impl.CommandEventHandler;
-import us.coastalhacking.corvus.eclipse.ui.api.EclipseUiApi;
 
 public class CommandEventHandlerTest {
 

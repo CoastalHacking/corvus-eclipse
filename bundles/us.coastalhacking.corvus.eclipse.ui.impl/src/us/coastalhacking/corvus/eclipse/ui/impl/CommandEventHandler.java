@@ -7,8 +7,8 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
 
-import us.coastalhacking.corvus.eclipse.ui.api.MarkerSupport;
-import us.coastalhacking.corvus.eclipse.ui.api.EclipseUiApi;
+import us.coastalhacking.corvus.eclipse.ui.EclipseUiApi;
+import us.coastalhacking.corvus.eclipse.ui.MarkerSupport;
 
 @Component(service = EventHandler.class, property = {
 		EventConstants.EVENT_TOPIC + "=" + EclipseUiApi.Event.Marker.TOPIC_ALL })

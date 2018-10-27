@@ -16,7 +16,7 @@ import org.eclipse.jface.text.ITextSelection;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import us.coastalhacking.corvus.eclipse.ui.api.MarkerSupport.Coordinate;
+import us.coastalhacking.corvus.eclipse.ui.MarkerSupport.Coordinate;
 import us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportImpl;
 import us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportImpl.ResourceJob;
 

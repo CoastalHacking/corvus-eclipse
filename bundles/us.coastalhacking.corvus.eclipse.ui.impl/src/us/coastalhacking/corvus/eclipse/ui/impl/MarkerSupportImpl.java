@@ -28,7 +28,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.Streams;
 
-import us.coastalhacking.corvus.eclipse.ui.api.MarkerSupport;
+import us.coastalhacking.corvus.eclipse.ui.MarkerSupport;
 
 class MarkerSupportImpl implements MarkerSupport {
 

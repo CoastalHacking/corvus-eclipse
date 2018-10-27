@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Corvus Eclipse UI API
-Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.ui.api
+Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.ui
 Bundle-Version: 0.1.0.qualifier
-Automatic-Module-Name: us.coastalhacking.corvus.eclipse.ui.api
+Automatic-Module-Name: us.coastalhacking.corvus.eclipse.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: us.coastalhacking.corvus.eclipse.ui.api;version="0.1.0"
+Export-Package: us.coastalhacking.corvus.eclipse.ui;version="0.1.0"
 Require-Bundle: org.eclipse.core.resources

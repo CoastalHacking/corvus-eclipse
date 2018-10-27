@@ -7,9 +7,10 @@ Bundle-Vendor: Coastal Hacking
 Automatic-Module-Name: us.coastalhacking.corvus.eclipse.app.provider
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.osgi.service.cm;version="1.5.0",
- org.owasp.prevent.ldap,
+ org.osgi.service.component.annotations;version="1.3.0",
  us.coastalhacking.corvus.eclipse.app,
  us.coastalhacking.corvus.eclipse.resources,
- us.coastalhacking.corvus.eclipse.transaction
+ us.coastalhacking.corvus.eclipse.transaction,
+ us.coastalhacking.corvus.osgi.utils
 Service-Component: OSGI-INF/us.coastalhacking.corvus.eclipse.app.provider.CorvusAppProvider.xml
 Bundle-ActivationPolicy: lazy
