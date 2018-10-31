@@ -11,5 +11,5 @@ Import-Package: org.osgi.framework,
  org.osgi.service.component.annotations,
  org.owasp.prevent.ldap,
  us.coastalhacking.corvus.osgi.utils
-Service-Component: OSGI-INF/us.coastalhacking.corvus.osgi.utils.provider.ConfigurationAdminHelperProvider.xml
 Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/us.coastalhacking.corvus.osgi.utils.provider.ConfigurationAdminHelperProvider.xml

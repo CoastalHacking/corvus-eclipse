@@ -35,10 +35,10 @@ class EclipseResourcesChangeListenerBase implements EclipseResourcesChangeListen
 	/**
 	 * Shall be called prior to any other methods
 	 */
-	void baseActivate(String markerType, TransactionalEditingDomain domain, String uriKey) {
+	void baseActivate(String markerType, TransactionalEditingDomain domain, String logicalUri) {
 		this.markerType = markerType;
 		this.domain = domain;
-		this.uri = URI.createURI(uriKey);
+		this.uri = URI.createURI(logicalUri);
 	}
 
 	// TODO: process IResource changes.
@@ -53,11 +53,14 @@ class EclipseResourcesChangeListenerBase implements EclipseResourcesChangeListen
 			return;
 		}
 
+		// Do not attempt to save the resource within a change event
+		// else you get the hose again via an exception with message:
+		// "The resource tree is locked for modifications."
 		final RecordingCommand command = new RecordingCommand(domain, "Marker change", "Marker change") {
 			@Override
 			protected void doExecute() {
 				final Resource existingResource = domain.getResourceSet().getResource(uri, true);
-				processIMarkerDeltas(deltas, factory, existingResource);
+				processIMarkerDeltas(deltas, factory, existingResource);	
 			}
 		};
 		domain.getCommandStack().execute(command);

@@ -13,7 +13,7 @@ import org.owasp.prevent.ldap.LdapEscape;
 
 import us.coastalhacking.corvus.osgi.utils.ConfigurationAdminHelper;
 
-@Component(service = ConfigurationAdminHelper.class)
+@Component(service = ConfigurationAdminHelper.class) //, immediate=true)
 public class ConfigurationAdminHelperProvider implements ConfigurationAdminHelper {
 
 	@Reference
@@ -32,13 +32,14 @@ public class ConfigurationAdminHelperProvider implements ConfigurationAdminHelpe
 	}
 
 	@Override
-	public void configure(String factoryPid, Map<String, Object> props, List<Configuration> configurations)
+	public String configure(String factoryPid, Map<String, Object> props, List<Configuration> configurations)
 			throws Exception {
 		// Cross-bundle configuration creation requires specifying a "location"
 		// Using the special location "?"
 		final Configuration configuration = configAdmin.createFactoryConfiguration(factoryPid, "?");
 		configurations.add(configuration);
 		configuration.update(new Hashtable<>(props));
+		return configuration.getPid();
 	}
 
 	@Override

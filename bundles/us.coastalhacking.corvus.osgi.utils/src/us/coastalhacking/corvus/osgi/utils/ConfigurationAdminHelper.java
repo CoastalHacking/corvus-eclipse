@@ -12,6 +12,14 @@ public interface ConfigurationAdminHelper {
 
 	public void deactivateConfigurations(List<Configuration> configurations);
 
-	public void configure(String factoryPid, Map<String, Object> props, List<Configuration> configurations)
+	/**
+	 *
+	 * @param factoryPid
+	 * @param props
+	 * @param configurations
+	 * @return the configuration PID
+	 * @throws Exception
+	 */
+	public String configure(String factoryPid, Map<String, Object> props, List<Configuration> configurations)
 			throws Exception;
 }

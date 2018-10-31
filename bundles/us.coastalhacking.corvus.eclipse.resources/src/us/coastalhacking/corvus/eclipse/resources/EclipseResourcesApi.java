@@ -6,12 +6,13 @@ public interface EclipseResourcesApi extends EclipseTransactionApi {
 
 	interface EclipseResourcesInitializer {
 		interface Component {
-			String CONFIG_PID = "corvus.eclipseresources.initializer";
+			String CONFIG_PID = "corvus.eclipseresources.init";
 		}
 
 		interface Properties {
-			String URI_KEY = "corvus:eclipseresources";
-			String PATH_KEY = "corvus.eclipseresources.path";
+			String LOGICAL = "corvus.eclipseresources.init.logical";
+			String DEFAULT_LOGICAL = "corvus:eclipseResources";
+			String PHYSICAL = "corvus.eclipseresources.init.physical";
 		}
 	}
 

@@ -30,13 +30,15 @@ class CorvusTransactionalFactoryProviderTest extends AbstractCMTest {
 	void shouldConfigure() throws Exception {
 
 		// Create and register a resource initializer
-		String uriKey = "test.initializer.uri.key";
-		String pathKey = "test.initializer.uri.path";
+//		String uriKey = "test.initializer.uri.key";
+//		String pathKey = "test.initializer.uri.path";
 		EObject expectedRoot = UtilsFactory.eINSTANCE.createTestRoot();
+		final URI logicalUri = URI.createURI("test:CorvusTransactionalFactoryProviderTest");
+		final URI physicalUri = URI.createFileURI(getTempFolderNewFile("CorvusTransactionalFactoryProviderTest.shouldConfigure.xmi"));
 		ResourceInitializer testInitializer = new ResourceInitializer() {
 			@Override
-			public String getUriKey() {
-				return uriKey;
+			public URI getLogical() {
+				return logicalUri;
 			}
 
 			@Override
@@ -45,15 +47,15 @@ class CorvusTransactionalFactoryProviderTest extends AbstractCMTest {
 			}
 
 			@Override
-			public String getPathKey() {
-				return pathKey;
+			public URI getPhysical() {
+				return physicalUri;
 			}
 		};
 
 		Map<String, Object> props = new HashMap<>();
-		String uriValue = "test:CorvusTransactionalFactoryProviderTest";
-		props.put(uriKey, uriValue);
-		props.put(pathKey, getTempFolderNewFile("shouldConfigure.xmi"));
+//		String uriValue = "test:CorvusTransactionalFactoryProviderTest";
+//		props.put(uriKey, uriValue);
+//		props.put(pathKey, getTempFolderNewFile("shouldConfigure.xmi"));
 		serviceRegistrations.add(
 				getBundleContext().registerService(ResourceInitializer.class, testInitializer, new Hashtable<>(props)));
 
@@ -64,7 +66,7 @@ class CorvusTransactionalFactoryProviderTest extends AbstractCMTest {
 		TransactionalEditingDomain domain = service.createEditingDomain();
 		
 		domain.runExclusive(() -> {
-			Resource resource = domain.getResourceSet().getResource(URI.createURI(uriValue), true);
+			Resource resource = domain.getResourceSet().getResource(logicalUri, true);
 			assertNotNull(resource);
 			EObject actualRoot = resource.getContents().get(0);
 			assertTrue(EcoreUtil.equals(expectedRoot, actualRoot));

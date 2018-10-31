@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" activate="activate" configuration-pid="us.coastalhacking.corvus.eclipse.ui.MarkerSupport" configuration-policy="optional" deactivate="deactivate" name="us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportProvider">
    <property name="markerKeys" value="entrypoint"/>
-   <property name="markerIds" value="us.coastalhacking.corvus.eclipse.resources.entrypoint"/>
+   <property name="markerIds" value="org.eclipse.core.resources.textmarker"/>
    <service>
       <provide interface="us.coastalhacking.corvus.eclipse.ui.MarkerSupport"/>
    </service>

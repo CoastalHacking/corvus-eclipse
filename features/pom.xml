@@ -15,7 +15,10 @@
 
 	<modules>
 		<module>us.coastalhacking.corvus.eclipse.dependencies.feature</module>
-		<module>us.coastalhacking.corvus.eclipse.ui.feature</module>
-		<module>us.coastalhacking.corvus.eclipse.model.feature</module>
+<!-- 		<module>us.coastalhacking.corvus.eclipse.ui.feature</module> -->
+<!-- 		<module>us.coastalhacking.corvus.eclipse.model.feature</module> -->
+		<module>us.coastalhacking.corvus.eclipse.dependencies.test.feature</module>
+		<module>us.coastalhacking.corvus.eclipse.runtime.feature</module>
+<!-- 		<module>us.coastalhacking.corvus.eclipse.feature.group</module> -->
 	</modules>
 </project>

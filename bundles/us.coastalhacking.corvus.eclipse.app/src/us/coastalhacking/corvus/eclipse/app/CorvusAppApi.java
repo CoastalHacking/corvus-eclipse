@@ -6,7 +6,7 @@ public interface CorvusAppApi extends EclipseResourcesApi {
 
 	interface CorvusApp {
 		interface Component {
-			String CONFIG_PID = "corvus.eclipse.app";
+			String FACTORY = "corvus.eclipse.app.factory";
 		}
 		
 	}

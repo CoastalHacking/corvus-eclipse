@@ -17,7 +17,7 @@ import us.coastalhacking.corvus.eclipse.app.CorvusApp;
 import us.coastalhacking.corvus.eclipse.app.CorvusAppApi;
 import us.coastalhacking.corvus.osgi.utils.ConfigurationAdminHelper;
 
-@Component(service = CorvusApp.class, configurationPid = CorvusAppApi.CorvusApp.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE)
+@Component(service = CorvusApp.class, factory = CorvusAppApi.CorvusApp.Component.FACTORY) //configurationPid = CorvusAppApi.CorvusApp.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE)
 public class CorvusAppProvider implements CorvusApp {
 
 	protected final List<Configuration> configurations = new CopyOnWriteArrayList<>();
@@ -33,7 +33,6 @@ public class CorvusAppProvider implements CorvusApp {
 		// Create a target filter and apply to all things which should be targeted
 		transactionId = (String) newProps.get(CorvusAppApi.TransactionalEditingDomain.Properties.ID);
 		String[] targets = { CorvusAppApi.CorvusTransactionalFactory.Reference.INITIALIZERS,
-				CorvusAppApi.CorvusTransactionalRegistry.Reference.FACTORY,
 				CorvusAppApi.EclipseResourcesChangeListener.Reference.REGISTRY };
 		helper.target(newProps, Arrays.stream(targets).sequential(), CorvusAppApi.TransactionalEditingDomain.Properties.ID,
 				transactionId);

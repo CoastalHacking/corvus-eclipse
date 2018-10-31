@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.junit.jupiter.api.Test;
@@ -31,13 +32,17 @@ class CorvusTransactionalRegistryProviderTest extends AbstractCMTest {
 	@Test
 	void shouldConfigure() throws Exception {
 		// Create and register a resource initializer
-		String uriKey = "test.initializer2.uri.key";
-		String pathKey = "test.initializer2.uri.path";
+//		String logicalKey = "test.initializer2.uri.key";
+//		String physicalKey = "test.initializer2.uri.path";
+		final URI logicalUri = URI.createURI("test:CorvusTransactionalRegistryProviderTest");
+		final URI physicalUri = URI.createFileURI(getTempFolderNewFile("CorvusTransactionalRegistryProviderTest.shouldConfigure.xmi"));
 		EObject expectedRoot = UtilsFactory.eINSTANCE.createTestRoot();
 		ResourceInitializer testInitializer = new ResourceInitializer() {
+			
+			
 			@Override
-			public String getUriKey() {
-				return uriKey;
+			public URI getLogical() {
+				return logicalUri;
 			}
 
 			@Override
@@ -46,15 +51,15 @@ class CorvusTransactionalRegistryProviderTest extends AbstractCMTest {
 			}
 
 			@Override
-			public String getPathKey() {
-				return pathKey;
+			public URI getPhysical() {
+				return physicalUri;
 			}
 		};
 
 		Map<String, Object> props = new HashMap<>();
-		String uriValue = "test:CorvusTransactionalRegistryProviderTest";
-		props.put(uriKey, uriValue);
-		props.put(pathKey, getTempFolderNewFile("CorvusTransactionalRegistryProviderTest.shouldConfigure.xmi"));
+//		String uriValue = "test:CorvusTransactionalRegistryProviderTest";
+//		props.put(logicalKey, uriValue);
+//		props.put(physicalKey, getTempFolderNewFile("CorvusTransactionalRegistryProviderTest.shouldConfigure.xmi"));
 		serviceRegistrations.add(
 				getBundleContext().registerService(ResourceInitializer.class, testInitializer, new Hashtable<>(props)));
 

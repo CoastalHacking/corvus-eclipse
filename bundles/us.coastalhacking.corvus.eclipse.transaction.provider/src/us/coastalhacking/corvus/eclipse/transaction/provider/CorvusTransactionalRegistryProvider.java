@@ -13,7 +13,7 @@ import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalFactory;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
 import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
 
-@Component(service = CorvusTransactionalRegistry.class, configurationPid = EclipseTransactionApi.CorvusTransactionalRegistry.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE)
+@Component(service = CorvusTransactionalRegistry.class, configurationPid = EclipseTransactionApi.CorvusTransactionalRegistry.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate=true)
 public class CorvusTransactionalRegistryProvider implements CorvusTransactionalRegistry {
 
 	final Map<String, TransactionalEditingDomain> registries = new ConcurrentHashMap<>();

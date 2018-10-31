@@ -103,6 +103,13 @@ public abstract class AbstractCMTest {
 		return st.waitForService(timeout);
 	}
 
+	protected String toFilter(String servicePid, Map<String, Object> props) {
+		return String.format("(&(%s=%s)%s)", Constants.SERVICE_PID, servicePid, props.entrySet().stream().map(
+				es -> String.format("(%s=%s)", es.getKey(), weaklyEscapeForLdapSearchFilter((String) es.getValue())))
+				.collect(Collectors.joining()));
+	}
+	
+	@Deprecated
 	protected String toFilter(Class<?> clazz, String servicePid, Map<String, Object> props) {
 		return String.format("(&(%s=%s)%s)", Constants.SERVICE_PID, servicePid, props.entrySet().stream().map(
 				es -> String.format("(%s=%s)", es.getKey(), weaklyEscapeForLdapSearchFilter((String) es.getValue())))
@@ -129,6 +136,22 @@ public abstract class AbstractCMTest {
 		return result.toString();
 	}
 
+	protected Object configurationHelper(Class<?>[] clazzes, String factoryPid, Map<String, Object> props, long timeout)
+			throws Exception {
+		assertNotNull(getConfigAdmin());
+		// Create the configuration
+		final Configuration configuration = getConfigAdmin().createFactoryConfiguration(factoryPid, "?");
+		configurations.add(configuration);
+		configurationFutures.put(configuration.getPid(), new CompletableFuture<>());
+		// Updating it with the passed-in properties
+		configuration.update(new Hashtable<>(props));
+		// Strictly return the specific service, ensuring the desired properties are
+		// also present
+		final String filter = toFilter(configuration.getPid(), props);
+		return serviceTrackerHelper(
+				new ServiceTracker<Object, Object>(getBundleContext(), getBundleContext().createFilter(filter), null), timeout);
+	}
+	
 	protected <S> S configurationHelper(Class<S> clazz, String factoryPid, Map<String, Object> props, long timeout)
 			throws Exception {
 		assertNotNull(getConfigAdmin());
@@ -140,7 +163,7 @@ public abstract class AbstractCMTest {
 		configuration.update(new Hashtable<>(props));
 		// Strictly return the specific service, ensuring the desired properties are
 		// also present
-		final String filter = toFilter(clazz, configuration.getPid(), props);
+		final String filter = toFilter(configuration.getPid(), props);
 		return serviceTrackerHelper(
 				new ServiceTracker<>(getBundleContext(), getBundleContext().createFilter(filter), null), timeout);
 	}

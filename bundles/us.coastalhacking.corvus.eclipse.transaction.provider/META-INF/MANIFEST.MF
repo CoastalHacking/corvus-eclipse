@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Corvus Eclipse EMF Provider
+Bundle-Name: Corvus Eclipse EMF Transactional Provider
 Bundle-SymbolicName: us.coastalhacking.corvus.eclipse.transaction.provider
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Coastal Hacking
@@ -14,6 +14,8 @@ Import-Package: org.eclipse.core.commands,
  org.eclipse.emf.edit.domain,
  org.eclipse.emf.transaction,
  org.eclipse.emf.transaction.impl,
+ org.eclipse.emf.workspace,
+ org.eclipse.emf.workspace.impl,
  org.osgi.service.component.annotations;version="1.3.0",
  us.coastalhacking.corvus.eclipse.transaction
 Service-Component: OSGI-INF/us.coastalhacking.corvus.eclipse.transaction.provider.CorvusTransactionalFactoryProvider.xml,

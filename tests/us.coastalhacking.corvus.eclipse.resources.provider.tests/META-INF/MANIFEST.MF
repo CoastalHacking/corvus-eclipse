@@ -16,3 +16,5 @@ Import-Package: org.junit;version="4.12.0",
  org.mockito.stubbing,
  us.coastalhacking.corvus.eclipse.resources,
  us.coastalhacking.corvus.eclipse.test.utils
+Require-Bundle: us.coastalhacking.corvus.eclipse.transaction.provider;bundle-version="0.1.0",
+ us.coastalhacking.corvus.osgi.utils.provider;bundle-version="0.1.0"

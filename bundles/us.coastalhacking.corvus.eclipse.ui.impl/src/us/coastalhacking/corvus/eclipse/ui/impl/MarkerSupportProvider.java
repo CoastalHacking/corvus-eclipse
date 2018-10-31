@@ -12,7 +12,7 @@ import us.coastalhacking.corvus.eclipse.ui.MarkerSupport;
 import us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportImpl;
 
 @Component(configurationPid = "us.coastalhacking.corvus.eclipse.ui.MarkerSupport", configurationPolicy = ConfigurationPolicy.OPTIONAL, service = MarkerSupport.class, property = {
-		"markerKeys=entrypoint", "markerIds=us.coastalhacking.corvus.eclipse.resources.entrypoint" })
+		"markerKeys=entrypoint", "markerIds=org.eclipse.core.resources.textmarker" })
 public class MarkerSupportProvider extends MarkerSupportImpl {
 
 	@interface Config {

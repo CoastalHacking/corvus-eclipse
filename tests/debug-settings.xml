@@ -8,13 +8,13 @@
 			<id>tychoDebug</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-			</activation>
+			</activation> 
 			<properties>
 				<debugPort>8000</debugPort>
 				<profileName>tychoDebug</profileName>
 				<osgi.console>1234</osgi.console>
 				<!-- <tycho.testArgLine>-Dosgi.noShutdown=true</tycho.testArgLine> -->
-				<!-- <tycho.testArgLine>-Dosgi.console= -Dosgi.console.enable.builtin=true</tycho.testArgLine> -->
+				<!-- <tycho.testArgLine>-Dosgi.console=1234 -Dosgi.console.enable.builtin=true</tycho.testArgLine> -->
 			</properties>
 		</profile>
 	</profiles>

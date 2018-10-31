@@ -148,7 +148,8 @@ class RoundtripITest {
 		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 
-			String markerId = "us.coastalhacking.corvus.eclipse.resources.entrypoint";
+			// FIXME: change me
+			String markerId = "org.eclipse.core.resources.textmarker";
 			IMarkerDelta[] deltas = event.findMarkerDeltas(markerId, true);
 			if (deltas.length > 0 && deltas[0].getResource().getFullPath().toPortableString().equals(fullPath)) {
 				latch.countDown();

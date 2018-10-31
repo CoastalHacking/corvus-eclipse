@@ -27,7 +27,7 @@ public interface EclipseTransactionApi {
 		}
 
 		interface Reference {
-			String FACTORY = "corvus.transaction.registry.factory";
+			String FACTORY = "corvus.transaction.registry.transactionalfactory";
 		}
 	}
 

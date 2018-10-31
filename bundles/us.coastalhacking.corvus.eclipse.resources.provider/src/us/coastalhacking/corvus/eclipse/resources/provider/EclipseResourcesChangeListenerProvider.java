@@ -14,7 +14,7 @@ import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesChangeListener;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
 
-@Component(service=EclipseResourcesChangeListener.class, configurationPid=EclipseResourcesApi.EclipseResourcesChangeListener.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE)
+@Component(service=EclipseResourcesChangeListener.class, configurationPid=EclipseResourcesApi.EclipseResourcesChangeListener.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE, immediate=true)
 public class EclipseResourcesChangeListenerProvider extends EclipseResourcesChangeListenerBase {
 
 	@Reference
@@ -27,9 +27,9 @@ public class EclipseResourcesChangeListenerProvider extends EclipseResourcesChan
 	void activate(Map<String, Object> props) {
 		String markerType = (String) props.get(EclipseResourcesApi.EclipseResourcesChangeListener.Properties.MARKER_TYPE);
 		String transactionId = (String) props.get(EclipseResourcesApi.TransactionalEditingDomain.Properties.ID);
-		String uriKey = (String) props.get(EclipseResourcesApi.EclipseResourcesInitializer.Properties.URI_KEY);
+		String logicalUri = (String) props.get(EclipseResourcesApi.EclipseResourcesInitializer.Properties.LOGICAL);
 		TransactionalEditingDomain domain = registry.getEditingDomain(transactionId);
-		super.baseActivate(markerType, domain, uriKey);		
+		super.baseActivate(markerType, domain, logicalUri);		
 		workspace.addResourceChangeListener(this);
 	}
 	

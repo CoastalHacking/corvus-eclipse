@@ -5,14 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesChangeListener;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesInitializer;
 import us.coastalhacking.corvus.eclipse.test.utils.AbstractCMTest;
+import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalFactory;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
+import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
 class EclipseResourcesChangeListenerProviderTest extends AbstractCMTest {
 
@@ -24,17 +29,28 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractCMTest {
 	void shouldConfigure() throws Exception {
 		Map<String, Object> props = new HashMap<>();
 		// Properties
+		
 		String uriKey = "test:EclipseResourcesChangeListenerProviderTest";
-		props.put(EclipseResourcesApi.EclipseResourcesInitializer.Properties.URI_KEY, uriKey);
+		props.put(EclipseResourcesApi.EclipseResourcesInitializer.Properties.LOGICAL, uriKey);
 		String pathKey = "EclipseResourcesChangeListenerProviderTest.shouldConfigure.xmi";
-		props.put(EclipseResourcesApi.EclipseResourcesInitializer.Properties.PATH_KEY, getTempFolderNewFile(pathKey));
+		IWorkspace workspace = TestUtils.getService(getBundleContext(), IWorkspace.class, 250);
+		assertNotNull(workspace);
+		IProject project = workspace.getRoot().getProject(getClass().getName());
+		project.create(null);
+		project.open(null);
+
+		// Create file in project
+		IFile file = project.getFile(pathKey);
+		String fullPath = file.getFullPath().toPortableString();
+		props.put(EclipseResourcesApi.EclipseResourcesInitializer.Properties.PHYSICAL, fullPath);
+		
 		String markerType = "org.eclipse.core.resources.textmarker";
 		props.put(EclipseResourcesApi.EclipseResourcesChangeListener.Properties.MARKER_TYPE, markerType);
-		String transactionId = "test.change.provider";
+		String transactionId = "eclipse.resources.test.listener.provider";
 		props.put(EclipseResourcesApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
 		// Configure initializer
-		configurationHelper(EclipseResourcesInitializer.class, EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, props, timeout);
+		configurationHelper(new Class[] {EclipseResourcesInitializer.class, ResourceInitializer.class}, EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, props, timeout);
 
 		// Configure factory
 		configurationHelper(CorvusTransactionalFactory.class,
@@ -47,6 +63,8 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractCMTest {
 		// Configure change listener
 		EclipseResourcesChangeListenerProvider provider = (EclipseResourcesChangeListenerProvider)configurationHelper(EclipseResourcesChangeListener.class, EclipseResourcesApi.EclipseResourcesChangeListener.Component.CONFIG_PID, props, timeout);
 		assertNotNull(provider);
+
+		project.delete(true, null);
 	}
 
 
