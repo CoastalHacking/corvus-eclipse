@@ -29,4 +29,15 @@ public interface EclipseResourcesApi extends EclipseTransactionApi {
 			String REGISTRY = "corvus.eclipseresources.listener.registry";
 		}
 	}
+	
+	interface ResourceModifiedListener {
+		interface Component {
+			String CONFIG_PID = "corvus.resourcemodified.listener";
+		}
+
+		interface Reference {
+			String REGISTRY = "corvus.resourcemodified.listener.registry";
+		}
+
+	}
 }

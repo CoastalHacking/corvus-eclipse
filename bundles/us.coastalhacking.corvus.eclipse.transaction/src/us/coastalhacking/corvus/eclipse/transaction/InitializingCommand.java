@@ -32,7 +32,9 @@ public class InitializingCommand extends RecordingCommand {
 		} catch (Exception e) {
 			resource = domain.getResourceSet().getResource(key, false);
 		}
-		resource.getContents().add(root);
+		if (resource.getContents().isEmpty()) {
+			resource.getContents().add(root);	
+		}
 		// TODO: get XMI options and pass here via properties
 		try {
 			resource.save(null);
