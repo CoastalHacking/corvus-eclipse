@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" activate="activate" configuration-pid="us.coastalhacking.corvus.eclipse.ui.MarkerSupport" configuration-policy="optional" deactivate="deactivate" name="us.coastalhacking.corvus.eclipse.resources.provider.MarkerSupportProvider">
-   <property name="markerKeys" value="entrypoint"/>
-   <property name="markerIds" value="us.coastalhacking.corvus.eclipse.resources.entrypoint"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" activate="activate" configuration-pid="corvus.eclipseresources.markersupport" deactivate="deactivate" immediate="true" name="us.coastalhacking.corvus.eclipse.resources.provider.MarkerSupportProvider">
    <service>
       <provide interface="us.coastalhacking.corvus.eclipse.resources.MarkerSupport"/>
    </service>
+   <reference bind="setMarkerProvider" cardinality="0..1" interface="us.coastalhacking.corvus.eclipse.resources.MarkerProvider" name="corvus.markersupport.markerprovider" policy="dynamic" policy-option="greedy" unbind="unsetMarkerProvider"/>
    <reference cardinality="1..1" field="workspace" interface="org.eclipse.core.resources.IWorkspace" name="workspace"/>
    <implementation class="us.coastalhacking.corvus.eclipse.resources.provider.MarkerSupportProvider"/>
 </scr:component>

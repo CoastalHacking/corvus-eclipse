@@ -13,7 +13,7 @@ import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesFactory;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesInitializer;
 import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
-@Component(service= {EclipseResourcesInitializer.class, ResourceInitializer.class}, configurationPid=EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE, immediate=true)
+@Component(service=ResourceInitializer.class, configurationPid=EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE, immediate=true)
 public class EclipseResourcesInitializerProvider implements EclipseResourcesInitializer {
 
 	private URI logical;

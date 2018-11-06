@@ -5,7 +5,7 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>us.coastalhacking.corvus.eclipse</groupId>
-	<artifactId>us.coastalhacking.corvus.eclipse.ui.impl.tests</artifactId>
+	<artifactId>us.coastalhacking.corvus.eclipse.ui.provider.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 
 	<parent>
@@ -21,7 +21,6 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<!-- <systemProperties> <osgi.console>1234</osgi.console> </systemProperties> -->
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<argLine>${tycho.surefire.extra.vmargs}</argLine>

@@ -4,6 +4,8 @@ import us.coastalhacking.corvus.eclipse.transaction.EclipseTransactionApi;
 
 public interface EclipseResourcesApi extends EclipseTransactionApi {
 
+	String BASE_MARKER = "us.coastalhacking.corvus.eclipse.resources.marker";
+	
 	interface EclipseResourcesInitializer {
 		interface Component {
 			String CONFIG_PID = "corvus.eclipseresources.init";
@@ -38,6 +40,15 @@ public interface EclipseResourcesApi extends EclipseTransactionApi {
 		interface Reference {
 			String REGISTRY = "corvus.resourcemodified.listener.registry";
 		}
-
+	}
+	
+	interface MarkerSupport {
+		interface Component {
+			String CONFIG_PID = "corvus.eclipseresources.markersupport";
+		}
+		
+		interface Reference {
+			String MARKER_PROVIDER = "corvus.markersupport.markerprovider";
+		}
 	}
 }

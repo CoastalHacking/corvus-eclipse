@@ -1,56 +1,94 @@
 package us.coastalhacking.corvus.eclipse.ui.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.text.ITextSelection;
-import org.junit.jupiter.api.Disabled;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.junit.jupiter.api.Test;
 
-import us.coastalhacking.corvus.eclipse.ui.MarkerSupport.Coordinate;
-import us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportImpl;
-import us.coastalhacking.corvus.eclipse.ui.impl.MarkerSupportImpl.ResourceJob;
+import us.coastalhacking.corvus.eclipse.resources.MarkerSupport.Coordinate;
 
-class MarkerSupportImplTest {
+class MarkerUiSupportBaseTest {
+
+	public interface EditorResource extends IResource, IEditorInput {
+
+	}
 
 	@Test
-	void shouldGetCoordinate() throws Exception {
+	void shouldPopulateResource() throws Exception {
+
+		// Mock & prep
+		IEclipseContext context = mock(IEclipseContext.class);
+		MarkerUiSupportBase base = new MarkerUiSupportBase() {
+			@Override
+			protected IEclipseContext getEclipseContext() {
+				return context;
+			}
+		};
+		EditorResource expected = mock(EditorResource.class);
+		IEditorPart editor = mock(IEditorPart.class);
+		when(editor.getEditorInput()).thenReturn(expected);
+		IWorkbenchPage page = mock(IWorkbenchPage.class);
+		when(page.getActiveEditor()).thenReturn(editor);
+		IWorkbenchWindow window = mock(IWorkbenchWindow.class);
+		when(window.getActivePage()).thenReturn(page);
+		IWorkbench workbench = mock(IWorkbench.class);
+		when(workbench.getActiveWorkbenchWindow()).thenReturn(window);
+		when(context.get(IWorkbench.class)).thenReturn(workbench);
+		final CompletableFuture<IResource> future = new CompletableFuture<>();
+
+		// Call & verify
+		base.populateResource(future);
+		IResource actual = future.get();
+		assertEquals(expected, actual);
+
+	}
+
+	@Test
+	void shouldGetSelectedCoordinate() throws Exception {
+
+		// Mock and Prep
 		int charStart = 0;
 		int length = 10;
 		int startLine = 0;
 		String expectedText = "Australian magpie";
-
 		ITextSelection textSelection = mock(ITextSelection.class);
 		when(textSelection.getOffset()).thenReturn(charStart);
 		when(textSelection.getLength()).thenReturn(length);
 		when(textSelection.getStartLine()).thenReturn(startLine);
 		when(textSelection.getText()).thenReturn(expectedText);
-
 		ESelectionService selectionService = mock(ESelectionService.class);
 		when(selectionService.getSelection()).thenReturn(textSelection);
-
 		IEclipseContext context = mock(IEclipseContext.class);
 		when(context.get(ESelectionService.class)).thenReturn(selectionService);
+		MarkerUiSupportBase base = new MarkerUiSupportBase() {
+			@Override
+			protected IEclipseContext getEclipseContext() {
+				return context;
+			}
+		};
 
-		MarkerSupportImpl impl = new MarkerSupportImpl();
-		impl.context = context;
-		Coordinate coordinate = impl.getSelectedCoordinate().get();
-
+		// Call & verify
+		Coordinate coordinate = base.getSelectedCoordinate().get();
 		assertEquals(charStart, coordinate.charStart());
 		assertEquals(charStart + length, coordinate.charEnd());
 		assertEquals(startLine, coordinate.lineNumber());
 		assertEquals(expectedText, coordinate.selected());
 	}
 
+
+/*
 	@Disabled("Needs to run as itest")
 	@Test
 	void shouldRunResourceJob() throws Exception {
@@ -72,7 +110,7 @@ class MarkerSupportImplTest {
 		when(coordinate.selected()).thenReturn(selected);
 
 		String markerId = "";
-		MarkerSupportImpl impl = new MarkerSupportImpl();
+		MarkerUiSupportBase impl = new MarkerUiSupportBase();
 		impl.id = "foo.bar";
 		ResourceJob job = impl.new ResourceJob(future, markerId, resource, coordinate);
 		job.runInWorkspace(null);
@@ -82,14 +120,7 @@ class MarkerSupportImplTest {
 		// 1 offset
 		verify(marker).setAttribute(IMarker.LINE_NUMBER, lineNumber + 1);
 		verify(marker).setAttribute(IMarker.MESSAGE, selected);
-	}
-
-	@Test
-	void shouldActivate() {
-		MarkerSupportImpl impl = new MarkerSupportImpl();
-		impl.activate(new String[] { "key1", "key2" }, new String[] { "id1", "id2" });
-		assertEquals(impl.markerKeysIds.get("key1"), "id1");
-		assertEquals(impl.markerKeysIds.inverse().get("id2"), "key2");
-	}
-
+	}	
+ */
+	
 }

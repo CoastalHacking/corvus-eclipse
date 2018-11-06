@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="us.coastalhacking.corvus.entrypoint.EntryPointMarkerProvider">
+   <service>
+      <provide interface="us.coastalhacking.corvus.eclipse.resources.MarkerProvider"/>
+   </service>
+   <implementation class="us.coastalhacking.corvus.entrypoint.EntryPointMarkerProvider"/>
+</scr:component>

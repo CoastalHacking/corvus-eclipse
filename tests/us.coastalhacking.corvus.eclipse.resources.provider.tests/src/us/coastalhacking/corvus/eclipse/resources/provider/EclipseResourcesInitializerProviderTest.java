@@ -11,7 +11,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
-import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesInitializer;
 import us.coastalhacking.corvus.eclipse.test.utils.AbstractCMTest;
 import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
 import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
@@ -39,7 +38,7 @@ class EclipseResourcesInitializerProviderTest extends AbstractCMTest {
 		props.put(EclipseResourcesApi.EclipseResourcesInitializer.Properties.PHYSICAL, fullPath);
 
 		// Call & verify
-		EclipseResourcesInitializer initializer = (EclipseResourcesInitializer) configurationHelper(new Class[] {EclipseResourcesInitializer.class, ResourceInitializer.class}, EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, props, timeout);
+		ResourceInitializer initializer = configurationHelper(ResourceInitializer.class, EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, props, timeout);
 		assertNotNull(initializer);
 	}
 

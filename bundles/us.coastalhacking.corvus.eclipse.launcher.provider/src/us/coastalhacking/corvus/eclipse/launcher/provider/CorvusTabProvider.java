@@ -51,7 +51,7 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab implements
 		configuration.rename(transactionId);
 		configuration.setAttribute(CorvusLaunchApi.TransactionalEditingDomain.Properties.ID, transactionId);
 		configuration.setAttribute(CorvusLaunchApi.EclipseResourcesInitializer.Properties.LOGICAL, CorvusLaunchApi.EclipseResourcesInitializer.Properties.DEFAULT_LOGICAL);
-		configuration.setAttribute(CorvusLaunchApi.EclipseResourcesChangeListener.Properties.MARKER_TYPE, "org.eclipse.core.resources.textmarker");
+		configuration.setAttribute(CorvusLaunchApi.EclipseResourcesChangeListener.Properties.MARKER_TYPE, CorvusLaunchApi.BASE_MARKER);
 	}
 
 	@Override

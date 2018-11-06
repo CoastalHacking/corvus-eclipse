@@ -1,7 +1,23 @@
 package us.coastalhacking.corvus.eclipse.ui;
 
 public interface EclipseUiApi {
+	interface Model {
+		interface Command {
+			String ID = "us.coastalhacking.corvus.eclipse.ui.command";
+		}
 
+		interface CommandParameter {
+			String MARKER = "us.coastalhacking.corvus.eclipse.ui.commandparameter.marker";
+			String ACTION = "us.coastalhacking.corvus.eclipse.ui.commandparameter.action";
+			String ACTION_ADD = "add";
+		}
+
+		interface Menu {
+			String ID = "us.coastalhacking.corvus.eclipse.ui.menu";
+		}
+	}
+	
+	@Deprecated
 	interface CommandParameter {
 		String MARKER = "us.coastalhacking.corvus.eclipse.ui.commandparameter.marker";
 		String ACTION = "us.coastalhacking.corvus.eclipse.ui.commandparameter.action";
@@ -17,4 +33,10 @@ public interface EclipseUiApi {
 		}
 	}
 
+	interface MarkerUiSupport {
+		interface Component {
+			String CONFIG_PID = "corvus.eclipseui.markeruisupport";
+		}
+	}
+	
 }

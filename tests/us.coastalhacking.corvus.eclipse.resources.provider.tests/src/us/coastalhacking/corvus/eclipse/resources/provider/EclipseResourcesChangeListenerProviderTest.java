@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesChangeListener;
-import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesInitializer;
 import us.coastalhacking.corvus.eclipse.test.utils.AbstractCMTest;
 import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalFactory;
@@ -44,13 +43,13 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractCMTest {
 		String fullPath = file.getFullPath().toPortableString();
 		props.put(EclipseResourcesApi.EclipseResourcesInitializer.Properties.PHYSICAL, fullPath);
 		
-		String markerType = "org.eclipse.core.resources.textmarker";
+		String markerType = EclipseResourcesApi.BASE_MARKER;
 		props.put(EclipseResourcesApi.EclipseResourcesChangeListener.Properties.MARKER_TYPE, markerType);
 		String transactionId = "eclipse.resources.test.listener.provider";
 		props.put(EclipseResourcesApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
 		// Configure initializer
-		configurationHelper(new Class[] {EclipseResourcesInitializer.class, ResourceInitializer.class}, EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, props, timeout);
+		configurationHelper(ResourceInitializer.class, EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, props, timeout);
 
 		// Configure factory
 		configurationHelper(CorvusTransactionalFactory.class,

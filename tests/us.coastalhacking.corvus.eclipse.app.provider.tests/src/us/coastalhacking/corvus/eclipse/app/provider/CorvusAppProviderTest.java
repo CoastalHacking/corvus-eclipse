@@ -19,11 +19,11 @@ import us.coastalhacking.corvus.eclipse.app.CorvusApp;
 import us.coastalhacking.corvus.eclipse.app.CorvusAppApi;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesChangeListener;
-import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesInitializer;
 import us.coastalhacking.corvus.eclipse.test.utils.AbstractCMTest;
 import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalFactory;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
+import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
 class CorvusAppProviderTest extends AbstractCMTest {
 
@@ -65,7 +65,7 @@ class CorvusAppProviderTest extends AbstractCMTest {
 		// Now, since the app doesn't require any of the services directly, we need to
 		// test for them differently
 		final Map<Class<?>, Boolean> found = new HashMap<>();
-		found.put(EclipseResourcesInitializer.class, false);
+		found.put(ResourceInitializer.class, false);
 		found.put(CorvusTransactionalFactory.class, false);
 		found.put(CorvusTransactionalRegistry.class, false);
 		found.put(EclipseResourcesChangeListener.class, false);

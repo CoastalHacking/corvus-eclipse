@@ -18,13 +18,13 @@ public class EventPublishingHandler {
 	private EventAdmin eventAdmin;
 
 	@Execute
-	public void execute(@Named(EclipseUiApi.CommandParameter.MARKER) String markerType, @Named(EclipseUiApi.CommandParameter.ACTION) String action) {
+	public void execute(@Named(EclipseUiApi.Model.CommandParameter.MARKER) String markerType, @Named(EclipseUiApi.Model.CommandParameter.ACTION) String action) {
 		final Map<String, Object> props = new HashMap<>();
 		props.put(EclipseUiApi.Event.Marker.PROP_TYPE, markerType);
 
 		String topic = "";
 		switch (action) {
-		case EclipseUiApi.CommandParameter.ACTION_ADD:
+		case EclipseUiApi.Model.CommandParameter.ACTION_ADD:
 			topic = EclipseUiApi.Event.Marker.TOPIC_ADD;
 			break;
 		default:

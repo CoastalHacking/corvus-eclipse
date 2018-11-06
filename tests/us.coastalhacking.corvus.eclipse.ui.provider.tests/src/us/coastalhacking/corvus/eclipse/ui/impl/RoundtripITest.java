@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -38,10 +39,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceRegistration;
 
+import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
+import us.coastalhacking.corvus.eclipse.resources.MarkerProvider;
 import us.coastalhacking.corvus.eclipse.test.utils.TestUtils;
 import us.coastalhacking.corvus.eclipse.ui.EclipseUiApi;
 
+// TODO: update as a subclass of one of the abstract tests
 @SuppressWarnings("restriction")
 class RoundtripITest {
 
@@ -73,9 +78,27 @@ class RoundtripITest {
 		bundleContext = null;
 	}
 
+	final static String MARKER = EclipseResourcesApi.BASE_MARKER;
+	
 	@Test
 	void shouldRoundTrip() throws Exception {
-
+		// Register marker provider
+		String markerKey = "foobar";
+		
+		MarkerProvider markerProvider = new MarkerProvider() {
+			
+			@Override
+			public String getValue() {
+				return MARKER;
+			}
+			
+			@Override
+			public String getKey() {
+				return markerKey;
+			}
+		};
+		ServiceRegistration<MarkerProvider> reg = bundleContext.registerService(MarkerProvider.class, markerProvider, new Hashtable<>());
+		
 		// Create project in workspace
 		IProject project = workspace.getRoot().getProject(getClass().getName());
 		project.create(null);
@@ -113,10 +136,11 @@ class RoundtripITest {
 
 				// Call UI action
 				EHandlerService handlerService = context.get(EHandlerService.class);
-				String commandId = "us.coastalhacking.corvus.eclipse.ui.command";
+				
+				String commandId = EclipseUiApi.Model.Command.ID;
 				Map<String, Object> params = new HashMap<>();
-				params.put(EclipseUiApi.CommandParameter.ACTION, EclipseUiApi.CommandParameter.ACTION_ADD);
-				params.put(EclipseUiApi.CommandParameter.MARKER, "entrypoint");
+				params.put(EclipseUiApi.Model.CommandParameter.ACTION, EclipseUiApi.Model.CommandParameter.ACTION_ADD);
+				params.put(EclipseUiApi.Model.CommandParameter.MARKER, markerKey);
 				ECommandService commandService = context.get(ECommandService.class);
 				ParameterizedCommand command = commandService.createCommand(commandId, params);
 
@@ -131,7 +155,8 @@ class RoundtripITest {
 		});
 
 		// Wait on latch
-		assertTrue(latch.await(3, TimeUnit.SECONDS));
+		assertTrue(latch.await(10, TimeUnit.SECONDS));
+		reg.unregister();
 	}
 
 	static class TestListener implements IResourceChangeListener {
@@ -148,8 +173,7 @@ class RoundtripITest {
 		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 
-			// FIXME: change me
-			String markerId = "org.eclipse.core.resources.textmarker";
+			String markerId = RoundtripITest.MARKER;
 			IMarkerDelta[] deltas = event.findMarkerDeltas(markerId, true);
 			if (deltas.length > 0 && deltas[0].getResource().getFullPath().toPortableString().equals(fullPath)) {
 				latch.countDown();

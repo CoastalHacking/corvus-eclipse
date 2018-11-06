@@ -12,7 +12,8 @@
 			<properties>
 				<debugPort>8000</debugPort>
 				<profileName>tychoDebug</profileName>
-				<osgi.console>1234</osgi.console>
+				<osgiConsole>1234</osgiConsole>
+				<!-- <osgi.console>1234</osgi.console> -->
 				<!-- <tycho.testArgLine>-Dosgi.noShutdown=true</tycho.testArgLine> -->
 				<!-- <tycho.testArgLine>-Dosgi.console=1234 -Dosgi.console.enable.builtin=true</tycho.testArgLine> -->
 			</properties>

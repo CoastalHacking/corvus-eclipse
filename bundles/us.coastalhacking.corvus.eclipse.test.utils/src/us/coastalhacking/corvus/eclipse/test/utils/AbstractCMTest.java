@@ -103,12 +103,18 @@ public abstract class AbstractCMTest {
 		return st.waitForService(timeout);
 	}
 
-	protected String toFilter(String servicePid, Map<String, Object> props) {
+	protected String toFilterWithPid(String servicePid, Map<String, Object> props) {
 		return String.format("(&(%s=%s)%s)", Constants.SERVICE_PID, servicePid, props.entrySet().stream().map(
 				es -> String.format("(%s=%s)", es.getKey(), weaklyEscapeForLdapSearchFilter((String) es.getValue())))
 				.collect(Collectors.joining()));
 	}
 	
+	protected String toFilter(Map<String, Object> props) {
+		return String.format("(&%s)", props.entrySet().stream().map(
+				es -> String.format("(%s=%s)", es.getKey(), weaklyEscapeForLdapSearchFilter((String) es.getValue())))
+				.collect(Collectors.joining()));
+	}
+
 	@Deprecated
 	protected String toFilter(Class<?> clazz, String servicePid, Map<String, Object> props) {
 		return String.format("(&(%s=%s)%s)", Constants.SERVICE_PID, servicePid, props.entrySet().stream().map(
@@ -141,17 +147,22 @@ public abstract class AbstractCMTest {
 		assertNotNull(getConfigAdmin());
 		// Create the configuration
 		final Configuration configuration = getConfigAdmin().createFactoryConfiguration(factoryPid, "?");
+		return configurationHelper(configuration, props, timeout);
+	}
+
+	protected Object configurationHelper(Configuration configuration, Map<String, Object> props, long timeout)
+			throws Exception {
 		configurations.add(configuration);
 		configurationFutures.put(configuration.getPid(), new CompletableFuture<>());
 		// Updating it with the passed-in properties
-		configuration.update(new Hashtable<>(props));
 		// Strictly return the specific service, ensuring the desired properties are
 		// also present
-		final String filter = toFilter(configuration.getPid(), props);
+		final String filter = toFilterWithPid(configuration.getPid(), props);
 		return serviceTrackerHelper(
-				new ServiceTracker<Object, Object>(getBundleContext(), getBundleContext().createFilter(filter), null), timeout);
+				new ServiceTracker<Object, Object>(getBundleContext(), getBundleContext().createFilter(filter), null),
+				timeout);
 	}
-	
+
 	protected <S> S configurationHelper(Class<S> clazz, String factoryPid, Map<String, Object> props, long timeout)
 			throws Exception {
 		assertNotNull(getConfigAdmin());
@@ -163,7 +174,7 @@ public abstract class AbstractCMTest {
 		configuration.update(new Hashtable<>(props));
 		// Strictly return the specific service, ensuring the desired properties are
 		// also present
-		final String filter = toFilter(configuration.getPid(), props);
+		final String filter = toFilterWithPid(configuration.getPid(), props);
 		return serviceTrackerHelper(
 				new ServiceTracker<>(getBundleContext(), getBundleContext().createFilter(filter), null), timeout);
 	}

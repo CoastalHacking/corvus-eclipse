@@ -8,12 +8,9 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
 import org.osgi.service.component.ComponentInstance;
 
-import us.coastalhacking.corvus.eclipse.app.CorvusApp;
-
 public class CorvusAppProcessBase implements IProcess {
 
 	private final ILaunch launch;
-	private final CorvusApp app;
 	private final ComponentInstance appInstance;
 	private AtomicBoolean disposed = new AtomicBoolean(false); 
 	private final String label;
@@ -21,7 +18,8 @@ public class CorvusAppProcessBase implements IProcess {
 	public CorvusAppProcessBase(ILaunch launch, ComponentInstance appInstance, String label) {
 		this.launch = launch;
 		this.appInstance = appInstance;
-		this.app = (CorvusApp) appInstance.getInstance();
+		// Don't need to save the result
+		appInstance.getInstance();
 		this.label = label;
 	}
 	

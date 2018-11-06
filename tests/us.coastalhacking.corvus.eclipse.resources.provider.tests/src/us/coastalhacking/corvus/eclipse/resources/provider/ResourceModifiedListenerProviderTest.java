@@ -28,8 +28,10 @@ class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 				EclipseResourcesApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 
 		// Configure registry
-		configurationHelper(CorvusTransactionalRegistry.class,
+		CorvusTransactionalRegistry registry = configurationHelper(CorvusTransactionalRegistry.class,
 				EclipseResourcesApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props, timeout);
+		// ensure it's provided
+		assertNotNull(registry);
 
 		ResourceModifiedListenerProvider provider = (ResourceModifiedListenerProvider)configurationHelper(ResourceModifiedListener.class, EclipseResourcesApi.ResourceModifiedListener.Component.CONFIG_PID, props, timeout);
 		assertNotNull(provider);

@@ -16,5 +16,8 @@ Import-Package: org.eclipse.core.resources,
  org.mockito,
  org.mockito.invocation,
  org.mockito.stubbing,
+ org.osgi.service.cm,
+ org.osgi.util.tracker;version="1.5.2",
  us.coastalhacking.corvus.eclipse.resources,
  us.coastalhacking.corvus.eclipse.test.utils
+Require-Bundle: us.coastalhacking.corvus.eclipse.transaction.provider;bundle-version="0.1.0"
