@@ -12,16 +12,16 @@ import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesFactory;
 import us.coastalhacking.corvus.eclipse.transaction.BaseResourceInitializer;
 import us.coastalhacking.corvus.eclipse.transaction.ResourceInitializer;
 
-@Component(service=ResourceInitializer.class, configurationPid=EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE, immediate=true)
+@Component(service = ResourceInitializer.class, configurationPid = EclipseResourcesApi.EclipseResourcesInitializer.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true)
 public class EclipseResourcesInitializerProvider extends BaseResourceInitializer {
 
 	@Activate
 	void activate(Map<String, Object> props) {
-		String logicalUri = (String) props.get(EclipseResourcesApi.EclipseResourcesInitializer.Properties.LOGICAL);
-		String physicalUri = (String) props.get(EclipseResourcesApi.EclipseResourcesInitializer.Properties.PHYSICAL);
-		baseActivate(logicalUri, physicalUri);
+		baseActivate(props, EclipseResourcesApi.EclipseResourcesInitializer.Properties.LOGICAL,
+				EclipseResourcesApi.EclipseResourcesInitializer.Properties.PHYSICAL);
+
 	}
-	
+
 	@Override
 	public EObject getRoot() {
 		return EclipseResourcesFactory.eINSTANCE.createIWorkspaceRoot();

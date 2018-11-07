@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.resources.EclipseResourcesApi;
 import us.coastalhacking.corvus.eclipse.resources.ResourceModifiedListener;
+import us.coastalhacking.corvus.eclipse.test.utils.AbstractProjectTest;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalFactory;
 import us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry;
 

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayInputStream;
 import java.util.concurrent.Future;
 
 import org.eclipse.core.resources.IFile;
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.resources.MarkerProvider;
 import us.coastalhacking.corvus.eclipse.resources.MarkerSupport;
+import us.coastalhacking.corvus.eclipse.test.utils.AbstractProjectTest;
 
 class MarkerSupportBaseTest extends AbstractProjectTest {
 
@@ -122,9 +122,9 @@ class MarkerSupportBaseTest extends AbstractProjectTest {
 				return charEnd;
 			}
 		};
-		final IFile file = project.getFile("shouldGetRule");
 		String expectedText = "This is text";
-		file.create(new ByteArrayInputStream(expectedText.getBytes()), false, null);
+		String filename = "shouldGetRule";
+		final IFile file = createFile(filename, expectedText);
 		
 		// Call and verify
 		IMarker[] markers = file.findMarkers(expectedValue, true, IResource.DEPTH_ZERO);

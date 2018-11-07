@@ -22,6 +22,15 @@ public interface EntrypointFactory extends EFactory {
 	EntrypointFactory eINSTANCE = us.coastalhacking.corvus.entrypoint.impl.EntrypointFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Entry Point Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entry Point Root</em>'.
+	 * @generated
+	 */
+	EntryPointRoot createEntryPointRoot();
+
+	/**
 	 * Returns a new object of class '<em>Entry Point</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -93,6 +93,11 @@ public abstract class AbstractCMTest {
 
 	}
 
+	protected Object serviceTrackerHelper(Map<String, Object> filterProps) throws Exception {
+		return serviceTrackerHelper(
+				new ServiceTracker<>(getBundleContext(), getBundleContext().createFilter(toFilter(filterProps)), null), timeout);
+	}
+
 	protected <T> T serviceTrackerHelper(Class<T> clazz) throws Exception {
 		return serviceTrackerHelper(new ServiceTracker<>(getBundleContext(), clazz, null), timeout);
 	}

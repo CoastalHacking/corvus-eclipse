@@ -4,10 +4,12 @@ package us.coastalhacking.corvus.entrypoint.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import us.coastalhacking.corvus.entrypoint.EntryPoint;
+import us.coastalhacking.corvus.entrypoint.EntryPointRoot;
 import us.coastalhacking.corvus.entrypoint.EntrypointFactory;
 import us.coastalhacking.corvus.entrypoint.EntrypointPackage;
 
@@ -20,6 +22,13 @@ import us.coastalhacking.corvus.semiotics.SemioticsPackage;
  * @generated
  */
 public class EntrypointPackageImpl extends EPackageImpl implements EntrypointPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass entryPointRootEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,8 +105,35 @@ public class EntrypointPackageImpl extends EPackageImpl implements EntrypointPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEntryPointRoot() {
+		return entryPointRootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEntryPointRoot_EntryPoints() {
+		return (EReference)entryPointRootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEntryPoint() {
 		return entryPointEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEntryPoint_Group() {
+		return (EReference)entryPointEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -128,7 +164,11 @@ public class EntrypointPackageImpl extends EPackageImpl implements EntrypointPac
 		isCreated = true;
 
 		// Create classes and their features
+		entryPointRootEClass = createEClass(ENTRY_POINT_ROOT);
+		createEReference(entryPointRootEClass, ENTRY_POINT_ROOT__ENTRY_POINTS);
+
 		entryPointEClass = createEClass(ENTRY_POINT);
+		createEReference(entryPointEClass, ENTRY_POINT__GROUP);
 	}
 
 	/**
@@ -165,7 +205,11 @@ public class EntrypointPackageImpl extends EPackageImpl implements EntrypointPac
 		entryPointEClass.getESuperTypes().add(theSemioticsPackage.getSemiotics());
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(entryPointRootEClass, EntryPointRoot.class, "EntryPointRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEntryPointRoot_EntryPoints(), this.getEntryPoint(), this.getEntryPoint_Group(), "entryPoints", null, 0, -1, EntryPointRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(entryPointEClass, EntryPoint.class, "EntryPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEntryPoint_Group(), this.getEntryPointRoot(), this.getEntryPointRoot_EntryPoints(), "group", null, 0, 1, EntryPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

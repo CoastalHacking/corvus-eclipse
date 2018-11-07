@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Corvus Entry Point Provider Tests
+Bundle-SymbolicName: us.coastalhacking.corvus.entrypoint.provider.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Coastal Hacking
+Fragment-Host: us.coastalhacking.corvus.entrypoint.provider;bundle-version="0.1.0"
+Automatic-Module-Name: us.coastalhacking.corvus.entrypoint.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.junit;version="4.12.0",
+ org.junit.jupiter.api,
+ org.junit.jupiter.api.function,
+ org.junit.platform.commons,
+ org.junit.rules,
+ org.mockito,
+ org.mockito.invocation,
+ org.mockito.stubbing,
+ org.osgi.service.cm,
+ us.coastalhacking.corvus.eclipse.resources,
+ us.coastalhacking.corvus.eclipse.test.utils

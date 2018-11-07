@@ -4,6 +4,7 @@ package us.coastalhacking.corvus.entrypoint;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
 
@@ -58,6 +59,43 @@ public interface EntrypointPackage extends EPackage {
 	EntrypointPackage eINSTANCE = us.coastalhacking.corvus.entrypoint.impl.EntrypointPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link us.coastalhacking.corvus.entrypoint.impl.EntryPointRootImpl <em>Entry Point Root</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see us.coastalhacking.corvus.entrypoint.impl.EntryPointRootImpl
+	 * @see us.coastalhacking.corvus.entrypoint.impl.EntrypointPackageImpl#getEntryPointRoot()
+	 * @generated
+	 */
+	int ENTRY_POINT_ROOT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Entry Points</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_POINT_ROOT__ENTRY_POINTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Entry Point Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_POINT_ROOT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Entry Point Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_POINT_ROOT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link us.coastalhacking.corvus.entrypoint.impl.EntryPointImpl <em>Entry Point</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,7 +103,7 @@ public interface EntrypointPackage extends EPackage {
 	 * @see us.coastalhacking.corvus.entrypoint.impl.EntrypointPackageImpl#getEntryPoint()
 	 * @generated
 	 */
-	int ENTRY_POINT = 0;
+	int ENTRY_POINT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
@@ -86,13 +124,22 @@ public interface EntrypointPackage extends EPackage {
 	int ENTRY_POINT__SIGNIFIERS = SemioticsPackage.SEMIOTICS__SIGNIFIERS;
 
 	/**
+	 * The feature id for the '<em><b>Group</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_POINT__GROUP = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Entry Point</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_POINT_FEATURE_COUNT = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 0;
+	int ENTRY_POINT_FEATURE_COUNT = SemioticsPackage.SEMIOTICS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Entry Point</em>' class.
@@ -105,6 +152,27 @@ public interface EntrypointPackage extends EPackage {
 
 
 	/**
+	 * Returns the meta object for class '{@link us.coastalhacking.corvus.entrypoint.EntryPointRoot <em>Entry Point Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entry Point Root</em>'.
+	 * @see us.coastalhacking.corvus.entrypoint.EntryPointRoot
+	 * @generated
+	 */
+	EClass getEntryPointRoot();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link us.coastalhacking.corvus.entrypoint.EntryPointRoot#getEntryPoints <em>Entry Points</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Entry Points</em>'.
+	 * @see us.coastalhacking.corvus.entrypoint.EntryPointRoot#getEntryPoints()
+	 * @see #getEntryPointRoot()
+	 * @generated
+	 */
+	EReference getEntryPointRoot_EntryPoints();
+
+	/**
 	 * Returns the meta object for class '{@link us.coastalhacking.corvus.entrypoint.EntryPoint <em>Entry Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -113,6 +181,17 @@ public interface EntrypointPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEntryPoint();
+
+	/**
+	 * Returns the meta object for the container reference '{@link us.coastalhacking.corvus.entrypoint.EntryPoint#getGroup <em>Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Group</em>'.
+	 * @see us.coastalhacking.corvus.entrypoint.EntryPoint#getGroup()
+	 * @see #getEntryPoint()
+	 * @generated
+	 */
+	EReference getEntryPoint_Group();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -138,6 +217,24 @@ public interface EntrypointPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link us.coastalhacking.corvus.entrypoint.impl.EntryPointRootImpl <em>Entry Point Root</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see us.coastalhacking.corvus.entrypoint.impl.EntryPointRootImpl
+		 * @see us.coastalhacking.corvus.entrypoint.impl.EntrypointPackageImpl#getEntryPointRoot()
+		 * @generated
+		 */
+		EClass ENTRY_POINT_ROOT = eINSTANCE.getEntryPointRoot();
+
+		/**
+		 * The meta object literal for the '<em><b>Entry Points</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTRY_POINT_ROOT__ENTRY_POINTS = eINSTANCE.getEntryPointRoot_EntryPoints();
+
+		/**
 		 * The meta object literal for the '{@link us.coastalhacking.corvus.entrypoint.impl.EntryPointImpl <em>Entry Point</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -146,6 +243,14 @@ public interface EntrypointPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ENTRY_POINT = eINSTANCE.getEntryPoint();
+
+		/**
+		 * The meta object literal for the '<em><b>Group</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTRY_POINT__GROUP = eINSTANCE.getEntryPoint_Group();
 
 	}
 

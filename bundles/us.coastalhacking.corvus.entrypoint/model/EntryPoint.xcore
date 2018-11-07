@@ -3,6 +3,10 @@ package us.coastalhacking.corvus.entrypoint
 
 import us.coastalhacking.corvus.semiotics.Semiotics
 
+class EntryPointRoot {
+	contains EntryPoint[] entryPoints opposite group
+}
+
 class EntryPoint extends Semiotics {
-	
+	container EntryPointRoot group opposite entryPoints	
 }

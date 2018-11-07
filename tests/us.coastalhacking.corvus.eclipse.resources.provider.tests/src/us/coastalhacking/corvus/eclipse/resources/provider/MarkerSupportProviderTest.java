@@ -9,6 +9,7 @@ import org.osgi.framework.ServiceRegistration;
 
 import us.coastalhacking.corvus.eclipse.resources.MarkerProvider;
 import us.coastalhacking.corvus.eclipse.resources.MarkerSupport;
+import us.coastalhacking.corvus.eclipse.test.utils.AbstractProjectTest;
 
 public class MarkerSupportProviderTest extends AbstractProjectTest {
 

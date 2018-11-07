@@ -72,6 +72,10 @@ public class EntrypointAdapterFactory extends AdapterFactoryImpl {
 	protected EntrypointSwitch<Adapter> modelSwitch =
 		new EntrypointSwitch<Adapter>() {
 			@Override
+			public Adapter caseEntryPointRoot(EntryPointRoot object) {
+				return createEntryPointRootAdapter();
+			}
+			@Override
 			public Adapter caseEntryPoint(EntryPoint object) {
 				return createEntryPointAdapter();
 			}
@@ -106,6 +110,20 @@ public class EntrypointAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.entrypoint.EntryPointRoot <em>Entry Point Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.entrypoint.EntryPointRoot
+	 * @generated
+	 */
+	public Adapter createEntryPointRootAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.entrypoint.EntryPoint <em>Entry Point</em>}'.

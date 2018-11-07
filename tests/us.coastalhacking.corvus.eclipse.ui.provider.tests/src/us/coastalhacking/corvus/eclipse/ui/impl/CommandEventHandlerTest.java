@@ -1,7 +1,11 @@
 package us.coastalhacking.corvus.eclipse.ui.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +19,6 @@ import org.osgi.framework.Constants;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
-import org.osgi.util.tracker.ServiceTracker;
 
 import us.coastalhacking.corvus.eclipse.resources.MarkerSupport;
 import us.coastalhacking.corvus.eclipse.resources.MarkerSupport.Coordinate;
@@ -40,9 +43,7 @@ class CommandEventHandlerTest extends AbstractCMTest {
 		Map<String, Object> props = new HashMap<>();
 		props.put(EventConstants.EVENT_TOPIC, EclipseUiApi.Event.Marker.TOPIC_ALL);
 		props.put(Constants.OBJECTCLASS, EventHandler.class.getName());
-		String filter = toFilter(props);
-		Object object = serviceTrackerHelper(
-				new ServiceTracker<>(getBundleContext(), getBundleContext().createFilter(filter), null), timeout);
+		Object object = serviceTrackerHelper(props);
 		assertNotNull(object);
 		assertTrue(object instanceof EventHandler);
 	}

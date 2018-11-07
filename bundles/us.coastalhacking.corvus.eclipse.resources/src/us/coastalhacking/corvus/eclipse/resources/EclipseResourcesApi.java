@@ -51,4 +51,11 @@ public interface EclipseResourcesApi extends EclipseTransactionApi {
 			String MARKER_PROVIDER = "corvus.markersupport.markerprovider";
 		}
 	}
+	
+	interface MarkerProvider {
+		interface Properties {
+			String KEY = "corvus.markerprovider.key";
+			String VALUE = "corvus.markerprovider.value";
+		}
+	}
 }
