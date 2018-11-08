@@ -27,6 +27,7 @@ Import-Package: org.eclipse.core.commands.common,
  us.coastalhacking.corvus.eclipse.launcher,
  us.coastalhacking.corvus.eclipse.resources,
  us.coastalhacking.corvus.eclipse.transaction,
+ us.coastalhacking.corvus.entrypoint,
  us.coastalhacking.corvus.osgi.utils
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/us.coastalhacking.corvus.eclipse.launcher.provider.CorvusLaunchProvider.xml,

@@ -12,6 +12,7 @@ Import-Package: org.osgi.service.cm;version="1.5.0",
  us.coastalhacking.corvus.eclipse.app,
  us.coastalhacking.corvus.eclipse.resources,
  us.coastalhacking.corvus.eclipse.transaction,
+ us.coastalhacking.corvus.entrypoint,
  us.coastalhacking.corvus.osgi.utils
 Service-Component: OSGI-INF/us.coastalhacking.corvus.eclipse.app.provider.CorvusAppProvider.xml
 Bundle-ActivationPolicy: lazy

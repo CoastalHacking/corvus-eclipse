@@ -14,6 +14,7 @@ import org.osgi.service.component.annotations.Reference;
 
 import us.coastalhacking.corvus.eclipse.app.CorvusApp;
 import us.coastalhacking.corvus.eclipse.app.CorvusAppApi;
+import us.coastalhacking.corvus.entrypoint.EntryPointApi;
 import us.coastalhacking.corvus.osgi.utils.ConfigurationAdminHelper;
 
 @Component(service = CorvusApp.class, factory = CorvusAppApi.CorvusApp.Component.FACTORY)
@@ -33,16 +34,37 @@ public class CorvusAppProvider implements CorvusApp {
 		transactionId = (String) newProps.get(CorvusAppApi.TransactionalEditingDomain.Properties.ID);
 		String[] targets = { CorvusAppApi.CorvusTransactionalFactory.Reference.INITIALIZERS,
 				CorvusAppApi.EclipseResourcesChangeListener.Reference.REGISTRY,
-				CorvusAppApi.ResourceModifiedListener.Reference.REGISTRY};
-		helper.target(newProps, Arrays.stream(targets).sequential(), CorvusAppApi.TransactionalEditingDomain.Properties.ID,
-				transactionId);
+				CorvusAppApi.ResourceModifiedListener.Reference.REGISTRY };
+		helper.target(newProps, Arrays.stream(targets).sequential(),
+				CorvusAppApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
 		// Ordered
-		helper.configure(CorvusAppApi.EclipseResourcesInitializer.Component.CONFIG_PID, newProps, configurations);
-		helper.configure(CorvusAppApi.CorvusTransactionalFactory.Component.CONFIG_PID, newProps, configurations);
-		helper.configure(CorvusAppApi.CorvusTransactionalRegistry.Component.CONFIG_PID, newProps, configurations);
-		helper.configure(CorvusAppApi.ResourceModifiedListener.Component.CONFIG_PID, newProps, configurations);
-		helper.configure(CorvusAppApi.EclipseResourcesChangeListener.Component.CONFIG_PID, newProps, configurations);
+		String[] pids = { EntryPointApi.ResourceInitializer.Component.CONFIG_PID,
+				CorvusAppApi.EclipseResourcesInitializer.Component.CONFIG_PID,
+				CorvusAppApi.CorvusTransactionalFactory.Component.CONFIG_PID,
+				CorvusAppApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+				CorvusAppApi.ResourceModifiedListener.Component.CONFIG_PID,
+				CorvusAppApi.EclipseResourcesChangeListener.Component.CONFIG_PID };
+		configurePids(helper, pids, newProps, configurations);
+
+//		helper.configure(EntryPointApi.ResourceInitializer.Component.CONFIG_PID, newProps, configurations);
+//		helper.configure(CorvusAppApi.EclipseResourcesInitializer.Component.CONFIG_PID, newProps, configurations);
+//		helper.configure(CorvusAppApi.CorvusTransactionalFactory.Component.CONFIG_PID, newProps, configurations);
+//		helper.configure(CorvusAppApi.CorvusTransactionalRegistry.Component.CONFIG_PID, newProps, configurations);
+//		helper.configure(CorvusAppApi.ResourceModifiedListener.Component.CONFIG_PID, newProps, configurations);
+//		helper.configure(CorvusAppApi.EclipseResourcesChangeListener.Component.CONFIG_PID, newProps, configurations);
+	}
+
+	void configurePids(ConfigurationAdminHelper helper, String[] pids, Hashtable<String, Object> props,
+			List<Configuration> configurations) {
+		Arrays.stream(pids).forEach(pid -> {
+			try {
+				helper.configure(pid, props, configurations);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 
 	@Deactivate

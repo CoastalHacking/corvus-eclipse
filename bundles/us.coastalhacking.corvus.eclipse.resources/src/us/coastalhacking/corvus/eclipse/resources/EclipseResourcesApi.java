@@ -13,7 +13,7 @@ public interface EclipseResourcesApi extends EclipseTransactionApi {
 
 		interface Properties {
 			String LOGICAL = "corvus.eclipseresources.init.logical";
-			String DEFAULT_LOGICAL = "corvus:eclipseResources";
+//			String DEFAULT_LOGICAL = "corvus:eclipseResources";
 			String PHYSICAL = "corvus.eclipseresources.init.physical";
 		}
 	}

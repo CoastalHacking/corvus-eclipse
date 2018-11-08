@@ -2,6 +2,8 @@ package us.coastalhacking.corvus.eclipse.launcher.provider;
 
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -31,6 +33,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 import us.coastalhacking.corvus.eclipse.launcher.CorvusLaunchApi;
 import us.coastalhacking.corvus.eclipse.launcher.CorvusTab;
+import us.coastalhacking.corvus.entrypoint.EntryPointApi;
 
 @Component(service=CorvusTab.class, scope=ServiceScope.PROTOTYPE)
 public class CorvusTabProvider extends AbstractLaunchConfigurationTab implements CorvusTab {
@@ -50,7 +53,8 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab implements
 		String transactionId = String.format("corvus.transaction.%s", Instant.now().toEpochMilli());
 		configuration.rename(transactionId);
 		configuration.setAttribute(CorvusLaunchApi.TransactionalEditingDomain.Properties.ID, transactionId);
-		configuration.setAttribute(CorvusLaunchApi.EclipseResourcesInitializer.Properties.LOGICAL, CorvusLaunchApi.EclipseResourcesInitializer.Properties.DEFAULT_LOGICAL);
+		configuration.setAttribute(CorvusLaunchApi.EclipseResourcesInitializer.Properties.LOGICAL, "corvus:eclipseResources");
+		configuration.setAttribute(EntryPointApi.ResourceInitializer.Properties.LOGICAL, "corvus:entrypoint");
 		configuration.setAttribute(CorvusLaunchApi.EclipseResourcesChangeListener.Properties.MARKER_TYPE, CorvusLaunchApi.BASE_MARKER);
 	}
 
@@ -76,14 +80,23 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab implements
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (!projectText.getText().isEmpty()) {
-			String projectName = projectText.getText();
-			// TODO: use eclipse resources here instead of JRE
-			// TODO: change URI from file to project in resource initializer when creating URIs
-			java.nio.file.Path path = Paths.get(projectName, "corvus.eclipseResources");
-			configuration.setAttribute(CorvusLaunchApi.EclipseResourcesInitializer.Properties.PHYSICAL, path.toAbsolutePath().toString());
+			final String projectName = projectText.getText();
 			configuration.setAttribute(PROJECT_NAME, projectName);
 
+			// TODO: replace me with osgi goodness 
+			final Map<String, String> initializers = new HashMap<>();
+			initializers.put("corvus.eclipseResources", CorvusLaunchApi.EclipseResourcesInitializer.Properties.PHYSICAL);
+			initializers.put("corvus.entrypoint", EntryPointApi.ResourceInitializer.Properties.PHYSICAL);
+			setInitializer(initializers, projectName, configuration);
 		}
+	}
+	
+	private void setInitializer(Map<String, String> initializers, String projectName, ILaunchConfigurationWorkingCopy configuration) {
+		initializers.entrySet().stream().forEach(es -> {
+			// TODO: use core resources/runtime here...
+			java.nio.file.Path path = Paths.get(projectName, es.getKey());
+			configuration.setAttribute(es.getValue(), path.toAbsolutePath().toString());			
+		});		
 	}
 
 	@Override
