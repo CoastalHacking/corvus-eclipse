@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" activate="activate" configuration-pid="corvus.resourcemodified.listener" configuration-policy="require" deactivate="deactivate" immediate="true" name="us.coastalhacking.corvus.eclipse.resources.provider.ResourceModifiedListenerProvider">
-   <service>
-      <provide interface="us.coastalhacking.corvus.eclipse.resources.ResourceModifiedListener"/>
-   </service>
-   <reference cardinality="1..1" field="registry" interface="us.coastalhacking.corvus.eclipse.transaction.CorvusTransactionalRegistry" name="corvus.resourcemodified.listener.registry"/>
-   <reference cardinality="1..1" field="workspace" interface="org.eclipse.core.resources.IWorkspace" name="workspace"/>
-   <implementation class="us.coastalhacking.corvus.eclipse.resources.provider.ResourceModifiedListenerProvider"/>
-</scr:component>

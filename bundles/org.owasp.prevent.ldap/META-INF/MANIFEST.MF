@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: OWASP Preventing LDAP Injection
-Bundle-SymbolicName: org.owasp.prevent.ldap
-Bundle-Version: 0.1.0.qualifier
-Bundle-Vendor: OWASP
-Automatic-Module-Name: org.owasp.prevent.ldap
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.owasp.prevent.ldap

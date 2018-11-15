@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_p7UuIHMQEeiaysDdmua0TQ">
-  <imports xsi:type="commands:Command" xmi:id="_t6lO0OE2Eeibysl8affRuQ" elementId="us.coastalhacking.corvus.eclipse.ui.command"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_n4-FwHMZEeiaysDdmua0TQ" featurename="handlers" parentElementId="xpath:/">
-    <elements xsi:type="commands:Handler" xmi:id="_qkX8EHMZEeiaysDdmua0TQ" elementId="us.coastalhacking.corvus.eclipse.ui.handler.event" contributionURI="bundleclass://us.coastalhacking.corvus.eclipse.ui.impl/us.coastalhacking.corvus.eclipse.ui.impl.EventPublishingHandler" command="_t6lO0OE2Eeibysl8affRuQ"/>
-  </fragments>
-</fragment:ModelFragments>
