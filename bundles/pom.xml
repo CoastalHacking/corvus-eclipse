@@ -13,24 +13,15 @@
 		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
-	<!--  keep alphabetized -->
 	<modules>
-		<module>org.owasp.prevent.ldap</module>
-		<module>us.coastalhacking.corvus.eclipse.app</module>
-		<module>us.coastalhacking.corvus.eclipse.app.provider</module>
-		<module>us.coastalhacking.corvus.eclipse.launcher</module>
-		<module>us.coastalhacking.corvus.eclipse.launcher.provider</module>
-		<module>us.coastalhacking.corvus.eclipse.resources</module>
-		<module>us.coastalhacking.corvus.eclipse.resources.provider</module>
-		<module>us.coastalhacking.corvus.eclipse.test.utils</module>
-		<module>us.coastalhacking.corvus.eclipse.transaction</module>
-		<module>us.coastalhacking.corvus.eclipse.transaction.provider</module>
-		<module>us.coastalhacking.corvus.eclipse.ui</module>
-		<module>us.coastalhacking.corvus.eclipse.ui.impl</module>
-		<module>us.coastalhacking.corvus.entrypoint</module>
-		<module>us.coastalhacking.corvus.entrypoint.provider</module>
-		<module>us.coastalhacking.corvus.osgi.utils</module>
-		<module>us.coastalhacking.corvus.osgi.utils.provider</module>
 		<module>us.coastalhacking.corvus.semiotics</module>
+		<module>us.coastalhacking.corvus.emf</module>
+		<module>us.coastalhacking.corvus.emf.provider</module>
+		<module>us.coastalhacking.corvus.util</module>
+		<module>us.coastalhacking.corvus.util.provider</module>
+		<module>us.coastalhacking.corvus.eclipse</module>
+		<module>us.coastalhacking.corvus.eclipse.provider</module>
+		<module>us.coastalhacking.corvus.eclipse.editor</module>
+		<module>us.coastalhacking.corvus.test.util</module>
 	</modules>
 </project>

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link us.coastalhacking.corvus.semiotics.Signified#getUuid <em>Uuid</em>}</li>
  *   <li>{@link us.coastalhacking.corvus.semiotics.Signified#getSignifiers <em>Signifiers</em>}</li>
  * </ul>
  *
@@ -23,6 +24,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Signified extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Uuid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Uuid</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Uuid</em>' attribute.
+	 * @see #setUuid(String)
+	 * @see us.coastalhacking.corvus.semiotics.SemioticsPackage#getSignified_Uuid()
+	 * @model unique="false" id="true"
+	 * @generated
+	 */
+	String getUuid();
+
+	/**
+	 * Sets the value of the '{@link us.coastalhacking.corvus.semiotics.Signified#getUuid <em>Uuid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Uuid</em>' attribute.
+	 * @see #getUuid()
+	 * @generated
+	 */
+	void setUuid(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Signifiers</b></em>' reference list.
 	 * The list contents are of type {@link us.coastalhacking.corvus.semiotics.Signifier}.

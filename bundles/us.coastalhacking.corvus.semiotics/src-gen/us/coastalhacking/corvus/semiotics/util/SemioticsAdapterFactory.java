@@ -2,6 +2,8 @@
  */
 package us.coastalhacking.corvus.semiotics.util;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -80,6 +82,42 @@ public class SemioticsAdapterFactory extends AdapterFactoryImpl {
 				return createSignifiedAdapter();
 			}
 			@Override
+			public Adapter caseRoot(Root object) {
+				return createRootAdapter();
+			}
+			@Override
+			public Adapter caseAttribute(Map.Entry<String, String> object) {
+				return createAttributeAdapter();
+			}
+			@Override
+			public Adapter caseIMarker(IMarker object) {
+				return createIMarkerAdapter();
+			}
+			@Override
+			public Adapter caseIResource(IResource object) {
+				return createIResourceAdapter();
+			}
+			@Override
+			public Adapter caseIWorkspaceRoot(IWorkspaceRoot object) {
+				return createIWorkspaceRootAdapter();
+			}
+			@Override
+			public Adapter caseEntryPoint(EntryPoint object) {
+				return createEntryPointAdapter();
+			}
+			@Override
+			public Adapter caseMarkerEntryPoint(MarkerEntryPoint object) {
+				return createMarkerEntryPointAdapter();
+			}
+			@Override
+			public Adapter caseSink(Sink object) {
+				return createSinkAdapter();
+			}
+			@Override
+			public Adapter caseMarkerSink(MarkerSink object) {
+				return createMarkerSinkAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -138,6 +176,132 @@ public class SemioticsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSignifiedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.Root <em>Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.Root
+	 * @generated
+	 */
+	public Adapter createRootAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.IMarker <em>IMarker</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.IMarker
+	 * @generated
+	 */
+	public Adapter createIMarkerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.IResource <em>IResource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.IResource
+	 * @generated
+	 */
+	public Adapter createIResourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.IWorkspaceRoot <em>IWorkspace Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.IWorkspaceRoot
+	 * @generated
+	 */
+	public Adapter createIWorkspaceRootAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.EntryPoint <em>Entry Point</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.EntryPoint
+	 * @generated
+	 */
+	public Adapter createEntryPointAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.MarkerEntryPoint <em>Marker Entry Point</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.MarkerEntryPoint
+	 * @generated
+	 */
+	public Adapter createMarkerEntryPointAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.Sink <em>Sink</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.Sink
+	 * @generated
+	 */
+	public Adapter createSinkAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link us.coastalhacking.corvus.semiotics.MarkerSink <em>Marker Sink</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see us.coastalhacking.corvus.semiotics.MarkerSink
+	 * @generated
+	 */
+	public Adapter createMarkerSinkAdapter() {
 		return null;
 	}
 

@@ -15,6 +15,6 @@
 
 	<modules>
 		<module>us.coastalhacking.corvus.eclipse.target</module>
-		<module>us.coastalhacking.corvus.eclipse.update</module>
+		<!-- <module>us.coastalhacking.corvus.eclipse.update</module> -->
 	</modules>
 </project>

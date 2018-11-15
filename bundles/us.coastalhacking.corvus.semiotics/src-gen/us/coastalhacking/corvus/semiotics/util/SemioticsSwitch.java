@@ -2,6 +2,8 @@
  */
 package us.coastalhacking.corvus.semiotics.util;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -86,6 +88,83 @@ public class SemioticsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SemioticsPackage.ROOT: {
+				Root root = (Root)theEObject;
+				T result = caseRoot(root);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.ATTRIBUTE: {
+				@SuppressWarnings("unchecked") Map.Entry<String, String> attribute = (Map.Entry<String, String>)theEObject;
+				T result = caseAttribute(attribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.IMARKER: {
+				IMarker iMarker = (IMarker)theEObject;
+				T result = caseIMarker(iMarker);
+				if (result == null) result = caseSemiotics(iMarker);
+				if (result == null) result = caseSignifier(iMarker);
+				if (result == null) result = caseSignified(iMarker);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.IRESOURCE: {
+				IResource iResource = (IResource)theEObject;
+				T result = caseIResource(iResource);
+				if (result == null) result = caseSemiotics(iResource);
+				if (result == null) result = caseSignifier(iResource);
+				if (result == null) result = caseSignified(iResource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.IWORKSPACE_ROOT: {
+				IWorkspaceRoot iWorkspaceRoot = (IWorkspaceRoot)theEObject;
+				T result = caseIWorkspaceRoot(iWorkspaceRoot);
+				if (result == null) result = caseSemiotics(iWorkspaceRoot);
+				if (result == null) result = caseSignifier(iWorkspaceRoot);
+				if (result == null) result = caseSignified(iWorkspaceRoot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.ENTRY_POINT: {
+				EntryPoint entryPoint = (EntryPoint)theEObject;
+				T result = caseEntryPoint(entryPoint);
+				if (result == null) result = caseSemiotics(entryPoint);
+				if (result == null) result = caseSignifier(entryPoint);
+				if (result == null) result = caseSignified(entryPoint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.MARKER_ENTRY_POINT: {
+				MarkerEntryPoint markerEntryPoint = (MarkerEntryPoint)theEObject;
+				T result = caseMarkerEntryPoint(markerEntryPoint);
+				if (result == null) result = caseEntryPoint(markerEntryPoint);
+				if (result == null) result = caseSemiotics(markerEntryPoint);
+				if (result == null) result = caseSignifier(markerEntryPoint);
+				if (result == null) result = caseSignified(markerEntryPoint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.SINK: {
+				Sink sink = (Sink)theEObject;
+				T result = caseSink(sink);
+				if (result == null) result = caseSemiotics(sink);
+				if (result == null) result = caseSignifier(sink);
+				if (result == null) result = caseSignified(sink);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SemioticsPackage.MARKER_SINK: {
+				MarkerSink markerSink = (MarkerSink)theEObject;
+				T result = caseMarkerSink(markerSink);
+				if (result == null) result = caseSink(markerSink);
+				if (result == null) result = caseSemiotics(markerSink);
+				if (result == null) result = caseSignifier(markerSink);
+				if (result == null) result = caseSignified(markerSink);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -132,6 +211,141 @@ public class SemioticsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSignified(Signified object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRoot(Root object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttribute(Map.Entry<String, String> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IMarker</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IMarker</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIMarker(IMarker object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IResource</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IResource</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIResource(IResource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IWorkspace Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IWorkspace Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIWorkspaceRoot(IWorkspaceRoot object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry Point</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntryPoint(EntryPoint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Marker Entry Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Marker Entry Point</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMarkerEntryPoint(MarkerEntryPoint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sink</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sink</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSink(Sink object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Marker Sink</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Marker Sink</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMarkerSink(MarkerSink object) {
 		return null;
 	}
 
