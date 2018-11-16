@@ -502,15 +502,6 @@ public class SemioticsPackageImpl extends EPackageImpl implements SemioticsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getMarkerEntryPoint__GetKey() {
-		return markerEntryPointEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSink() {
 		return sinkEClass;
 	}
@@ -522,15 +513,6 @@ public class SemioticsPackageImpl extends EPackageImpl implements SemioticsPacka
 	 */
 	public EClass getMarkerSink() {
 		return markerSinkEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMarkerSink__GetKey() {
-		return markerSinkEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -605,12 +587,10 @@ public class SemioticsPackageImpl extends EPackageImpl implements SemioticsPacka
 		entryPointEClass = createEClass(ENTRY_POINT);
 
 		markerEntryPointEClass = createEClass(MARKER_ENTRY_POINT);
-		createEOperation(markerEntryPointEClass, MARKER_ENTRY_POINT___GET_KEY);
 
 		sinkEClass = createEClass(SINK);
 
 		markerSinkEClass = createEClass(MARKER_SINK);
-		createEOperation(markerSinkEClass, MARKER_SINK___GET_KEY);
 	}
 
 	/**
@@ -649,10 +629,10 @@ public class SemioticsPackageImpl extends EPackageImpl implements SemioticsPacka
 		iMarkerEClass.getESuperTypes().add(this.getSemiotics());
 		iResourceEClass.getESuperTypes().add(this.getSemiotics());
 		iWorkspaceRootEClass.getESuperTypes().add(this.getSemiotics());
-		entryPointEClass.getESuperTypes().add(this.getSemiotics());
 		markerEntryPointEClass.getESuperTypes().add(this.getEntryPoint());
-		sinkEClass.getESuperTypes().add(this.getSemiotics());
+		markerEntryPointEClass.getESuperTypes().add(this.getSemiotics());
 		markerSinkEClass.getESuperTypes().add(this.getSink());
+		markerSinkEClass.getESuperTypes().add(this.getSemiotics());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(semioticsEClass, Semiotics.class, "Semiotics", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -708,13 +688,9 @@ public class SemioticsPackageImpl extends EPackageImpl implements SemioticsPacka
 
 		initEClass(markerEntryPointEClass, MarkerEntryPoint.class, "MarkerEntryPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getMarkerEntryPoint__GetKey(), theEcorePackage.getEString(), "getKey", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
 		initEClass(sinkEClass, Sink.class, "Sink", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(markerSinkEClass, MarkerSink.class, "MarkerSink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEOperation(getMarkerSink__GetKey(), theEcorePackage.getEString(), "getKey", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

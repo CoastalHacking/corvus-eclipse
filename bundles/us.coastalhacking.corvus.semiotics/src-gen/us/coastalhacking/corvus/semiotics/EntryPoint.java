@@ -2,6 +2,7 @@
  */
 package us.coastalhacking.corvus.semiotics;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,5 +14,5 @@ package us.coastalhacking.corvus.semiotics;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface EntryPoint extends Semiotics {
+public interface EntryPoint extends EObject {
 } // EntryPoint

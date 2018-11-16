@@ -689,58 +689,13 @@ public interface SemioticsPackage extends EPackage {
 	int ENTRY_POINT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_POINT__KEY = SEMIOTICS__KEY;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_POINT__SIGNIFIEDS = SEMIOTICS__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Uuid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_POINT__UUID = SEMIOTICS__UUID;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_POINT__SIGNIFIERS = SEMIOTICS__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Root</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_POINT__ROOT = SEMIOTICS__ROOT;
-
-	/**
 	 * The number of structural features of the '<em>Entry Point</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_POINT_FEATURE_COUNT = SEMIOTICS_FEATURE_COUNT + 0;
+	int ENTRY_POINT_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Entry Point</em>' class.
@@ -749,7 +704,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_POINT_OPERATION_COUNT = SEMIOTICS_OPERATION_COUNT + 0;
+	int ENTRY_POINT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link us.coastalhacking.corvus.semiotics.impl.MarkerEntryPointImpl <em>Marker Entry Point</em>}' class.
@@ -768,7 +723,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT__KEY = ENTRY_POINT__KEY;
+	int MARKER_ENTRY_POINT__KEY = ENTRY_POINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
@@ -777,7 +732,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT__SIGNIFIEDS = ENTRY_POINT__SIGNIFIEDS;
+	int MARKER_ENTRY_POINT__SIGNIFIEDS = ENTRY_POINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Uuid</b></em>' attribute.
@@ -786,7 +741,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT__UUID = ENTRY_POINT__UUID;
+	int MARKER_ENTRY_POINT__UUID = ENTRY_POINT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
@@ -795,7 +750,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT__SIGNIFIERS = ENTRY_POINT__SIGNIFIERS;
+	int MARKER_ENTRY_POINT__SIGNIFIERS = ENTRY_POINT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Root</b></em>' container reference.
@@ -804,7 +759,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT__ROOT = ENTRY_POINT__ROOT;
+	int MARKER_ENTRY_POINT__ROOT = ENTRY_POINT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Marker Entry Point</em>' class.
@@ -813,16 +768,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT_FEATURE_COUNT = ENTRY_POINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MARKER_ENTRY_POINT___GET_KEY = ENTRY_POINT_OPERATION_COUNT + 0;
+	int MARKER_ENTRY_POINT_FEATURE_COUNT = ENTRY_POINT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Marker Entry Point</em>' class.
@@ -831,7 +777,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_ENTRY_POINT_OPERATION_COUNT = ENTRY_POINT_OPERATION_COUNT + 1;
+	int MARKER_ENTRY_POINT_OPERATION_COUNT = ENTRY_POINT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link us.coastalhacking.corvus.semiotics.Sink <em>Sink</em>}' class.
@@ -844,58 +790,13 @@ public interface SemioticsPackage extends EPackage {
 	int SINK = 10;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SINK__KEY = SEMIOTICS__KEY;
-
-	/**
-	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SINK__SIGNIFIEDS = SEMIOTICS__SIGNIFIEDS;
-
-	/**
-	 * The feature id for the '<em><b>Uuid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SINK__UUID = SEMIOTICS__UUID;
-
-	/**
-	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SINK__SIGNIFIERS = SEMIOTICS__SIGNIFIERS;
-
-	/**
-	 * The feature id for the '<em><b>Root</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SINK__ROOT = SEMIOTICS__ROOT;
-
-	/**
 	 * The number of structural features of the '<em>Sink</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SINK_FEATURE_COUNT = SEMIOTICS_FEATURE_COUNT + 0;
+	int SINK_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Sink</em>' class.
@@ -904,7 +805,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SINK_OPERATION_COUNT = SEMIOTICS_OPERATION_COUNT + 0;
+	int SINK_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link us.coastalhacking.corvus.semiotics.impl.MarkerSinkImpl <em>Marker Sink</em>}' class.
@@ -923,7 +824,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK__KEY = SINK__KEY;
+	int MARKER_SINK__KEY = SINK_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Signifieds</b></em>' reference list.
@@ -932,7 +833,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK__SIGNIFIEDS = SINK__SIGNIFIEDS;
+	int MARKER_SINK__SIGNIFIEDS = SINK_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Uuid</b></em>' attribute.
@@ -941,7 +842,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK__UUID = SINK__UUID;
+	int MARKER_SINK__UUID = SINK_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Signifiers</b></em>' reference list.
@@ -950,7 +851,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK__SIGNIFIERS = SINK__SIGNIFIERS;
+	int MARKER_SINK__SIGNIFIERS = SINK_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Root</b></em>' container reference.
@@ -959,7 +860,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK__ROOT = SINK__ROOT;
+	int MARKER_SINK__ROOT = SINK_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Marker Sink</em>' class.
@@ -968,16 +869,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK_FEATURE_COUNT = SINK_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MARKER_SINK___GET_KEY = SINK_OPERATION_COUNT + 0;
+	int MARKER_SINK_FEATURE_COUNT = SINK_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Marker Sink</em>' class.
@@ -986,7 +878,7 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MARKER_SINK_OPERATION_COUNT = SINK_OPERATION_COUNT + 1;
+	int MARKER_SINK_OPERATION_COUNT = SINK_OPERATION_COUNT + 0;
 
 
 	/**
@@ -1364,16 +1256,6 @@ public interface SemioticsPackage extends EPackage {
 	EClass getMarkerEntryPoint();
 
 	/**
-	 * Returns the meta object for the '{@link us.coastalhacking.corvus.semiotics.MarkerEntryPoint#getKey() <em>Get Key</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Key</em>' operation.
-	 * @see us.coastalhacking.corvus.semiotics.MarkerEntryPoint#getKey()
-	 * @generated
-	 */
-	EOperation getMarkerEntryPoint__GetKey();
-
-	/**
 	 * Returns the meta object for class '{@link us.coastalhacking.corvus.semiotics.Sink <em>Sink</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1392,16 +1274,6 @@ public interface SemioticsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMarkerSink();
-
-	/**
-	 * Returns the meta object for the '{@link us.coastalhacking.corvus.semiotics.MarkerSink#getKey() <em>Get Key</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Key</em>' operation.
-	 * @see us.coastalhacking.corvus.semiotics.MarkerSink#getKey()
-	 * @generated
-	 */
-	EOperation getMarkerSink__GetKey();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1727,14 +1599,6 @@ public interface SemioticsPackage extends EPackage {
 		EClass MARKER_ENTRY_POINT = eINSTANCE.getMarkerEntryPoint();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Key</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MARKER_ENTRY_POINT___GET_KEY = eINSTANCE.getMarkerEntryPoint__GetKey();
-
-		/**
 		 * The meta object literal for the '{@link us.coastalhacking.corvus.semiotics.Sink <em>Sink</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1753,14 +1617,6 @@ public interface SemioticsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MARKER_SINK = eINSTANCE.getMarkerSink();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Key</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MARKER_SINK___GET_KEY = eINSTANCE.getMarkerSink__GetKey();
 
 	}
 

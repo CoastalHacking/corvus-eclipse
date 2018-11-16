@@ -193,7 +193,9 @@ public class EclipseResourcesChangeListenerProvider implements IResourceChangeLi
 
 	void removed(Optional<IMarker> maybeMarker) {
 		if (maybeMarker.isPresent()) {
-			EcoreUtil.delete(maybeMarker.get());
+			// https://eclipsesource.com/blogs/2015/05/26/emf-dos-and-donts-11/
+			// tl;dr, avoid EcoreUtil.delete
+			EcoreUtil.remove(maybeMarker.get());
 		} else {
 			// TODO log - attempted to delete a marker that doesn't exist
 		}

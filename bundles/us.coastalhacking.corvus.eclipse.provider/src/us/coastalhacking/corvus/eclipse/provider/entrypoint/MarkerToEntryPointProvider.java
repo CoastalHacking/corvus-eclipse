@@ -2,7 +2,6 @@ package us.coastalhacking.corvus.eclipse.provider.entrypoint;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.command.Command;
@@ -11,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
@@ -28,12 +28,14 @@ import us.coastalhacking.corvus.semiotics.MarkerEntryPoint;
 import us.coastalhacking.corvus.semiotics.Root;
 import us.coastalhacking.corvus.semiotics.SemioticsFactory;
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
+import us.coastalhacking.corvus.semiotics.Signified;
 
 @Component(service = TriggerListener.class, configurationPid = EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true)
 public class MarkerToEntryPointProvider extends TriggerListener {
 
 	private String transId;
-	private TransactionalEditingDomain domain;
+	// accessible for testing
+	protected TransactionalEditingDomain domain;
 	private NotificationFilter filter;
 	URI epLogicalUri;
 
@@ -64,16 +66,25 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 		switch (notification.getEventType()) {
 		case Notification.ADD_MANY:
 		case Notification.ADD: {
-			if (notification.getFeature().equals(SemioticsPackage.Literals.IRESOURCE__MARKERS)) {
-				Collection<IMarker> markers;
-				if (notification.getEventType() == Notification.ADD_MANY) {
-					markers = (List<IMarker>) notification.getNewValue();
-				} else {
-					markers = Collections.singleton((IMarker) notification.getNewValue());
-				}
-				return generateForMarkers(domain, epLogicalUri, markers);
+			Collection<IMarker> markers;
+			if (notification.getEventType() == Notification.ADD_MANY) {
+				markers = (Collection<IMarker>) notification.getNewValue();
+			} else {
+				markers = Collections.singleton((IMarker) notification.getNewValue());
 			}
+			return addViaMarkers(domain, epLogicalUri, markers);
 		}
+		case Notification.REMOVE:
+		case Notification.REMOVE_MANY: {
+			Collection<IMarker> markers;
+			if (notification.getEventType() == Notification.REMOVE_MANY) {
+				markers= (Collection<IMarker>) notification.getOldValue();
+			} else {
+				markers = Collections.singleton((IMarker) notification.getOldValue());
+			}
+			return removeViaMarkers(domain, epLogicalUri, markers);
+		}
+
 		default: {
 			break;
 		}
@@ -81,7 +92,7 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 		return null;
 	}
 
-	Command generateForMarkers(TransactionalEditingDomain domain, URI uri, Collection<IMarker> markers) {
+	Command addViaMarkers(TransactionalEditingDomain domain, URI uri, Collection<IMarker> markers) {
 		// TODO: ensure resource caching is enabled
 		final Resource epResource = domain.getResourceSet().getResource(uri, true);
 		final Root root = (Root) epResource.getContents().get(0);
@@ -91,6 +102,23 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 			result.append(AddCommand.create(domain, root, SemioticsPackage.Literals.ROOT__SEMIOTICS, ep));
 			result.append(AddCommand.create(domain, ep, SemioticsPackage.Literals.SIGNIFIED__SIGNIFIERS, marker));
 			result.append(AddCommand.create(domain, marker, SemioticsPackage.Literals.SIGNIFIER__SIGNIFIEDS, ep));
+		}
+		return result;
+	}
+	
+	Command removeViaMarkers(TransactionalEditingDomain domain, URI uri, Collection<IMarker> markers) {
+		// TODO: ensure resource caching is enabled
+		final Resource resource = domain.getResourceSet().getResource(uri, true);
+		final Root root = (Root) resource.getContents().get(0);
+		final CompoundCommand result = new CompoundCommand();
+		for (IMarker marker : markers) {
+			for (Signified s : marker.getSignifieds()) {
+				if (s.eClass().equals(SemioticsPackage.Literals.MARKER_ENTRY_POINT)) {
+					result.append(RemoveCommand.create(domain, root, SemioticsPackage.Literals.ROOT__SEMIOTICS, s));
+					result.append(
+							RemoveCommand.create(domain, s, SemioticsPackage.Literals.SIGNIFIED__SIGNIFIERS, marker));
+				}
+			}
 		}
 		return result;
 	}

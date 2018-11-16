@@ -2,8 +2,6 @@
  */
 package us.coastalhacking.corvus.semiotics.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -21,9 +19,9 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import us.coastalhacking.corvus.semiotics.IMarker;
 import us.coastalhacking.corvus.semiotics.MarkerEntryPoint;
 import us.coastalhacking.corvus.semiotics.Root;
+import us.coastalhacking.corvus.semiotics.Semiotics;
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
 import us.coastalhacking.corvus.semiotics.Signified;
 import us.coastalhacking.corvus.semiotics.Signifier;
@@ -130,7 +128,7 @@ public class MarkerEntryPointImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getKey_() {
+	public String getKey() {
 		return key;
 	}
 
@@ -240,19 +238,6 @@ public class MarkerEntryPointImpl extends MinimalEObjectImpl.Container implement
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SemioticsPackage.MARKER_ENTRY_POINT__ROOT, newRoot, newRoot));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getKey() {
-		if (((!this.getSignifiers().isEmpty()) && (this.getSignifiers().get(0) instanceof IMarker))) {
-			Signifier _get = this.getSignifiers().get(0);
-			return ((IMarker) _get).getMessage();
-		}
-		return null;
 	}
 
 	/**
@@ -417,10 +402,23 @@ public class MarkerEntryPointImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Signifier.class) {
+			switch (derivedFeatureID) {
+				case SemioticsPackage.MARKER_ENTRY_POINT__KEY: return SemioticsPackage.SIGNIFIER__KEY;
+				case SemioticsPackage.MARKER_ENTRY_POINT__SIGNIFIEDS: return SemioticsPackage.SIGNIFIER__SIGNIFIEDS;
+				default: return -1;
+			}
+		}
 		if (baseClass == Signified.class) {
 			switch (derivedFeatureID) {
 				case SemioticsPackage.MARKER_ENTRY_POINT__UUID: return SemioticsPackage.SIGNIFIED__UUID;
 				case SemioticsPackage.MARKER_ENTRY_POINT__SIGNIFIERS: return SemioticsPackage.SIGNIFIED__SIGNIFIERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == Semiotics.class) {
+			switch (derivedFeatureID) {
+				case SemioticsPackage.MARKER_ENTRY_POINT__ROOT: return SemioticsPackage.SEMIOTICS__ROOT;
 				default: return -1;
 			}
 		}
@@ -434,6 +432,13 @@ public class MarkerEntryPointImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Signifier.class) {
+			switch (baseFeatureID) {
+				case SemioticsPackage.SIGNIFIER__KEY: return SemioticsPackage.MARKER_ENTRY_POINT__KEY;
+				case SemioticsPackage.SIGNIFIER__SIGNIFIEDS: return SemioticsPackage.MARKER_ENTRY_POINT__SIGNIFIEDS;
+				default: return -1;
+			}
+		}
 		if (baseClass == Signified.class) {
 			switch (baseFeatureID) {
 				case SemioticsPackage.SIGNIFIED__UUID: return SemioticsPackage.MARKER_ENTRY_POINT__UUID;
@@ -441,21 +446,13 @@ public class MarkerEntryPointImpl extends MinimalEObjectImpl.Container implement
 				default: return -1;
 			}
 		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case SemioticsPackage.MARKER_ENTRY_POINT___GET_KEY:
-				return getKey();
+		if (baseClass == Semiotics.class) {
+			switch (baseFeatureID) {
+				case SemioticsPackage.SEMIOTICS__ROOT: return SemioticsPackage.MARKER_ENTRY_POINT__ROOT;
+				default: return -1;
+			}
 		}
-		return super.eInvoke(operationID, arguments);
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

@@ -77,28 +77,20 @@ class IWorkspaceRoot extends Semiotics {
 }
 
 // Entry Points and Sinks
-interface EntryPoint extends Semiotics {
+interface EntryPoint {
 }
 
 /**
  * An entry point whose 0-index signifier is an IMarker
  */
-class MarkerEntryPoint extends EntryPoint {
-	op String getKey() {
-		if (!signifiers.empty && signifiers.get(0) instanceof IMarker)
-			return (signifiers.get(0) as IMarker).message
-	}
+class MarkerEntryPoint extends EntryPoint, Semiotics {
 }
 
-interface Sink extends Semiotics {
+interface Sink {
 }
 
 /**
  * A sink whose 0-index signifier is an IMarker
  */
-class MarkerSink extends Sink {
-	op String getKey() {
-		if (signifiers !== null && signifiers.get(0) instanceof IMarker)
-			return (signifiers.get(0) as IMarker).message
-	}
+class MarkerSink extends Sink, Semiotics {
 }

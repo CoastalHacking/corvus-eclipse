@@ -130,9 +130,6 @@ public class SemioticsSwitch<T> extends Switch<T> {
 			case SemioticsPackage.ENTRY_POINT: {
 				EntryPoint entryPoint = (EntryPoint)theEObject;
 				T result = caseEntryPoint(entryPoint);
-				if (result == null) result = caseSemiotics(entryPoint);
-				if (result == null) result = caseSignifier(entryPoint);
-				if (result == null) result = caseSignified(entryPoint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -149,9 +146,6 @@ public class SemioticsSwitch<T> extends Switch<T> {
 			case SemioticsPackage.SINK: {
 				Sink sink = (Sink)theEObject;
 				T result = caseSink(sink);
-				if (result == null) result = caseSemiotics(sink);
-				if (result == null) result = caseSignifier(sink);
-				if (result == null) result = caseSignified(sink);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

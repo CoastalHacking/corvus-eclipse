@@ -69,9 +69,6 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 		String transactionId = "shouldConfigureOsgi";
 		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
-		// Configure initializer
-//		configurationHelper(ResourceInitializer.class, EclipseApi.ResourceInitializer.Component.CONFIG_PID, props, timeout);
-
 		// Configure factory
 		Factory factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
