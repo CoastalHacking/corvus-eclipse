@@ -21,7 +21,6 @@
 		<module>us.coastalhacking.corvus.util.provider</module>
 		<module>us.coastalhacking.corvus.eclipse</module>
 		<module>us.coastalhacking.corvus.eclipse.provider</module>
-		<module>us.coastalhacking.corvus.eclipse.editor</module>
 		<module>us.coastalhacking.corvus.test.util</module>
 	</modules>
 </project>
