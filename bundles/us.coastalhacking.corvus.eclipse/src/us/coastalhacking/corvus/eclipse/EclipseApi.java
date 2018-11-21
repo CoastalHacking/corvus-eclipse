@@ -39,10 +39,6 @@ public interface EclipseApi {
 		interface Properties {
 			String MARKER_TYPE = "corvus.eclipse.ircl.markertype";
 		}
-
-		interface Reference {
-			String REGISTRY = "corvus.eclipse.ircl.registry";
-		}
 	}
 
 	interface ResourceModifiedListener {

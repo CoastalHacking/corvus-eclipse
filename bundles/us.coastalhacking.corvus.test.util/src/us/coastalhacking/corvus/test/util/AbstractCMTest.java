@@ -188,7 +188,7 @@ public abstract class AbstractCMTest {
 
 		@Override
 		public void configurationEvent(ConfigurationEvent event) {
-			if (event.getType() == ConfigurationEvent.CM_DELETED) {
+			if (event.getType() == ConfigurationEvent.CM_DELETED && configurationFutures.containsKey(event.getPid())) {
 				configurationFutures.get(event.getPid()).complete(null);
 			}
 		}

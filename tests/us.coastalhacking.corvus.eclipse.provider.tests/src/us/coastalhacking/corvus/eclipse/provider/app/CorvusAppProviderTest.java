@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,7 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 	String id;
 	Factory factory;
 	Registry registry;
+	IEditingDomainProvider domainProvider;
 	final String markerType = EclipseApi.Marker.BASE_MARKER;
 	
 	@BeforeEach
@@ -52,13 +54,14 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 				props, timeout);
 		// ensure it's provided
 		assertNotNull(registry);
+		
+		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID, props, timeout);
+		assertNotNull(domainProvider);
 	}
 
 	@Test
 	void shouldConfigure() throws Exception {
-		// Prep
-
-		// Get factory
+		// Get component factory
 		Map<String, Object> filterProps = new HashMap<>();
 		filterProps.put(ComponentConstants.COMPONENT_FACTORY, EclipseApi.CorvusApp.Component.FACTORY);
 		ComponentFactory appFactory = (ComponentFactory) serviceTrackerHelper(filterProps);
@@ -73,6 +76,7 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		found.put(ResourceInitializer.class, false);
 		found.put(Factory.class, false);
 		found.put(Registry.class, false);
+		found.put(IEditingDomainProvider.class, false);
 		found.put(IResourceChangeListener.class, false);
 
 		Map<String, Object> transIdFilter = new HashMap<>();

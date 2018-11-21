@@ -86,11 +86,6 @@ public interface EmfApi {
 		interface Component {
 			String CONFIG_PID = "corvus.emf.resourcemodified";
 		}
-
-		interface Reference {
-			@Deprecated
-			String REGISTRY = "corvus.emf.resourcemodified.registry";
-		}
 	}
 
 }
