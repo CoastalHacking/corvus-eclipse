@@ -36,6 +36,6 @@ public class TransactionIdUtilProvider implements TransactionIdUtil {
 	@Override
 	public void putId(Map<String, Object> props, String id) {
 		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, id);
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, id);
+		//props.put(EmfApi.ResourceInitializer.Properties.PROJECT, id);
 	}
 }

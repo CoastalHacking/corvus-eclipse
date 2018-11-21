@@ -41,8 +41,6 @@ public interface EmfApi {
 		interface Properties {
 			String LOGICAL = "corvus.emf.initializer.logical";
 			String PHYSICAL = "corvus.emf.initializer.physical";
-			@Deprecated
-			String PROJECT = "corvus.emf.initializer.project";
 		}
 		
 		interface EclipseResources {

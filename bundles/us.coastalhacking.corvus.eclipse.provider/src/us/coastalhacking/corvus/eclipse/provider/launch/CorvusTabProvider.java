@@ -7,7 +7,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.debug.ui.ILaunchConfigurationTab2;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -79,7 +78,7 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab {
 			// Remove first forward slash
 			configuration.rename(id.substring(1));
 			configuration.setAttribute(EmfApi.TransactionalEditingDomain.Properties.ID, id);
-			configuration.setAttribute(EmfApi.ResourceInitializer.Properties.PROJECT, id);
+			//configuration.setAttribute(EmfApi.ResourceInitializer.Properties.PROJECT, id);
 		}
 	}
 

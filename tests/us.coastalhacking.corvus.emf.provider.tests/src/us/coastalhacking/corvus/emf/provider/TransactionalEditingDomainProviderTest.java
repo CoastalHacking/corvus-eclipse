@@ -63,7 +63,7 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 		transactionId = idUtil.getId(project);
 		projectUri = idUtil.getUri(transactionId);
 		idUtil.putId(props, transactionId);
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, transactionId);
+		//props.put(EmfApi.ResourceInitializer.Properties.PROJECT, transactionId);
 		factory = configurationHelper(Factory.class, EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 		assertNotNull(factory);
 		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props, timeout);

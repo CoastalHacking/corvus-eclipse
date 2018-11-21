@@ -11,6 +11,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.osgi.service.component.ComponentConstants;
 import org.osgi.service.component.ComponentFactory;
@@ -19,6 +20,7 @@ import org.osgi.service.component.ComponentInstance;
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
 import us.coastalhacking.corvus.emf.ResourceInitializer;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
 
 class CorvusAppProviderTest extends AbstractProjectTest {
@@ -27,21 +29,41 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		super();
 	}
 
+	TransactionIdUtil idUtil;
+	Map<String, Object> props;
+	String id;
+	Factory factory;
+	Registry registry;
+	final String markerType = EclipseApi.Marker.BASE_MARKER;
+	
+	@BeforeEach
+	void subBeforeEach() throws Exception {
+		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
+		assertNotNull(idUtil);
+		props = new HashMap<>();
+		props.put(EclipseApi.IResourceChangeListener.Properties.MARKER_TYPE, markerType);
+
+		id = idUtil.getId(project);
+		idUtil.putId(props, id);
+		factory = configurationHelper(Factory.class,
+				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		assertNotNull(factory);
+		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+				props, timeout);
+		// ensure it's provided
+		assertNotNull(registry);
+	}
+
 	@Test
 	void shouldConfigure() throws Exception {
 		// Prep
-		Hashtable<String, Object> props = new Hashtable<>();
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, project.getFullPath().toPortableString());
-		props.put(EclipseApi.IResourceChangeListener.Properties.MARKER_TYPE, EclipseApi.Marker.BASE_MARKER);
-		String transactionId = "test." + getClass().getName();
-		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
 		// Get factory
 		Map<String, Object> filterProps = new HashMap<>();
 		filterProps.put(ComponentConstants.COMPONENT_FACTORY, EclipseApi.CorvusApp.Component.FACTORY);
 		ComponentFactory appFactory = (ComponentFactory) serviceTrackerHelper(filterProps);
 		assertNotNull(appFactory);
-		ComponentInstance instance = appFactory.newInstance(props);
+		ComponentInstance instance = appFactory.newInstance(new Hashtable<>(props));
 		Object service = instance.getInstance();
 		assertNotNull(service);
 		assertTrue(service instanceof CorvusAppFactoryProvider);
@@ -54,7 +76,7 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		found.put(IResourceChangeListener.class, false);
 
 		Map<String, Object> transIdFilter = new HashMap<>();
-		transIdFilter.put(EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
+		transIdFilter.put(EmfApi.TransactionalEditingDomain.Properties.ID, id);
 		found.keySet().forEach(clz -> {
 			try {
 				Object svc = serviceTrackerHelper(transIdFilter);
