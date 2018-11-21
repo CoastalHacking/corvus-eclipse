@@ -34,11 +34,8 @@ import org.eclipse.emf.transaction.RollbackException;
 import org.eclipse.emf.transaction.Transaction;
 import org.eclipse.emf.transaction.TransactionChangeDescription;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
-import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 import us.coastalhacking.corvus.emf.EmfApi;
@@ -46,26 +43,8 @@ import us.coastalhacking.corvus.emf.EmfApi;
 @Component(service=ResourceSetListener.class, configurationPid=EmfApi.ResourceModifiedListener.Component.CONFIG_PID, configurationPolicy=ConfigurationPolicy.REQUIRE, immediate=true)
 public class ResourceModifiedListenerProvider implements ResourceSetListener {
 
-	private String transId;
-	private TransactionalEditingDomain domain;
-
 	@Reference
 	IWorkspace workspace;
-
-	@Reference(name=EmfApi.ResourceModifiedListener.Reference.REGISTRY)
-	Registry registry;
-
-	@Activate
-	void activate(Map<String, Object> props) {
-		transId = (String)props.get(EmfApi.TransactionalEditingDomain.Properties.ID);
-		domain = registry.getEditingDomain(transId);
-		domain.addResourceSetListener(this);
-	}
-	
-	@Deactivate
-	void deactivate() {
-		domain.removeResourceSetListener(this);
-	}
 
 	@Override
 	public NotificationFilter getFilter() {
@@ -85,7 +64,7 @@ public class ResourceModifiedListenerProvider implements ResourceSetListener {
 			addUris(uris, desc);
 
 			if (!uris.isEmpty()) {
-				SaveResourceJob job = new SaveResourceJob(uris, domain, getOptions());
+				SaveResourceJob job = new SaveResourceJob(uris, event.getEditingDomain(), getOptions());
 				job.setRule(getRule(uris));
 				job.schedule();
 			}

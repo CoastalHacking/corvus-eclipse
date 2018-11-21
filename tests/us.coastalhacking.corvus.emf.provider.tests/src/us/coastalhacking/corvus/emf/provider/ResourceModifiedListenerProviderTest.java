@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,19 +26,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionChangeDescription;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.ServiceRegistration;
 
 import us.coastalhacking.corvus.emf.EmfApi;
-import us.coastalhacking.corvus.emf.ResourceInitializer;
 import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
-import us.coastalhacking.corvus.test.util.UtilFactory;
 
 class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 
@@ -52,6 +49,7 @@ class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 	String id;
 	Factory factory;
 	Registry registry;
+	IEditingDomainProvider domainProvider;
 
 	@BeforeEach
 	void subBeforeEach() throws Exception {
@@ -63,10 +61,14 @@ class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 		factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 		assertNotNull(factory);
+
 		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
 				props, timeout);
-		// ensure it's provided
 		assertNotNull(registry);
+		
+		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID,
+				props, timeout);
+		assertNotNull(domainProvider);		
 	}
 
 	@Test
