@@ -13,12 +13,12 @@ import org.osgi.service.component.annotations.Reference;
 
 import us.coastalhacking.corvus.emf.EmfApi;
 
-@Component(service = Registry.class, configurationPid = EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate=true)
+@Component(service = Registry.class, configurationPid = EmfApi.Registry.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate=true)
 public class CorvusTransactionalRegistryProvider implements Registry {
 
 	final Map<String, TransactionalEditingDomain> registries = new ConcurrentHashMap<>();
 
-	@Reference(name = EmfApi.CorvusTransactionalRegistry.Reference.FACTORY)
+	@Reference(name = EmfApi.Factory.Reference.NAME)
 	Factory factory;
 
 	@Deactivate

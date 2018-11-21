@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +21,6 @@ import org.osgi.service.component.ComponentInstance;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
-import us.coastalhacking.corvus.emf.ResourceInitializer;
 import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
 
@@ -53,7 +51,7 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 		assertNotNull(factory);
-		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+		registry = configurationHelper(Registry.class, EmfApi.Registry.Component.CONFIG_PID,
 				props, timeout);
 		// ensure it's provided
 		assertNotNull(registry);

@@ -3,6 +3,6 @@
    <service>
       <provide interface="org.eclipse.emf.transaction.TransactionalEditingDomain$Registry"/>
    </service>
-   <reference cardinality="1..1" field="factory" interface="org.eclipse.emf.transaction.TransactionalEditingDomain$Factory" name="corvus.emf.registry.factory"/>
+   <reference cardinality="1..1" field="factory" interface="org.eclipse.emf.transaction.TransactionalEditingDomain$Factory" name="corvus.emf.factory.name"/>
    <implementation class="us.coastalhacking.corvus.emf.provider.CorvusTransactionalRegistryProvider"/>
 </scr:component>

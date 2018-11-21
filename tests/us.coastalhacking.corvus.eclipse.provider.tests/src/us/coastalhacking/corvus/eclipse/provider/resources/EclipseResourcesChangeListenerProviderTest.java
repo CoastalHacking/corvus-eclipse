@@ -81,7 +81,7 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 		factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 		assertNotNull(factory);
-		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+		registry = configurationHelper(Registry.class, EmfApi.Registry.Component.CONFIG_PID,
 				props, timeout);
 		// ensure it's provided
 		assertNotNull(registry);

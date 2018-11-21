@@ -79,7 +79,7 @@ class CorvusTransactionalRegistryProviderTest extends AbstractProjectTest {
 
 		// Configure registry
 		CorvusTransactionalRegistryProvider provider = (CorvusTransactionalRegistryProvider)configurationHelper(Registry.class,
-				EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props, timeout);
+				EmfApi.Registry.Component.CONFIG_PID, props, timeout);
 		
 		// Verify
 		assertNotNull(provider);

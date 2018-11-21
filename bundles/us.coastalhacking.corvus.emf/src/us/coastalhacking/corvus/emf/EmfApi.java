@@ -29,12 +29,18 @@ public interface EmfApi {
 		}
 
 		interface Reference {
-			String NAME = "corvus.emf.registry";
+			String NAME = Registry.Component.CONFIG_PID + ".name";
 		}
 	}
 	
 	interface Factory {
-		
+		interface Component {
+			String CONFIG_PID = "corvus.emf.factory";
+		}
+
+		interface Reference {
+			String NAME = Factory.Component.CONFIG_PID + ".name";
+		}
 	}
 	
 	interface TransactionalEditingDomain {
@@ -72,19 +78,6 @@ public interface EmfApi {
 		@Deprecated
 		interface Reference {
 			String INITIALIZERS = EmfApi.IEditingDomainProvider.Reference.INITIALIZERS;
-		}
-	}
-	
-	@Deprecated
-	interface CorvusTransactionalRegistry {
-		@Deprecated
-		interface Component {
-			String CONFIG_PID = Registry.Component.CONFIG_PID;
-		}
-		@Deprecated
-		interface Reference {
-			String FACTORY = "corvus.emf.registry.factory";
-			String NAME = Registry.Reference.NAME;
 		}
 	}
 

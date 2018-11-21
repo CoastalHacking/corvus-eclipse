@@ -68,7 +68,7 @@ class SemioticsEditorProviderTest extends AbstractProjectTest {
 				timeout);
 		assertNotNull(factory);
 
-		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props,
+		registry = configurationHelper(Registry.class, EmfApi.Registry.Component.CONFIG_PID, props,
 				timeout);
 		assertNotNull(registry);
 

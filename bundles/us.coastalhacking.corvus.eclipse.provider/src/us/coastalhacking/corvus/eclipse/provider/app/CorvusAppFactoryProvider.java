@@ -34,13 +34,13 @@ public class CorvusAppFactoryProvider {
 	void activate(Map<String, Object> props) throws Exception {
 		Hashtable<String, Object> newProps = new Hashtable<>(props);
 		transactionId = idUtil.getId(props);
-		String[] targets = { EmfApi.Registry.Reference.NAME, EmfApi.IEditingDomainProvider.Reference.NAME };
+		String[] targets = { EmfApi.Registry.Reference.NAME, EmfApi.Factory.Reference.NAME, EmfApi.IEditingDomainProvider.Reference.NAME };
 		helper.target(newProps, Arrays.stream(targets).sequential(),
 				EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
 		// Ordered
-		String[] pids = { EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID,
-				EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+		String[] pids = { EmfApi.Factory.Component.CONFIG_PID,
+				EmfApi.Registry.Component.CONFIG_PID,
 				EmfApi.IEditingDomainProvider.Component.CONFIG_PID,
 				// https://github.com/CoastalHacking/corvus-eclipse/issues/35
 				//EmfApi.ResourceModifiedListener.Component.CONFIG_PID,
