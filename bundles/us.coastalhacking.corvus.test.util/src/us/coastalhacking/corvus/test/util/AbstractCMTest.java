@@ -223,4 +223,9 @@ public abstract class AbstractCMTest {
 		}
 		return configAdmin;
 	}
+	
+	protected <T> void registerService(Class<T> serviceInterface, T service, Map<String, Object> props) {
+		serviceRegistrations.add(getBundleContext().registerService(serviceInterface,
+				service, new Hashtable<>(props)));
+	}
 }

@@ -3,6 +3,6 @@
    <service>
       <provide interface="org.eclipse.emf.transaction.TransactionalEditingDomain$Factory"/>
    </service>
-   <reference bind="setInitializer" cardinality="0..n" interface="us.coastalhacking.corvus.emf.ResourceInitializer" name="corvus.emf.factory.initializers" policy="dynamic" policy-option="greedy" unbind="unsetInitializer"/>
+   <reference bind="setInitializer" cardinality="0..n" interface="us.coastalhacking.corvus.emf.ResourceInitializer" name="corvus.emf.domainprovider.initializers" policy="dynamic" policy-option="greedy" unbind="unsetInitializer"/>
    <implementation class="us.coastalhacking.corvus.emf.provider.CorvusTransactionalFactoryProvider"/>
 </scr:component>

@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -50,6 +51,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 import us.coastalhacking.corvus.emf.EmfApi;
@@ -59,6 +61,8 @@ import us.coastalhacking.corvus.semiotics.editor.SemioticsEditorPlugin;
 @SuppressWarnings("restriction")
 @Component(factory = "us.coastalhacking.corvus.semiotics.editor.SemioticsEditor")
 public class SemioticsEditorProvider extends SemioticsEditor {
+
+	AtomicBoolean disposed = new AtomicBoolean(false);
 
 	@Reference
 	IWorkbench workbench;
@@ -105,6 +109,14 @@ public class SemioticsEditorProvider extends SemioticsEditor {
 		} else {
 			throw new IllegalStateException("No resource selected, no way to determine project");
 		}
+	}
+
+	@Deactivate
+	void deactivate() {
+		if (disposed.getAndSet(true)) {
+			return;
+		}
+		this.dispose();
 	}
 
 	@Override

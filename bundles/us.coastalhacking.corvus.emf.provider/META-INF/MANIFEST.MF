@@ -29,5 +29,7 @@ Service-Component: OSGI-INF/us.coastalhacking.corvus.emf.provider.CorvusTransact
  OSGI-INF/us.coastalhacking.corvus.emf.provider.CorvusTransactionalRegistryProvider.xml,
  OSGI-INF/us.coastalhacking.corvus.emf.provider.ResourceModifiedListenerProvider.xml,
  OSGI-INF/us.coastalhacking.corvus.emf.provider.EclipseResourcesInitializerProvider.xml,
- OSGI-INF/us.coastalhacking.corvus.emf.provider.EntryPointResourceInitializerProvider.xml
+ OSGI-INF/us.coastalhacking.corvus.emf.provider.EntryPointResourceInitializerProvider.xml,
+ OSGI-INF/us.coastalhacking.corvus.emf.provider.TransactionalEditingDomainProvider.xml,
+ OSGI-INF/us.coastalhacking.corvus.emf.provider.TransactionIdUtilProvider.xml
 Bundle-ActivationPolicy: lazy
