@@ -2,9 +2,15 @@ package us.coastalhacking.corvus.emf;
 
 public interface EmfApi {
 	
+	interface ResourceSetListener {
+		interface Properties {
+			String ID = "corvus.emf.rsl";
+		}
+	}
+
 	interface IEditingDomainProvider {
 		interface Component {
-			String CONFIG_PID = "corvus.emf.domainprovider";
+			String CONFIG_PID = "corvus.emf.iedp";
 		}
 		interface Reference {
 			// Use ResourceSetListener.Ref... NAME

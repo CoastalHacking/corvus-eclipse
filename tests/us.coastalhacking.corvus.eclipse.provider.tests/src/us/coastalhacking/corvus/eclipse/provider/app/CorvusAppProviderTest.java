@@ -10,10 +10,12 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentConstants;
 import org.osgi.service.component.ComponentFactory;
 import org.osgi.service.component.ComponentInstance;
@@ -47,6 +49,7 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 
 		id = idUtil.getId(project);
 		idUtil.putId(props, id);
+
 		factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 		assertNotNull(factory);
@@ -55,7 +58,7 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		// ensure it's provided
 		assertNotNull(registry);
 		
-		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID, props, timeout);
+		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID, props, timeout*2);
 		assertNotNull(domainProvider);
 	}
 
@@ -73,18 +76,19 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 
 		// Since the app does not require the below services directly test for them differently
 		final Map<Class<?>, Boolean> found = new HashMap<>();
-		found.put(ResourceInitializer.class, false);
+		// Needs to stay in sync with app's manually configured PIDs
 		found.put(Factory.class, false);
 		found.put(Registry.class, false);
 		found.put(IEditingDomainProvider.class, false);
 		found.put(IResourceChangeListener.class, false);
 
-		Map<String, Object> transIdFilter = new HashMap<>();
-		transIdFilter.put(EmfApi.TransactionalEditingDomain.Properties.ID, id);
 		found.keySet().forEach(clz -> {
+			Map<String, Object> filter = new HashMap<>();
+			filter.put(EmfApi.TransactionalEditingDomain.Properties.ID, id);
+			filter.put(Constants.OBJECTCLASS, clz.getName());
 			try {
-				Object svc = serviceTrackerHelper(transIdFilter);
-				assertNotNull(svc);
+				Object svc = serviceTrackerHelper(filter);
+				assertNotNull(svc);			
 				found.put(clz, true);
 			} catch (Exception e) {
 				fail(e);

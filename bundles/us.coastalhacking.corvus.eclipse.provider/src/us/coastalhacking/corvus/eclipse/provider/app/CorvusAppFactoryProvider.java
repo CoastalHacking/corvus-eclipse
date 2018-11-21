@@ -44,8 +44,10 @@ public class CorvusAppFactoryProvider {
 				EmfApi.IEditingDomainProvider.Component.CONFIG_PID,
 				// https://github.com/CoastalHacking/corvus-eclipse/issues/35
 				//EmfApi.ResourceModifiedListener.Component.CONFIG_PID,
+				// Would need a prototype-scope
 				EclipseApi.IResourceChangeListener.Component.CONFIG_PID,
-				EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID};
+				//EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID
+				};
 		configurePids(helper, pids, newProps, configurations);
 	}
 

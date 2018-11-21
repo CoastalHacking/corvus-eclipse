@@ -15,7 +15,6 @@ import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TriggerListener;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.ConfigurationPolicy;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
@@ -26,7 +25,8 @@ import us.coastalhacking.corvus.semiotics.SemioticsFactory;
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
 import us.coastalhacking.corvus.semiotics.Signified;
 
-@Component(service = ResourceSetListener.class, configurationPid = EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true)
+@Component(service = ResourceSetListener.class, immediate = true, property = EmfApi.ResourceSetListener.Properties.ID
+		+ "=" + EclipseApi.ResourceSetListener.Properties.MarkerToEntryPoint.ID)
 public class MarkerToEntryPointProvider extends TriggerListener {
 
 	private NotificationFilter filter;
@@ -56,7 +56,7 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 		case Notification.REMOVE_MANY: {
 			Collection<IMarker> markers;
 			if (notification.getEventType() == Notification.REMOVE_MANY) {
-				markers= (Collection<IMarker>) notification.getOldValue();
+				markers = (Collection<IMarker>) notification.getOldValue();
 			} else {
 				markers = Collections.singleton((IMarker) notification.getOldValue());
 			}
@@ -82,7 +82,7 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 		}
 		return result;
 	}
-	
+
 	Command removeViaMarkers(TransactionalEditingDomain domain, URI uri, Collection<IMarker> markers) {
 		final Resource resource = domain.getResourceSet().getResource(uri, true);
 		final Root root = (Root) resource.getContents().get(0);

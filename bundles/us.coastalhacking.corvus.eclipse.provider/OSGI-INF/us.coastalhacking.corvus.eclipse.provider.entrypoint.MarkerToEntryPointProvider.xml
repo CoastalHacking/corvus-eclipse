@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.2.0" configuration-pid="corvus.triggers.entrypoint" configuration-policy="require" immediate="true" name="us.coastalhacking.corvus.eclipse.provider.entrypoint.MarkerToEntryPointProvider">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="us.coastalhacking.corvus.eclipse.provider.entrypoint.MarkerToEntryPointProvider">
+   <property name="corvus.emf.rsl" value="corvus.eclipse.rsl.entrypoint.id"/>
    <service>
       <provide interface="org.eclipse.emf.transaction.ResourceSetListener"/>
    </service>

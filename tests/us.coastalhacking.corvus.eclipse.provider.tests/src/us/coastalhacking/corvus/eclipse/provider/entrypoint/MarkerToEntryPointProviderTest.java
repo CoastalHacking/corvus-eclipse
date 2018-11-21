@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.eclipse.emf.common.command.Command;
@@ -21,13 +23,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
+import us.coastalhacking.corvus.emf.EmfApi;
 import us.coastalhacking.corvus.semiotics.IMarker;
 import us.coastalhacking.corvus.semiotics.IResource;
 import us.coastalhacking.corvus.semiotics.MarkerEntryPoint;
@@ -99,8 +101,9 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 
 	@Test
 	void shouldConfigureForOsgi() throws Exception {
-		MarkerToEntryPointProvider provider = (MarkerToEntryPointProvider) configurationHelper(ResourceSetListener.class,
-				EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, Collections.emptyMap(), timeout);
+		Map<String, Object> filterProps = new HashMap<>();
+		filterProps.put(EmfApi.ResourceSetListener.Properties.ID, EclipseApi.ResourceSetListener.Properties.MarkerToEntryPoint.ID);
+		MarkerToEntryPointProvider provider = (MarkerToEntryPointProvider) serviceTrackerHelper(filterProps);
 		assertNotNull(provider);
 	}
 
