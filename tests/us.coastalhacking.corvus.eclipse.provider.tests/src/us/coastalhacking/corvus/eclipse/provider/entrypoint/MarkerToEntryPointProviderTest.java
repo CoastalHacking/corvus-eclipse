@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.eclipse.emf.common.command.Command;
@@ -25,16 +23,11 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
-import org.eclipse.emf.transaction.TriggerListener;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
-import us.coastalhacking.corvus.emf.EmfApi;
-import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.semiotics.IMarker;
 import us.coastalhacking.corvus.semiotics.IResource;
 import us.coastalhacking.corvus.semiotics.MarkerEntryPoint;
@@ -63,12 +56,6 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 	IMarker marker;
 	IResource resource;
 
-	TransactionIdUtil idUtil;
-	Map<String, Object> props;
-	String id;
-	Factory factory;
-	Registry registry;
-	
 	@BeforeEach
 	void subBeforeEach() throws Exception {
 		domain = new TransactionalEditingDomainImpl(new ComposedAdapterFactory());
@@ -89,7 +76,6 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 		epLogical = URI.createURI("test:ep.logical");
 		markerLogical = URI.createURI("test:marker.logical");
 		provider = new MarkerToEntryPointProvider();
-//		provider.domain = domain;
 		provider.epLogicalUri = epLogical;
 		epPhysical = URI.createPlatformResourceURI(
 				project.getFile(EcoreUtil.generateUUID()).getFullPath().toPortableString(), true);
@@ -109,25 +95,12 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 			}
 		};
 		domain.getCommandStack().execute(init);
-		
-		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
-		assertNotNull(idUtil);
-		props = new HashMap<>();
-		id = idUtil.getId(project);
-		idUtil.putId(props, id);
-		factory = configurationHelper(Factory.class,
-				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
-		assertNotNull(factory);
-		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
-				props, timeout);
-		// ensure it's provided
-		assertNotNull(registry);
 	}
 
 	@Test
 	void shouldConfigureForOsgi() throws Exception {
 		MarkerToEntryPointProvider provider = (MarkerToEntryPointProvider) configurationHelper(ResourceSetListener.class,
-				EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, props, timeout);
+				EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, Collections.emptyMap(), timeout);
 		assertNotNull(provider);
 	}
 

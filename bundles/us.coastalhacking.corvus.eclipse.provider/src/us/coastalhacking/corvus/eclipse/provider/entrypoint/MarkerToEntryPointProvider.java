@@ -2,7 +2,6 @@ package us.coastalhacking.corvus.eclipse.provider.entrypoint;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -14,13 +13,9 @@ import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
 import org.eclipse.emf.transaction.TriggerListener;
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
-import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Reference;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
@@ -34,9 +29,6 @@ import us.coastalhacking.corvus.semiotics.Signified;
 @Component(service = ResourceSetListener.class, configurationPid = EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true)
 public class MarkerToEntryPointProvider extends TriggerListener {
 
-//	private String transId;
-	// accessible for testing
-//	protected TransactionalEditingDomain domain;
 	private NotificationFilter filter;
 	URI epLogicalUri;
 
@@ -44,21 +36,6 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 		filter = NotificationFilter.createFeatureFilter(SemioticsPackage.Literals.IRESOURCE__MARKERS);
 		epLogicalUri = URI.createURI(EmfApi.ResourceInitializer.EntryPoint.Properties.LOGICAL);
 	}
-
-//	@Reference(name = EmfApi.CorvusTransactionalRegistry.Reference.NAME)
-//	Registry registry;
-//
-//	@Activate
-//	void activate(Map<String, Object> props) {
-//		transId = (String) props.get(EmfApi.TransactionalEditingDomain.Properties.ID);
-//		domain = registry.getEditingDomain(transId);
-//		domain.addResourceSetListener(this);
-//	}
-//
-//	@Deactivate
-//	void deactivate() {
-//		domain.removeResourceSetListener(this);
-//	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
@@ -65,6 +66,7 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	String id;
 	Factory factory;
 	Registry registry;
+	IEditingDomainProvider domainProvider;
 	final String markerType = EclipseApi.Marker.BASE_MARKER;
 	
 	@BeforeEach
@@ -83,6 +85,9 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 				props, timeout);
 		// ensure it's provided
 		assertNotNull(registry);
+
+		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID, props, timeout);
+		assertNotNull(domainProvider);
 	}
 
 	@Test
@@ -134,7 +139,8 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	
 	@Test
 	void shouldAddRemoveChangeMarkersViaOsgiProvider() throws Exception {
-		TransactionalEditingDomain domain = registry.getEditingDomain(id);
+		// dirty
+		TransactionalEditingDomain domain = (TransactionalEditingDomain) domainProvider.getEditingDomain();
 		
 		// Configure change listener
 		EclipseResourcesChangeListenerProvider provider = (EclipseResourcesChangeListenerProvider)configurationHelper(IResourceChangeListener.class, EclipseApi.IResourceChangeListener.Component.CONFIG_PID, props, timeout);

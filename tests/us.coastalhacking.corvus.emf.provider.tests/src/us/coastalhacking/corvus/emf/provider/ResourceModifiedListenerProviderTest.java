@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -26,16 +26,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionChangeDescription;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.emf.EmfApi;
-import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
 
 class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
@@ -44,38 +39,11 @@ class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 		super();
 	}
 
-	TransactionIdUtil idUtil;
-	Map<String, Object> props;
-	String id;
-	Factory factory;
-	Registry registry;
-	IEditingDomainProvider domainProvider;
-
-	@BeforeEach
-	void subBeforeEach() throws Exception {
-		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
-		assertNotNull(idUtil);
-		props = new HashMap<>();
-		id = idUtil.getId(project);
-		idUtil.putId(props, id);
-		factory = configurationHelper(Factory.class,
-				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
-		assertNotNull(factory);
-
-		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
-				props, timeout);
-		assertNotNull(registry);
-		
-		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID,
-				props, timeout);
-		assertNotNull(domainProvider);		
-	}
-
 	@Test
 	void shouldConfigure() throws Exception {
 		// Execute & verify
 		ResourceModifiedListenerProvider provider = (ResourceModifiedListenerProvider) configurationHelper(
-				ResourceSetListener.class, EmfApi.ResourceModifiedListener.Component.CONFIG_PID, props, timeout);
+				ResourceSetListener.class, EmfApi.ResourceModifiedListener.Component.CONFIG_PID, Collections.emptyMap(), timeout);
 		assertNotNull(provider);
 	}
 
