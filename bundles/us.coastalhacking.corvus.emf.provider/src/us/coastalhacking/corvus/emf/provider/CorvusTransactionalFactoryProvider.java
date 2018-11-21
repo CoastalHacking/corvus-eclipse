@@ -19,10 +19,14 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 import us.coastalhacking.corvus.emf.EmfApi;
 import us.coastalhacking.corvus.emf.ResourceInitializer;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 
 @Component(service = Factory.class, configurationPid = EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate=true)
 public class CorvusTransactionalFactoryProvider extends WorkspaceEditingDomainFactory {
 
+	@Reference
+	TransactionIdUtil idUtil;
+	
 	List<ResourceInitializer> initializers = new CopyOnWriteArrayList<>();
 
 	// BUG: doesn't add to existing TEDs
@@ -36,13 +40,12 @@ public class CorvusTransactionalFactoryProvider extends WorkspaceEditingDomainFa
 	}
 
 	Map<String, Object> props;
-	URI projectUri; 
+	URI projectUri;
 
 	@Activate
 	void activate(Map<String, Object> props) {
 		this.props = props;
-		String project = (String) props.get(EmfApi.ResourceInitializer.Properties.PROJECT);
-		projectUri = URI.createPlatformResourceURI(project, true);
+		projectUri = idUtil.getUri(props);
 	}
 
 	@Override
@@ -54,7 +57,6 @@ public class CorvusTransactionalFactoryProvider extends WorkspaceEditingDomainFa
 			Command command = new InitializingCommand(domain, logical, physical, ri.getRoot());
 			domain.getCommandStack().execute(command);
 		}
-
 		return domain;
 	}
 }

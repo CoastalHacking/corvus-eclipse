@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.semiotics.IMarker;
 import us.coastalhacking.corvus.semiotics.IResource;
 import us.coastalhacking.corvus.semiotics.MarkerEntryPoint;
@@ -61,8 +62,14 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 	IMarker marker;
 	IResource resource;
 
+	TransactionIdUtil idUtil;
+	Map<String, Object> props;
+	String id;
+	Factory factory;
+	Registry registry;
+	
 	@BeforeEach
-	void beforeSubEach() {
+	void subBeforeEach() throws Exception {
 		domain = new TransactionalEditingDomainImpl(new ComposedAdapterFactory());
 		epResource = new ResourceImpl();
 		markerResource = new ResourceImpl();
@@ -101,26 +108,23 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 			}
 		};
 		domain.getCommandStack().execute(init);
+		
+		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
+		assertNotNull(idUtil);
+		props = new HashMap<>();
+		id = idUtil.getId(project);
+		idUtil.putId(props, id);
+		factory = configurationHelper(Factory.class,
+				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		assertNotNull(factory);
+		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+				props, timeout);
+		// ensure it's provided
+		assertNotNull(registry);
 	}
 
 	@Test
 	void shouldConfigureForOsgi() throws Exception {
-		final Map<String, Object> props = new HashMap<>();
-		final String fullPath = project.getFullPath().toPortableString();
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, fullPath);
-		String transactionId = EcoreUtil.generateUUID();
-		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
-
-		// Configure factory
-		Factory factory = configurationHelper(Factory.class, EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID,
-				props, timeout);
-		assertNotNull(factory);
-
-		// Configure registry
-		Registry registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
-				props, timeout);
-		assertNotNull(registry);
-
 		MarkerToEntryPointProvider provider = (MarkerToEntryPointProvider) configurationHelper(TriggerListener.class,
 				EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, props, timeout);
 		assertNotNull(provider);

@@ -33,10 +33,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.semiotics.IWorkspaceRoot;
 import us.coastalhacking.corvus.semiotics.SemioticsFactory;
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
@@ -48,8 +50,8 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	public EclipseResourcesChangeListenerProviderTest() throws Exception {
 		super();
 	}
-	
-	SemioticsFactory factory = SemioticsFactory.eINSTANCE;
+
+	SemioticsFactory semioticsFactory = SemioticsFactory.eINSTANCE;
 
 	static final String CORNIX_FULL_PATH = "/corvidae/corvus/corvus_cornix";
 	static final long GW20170817 = ZonedDateTime
@@ -58,27 +60,33 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	static final long MARKER_ID = 42L;
 	static final String MARKER_TYPE = EclipseApi.Marker.BASE_MARKER;
 	
-	@Test
-	void shouldConfigureOsgi() throws Exception {
-		// Properties
-		final Map<String, Object> props = new HashMap<>();
-		final String fullPath = project.getFullPath().toPortableString();
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, fullPath);
-		final String markerType = EclipseApi.Marker.BASE_MARKER;
+	TransactionIdUtil idUtil;
+	Map<String, Object> props;
+	String id;
+	Factory factory;
+	Registry registry;
+	final String markerType = EclipseApi.Marker.BASE_MARKER;
+	
+	@BeforeEach
+	void subBeforeEach() throws Exception {
+		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
+		assertNotNull(idUtil);
+		props = new HashMap<>();
 		props.put(EclipseApi.IResourceChangeListener.Properties.MARKER_TYPE, markerType);
-		String transactionId = "shouldConfigureOsgi";
-		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
 
-		// Configure factory
-		Factory factory = configurationHelper(Factory.class,
+		id = idUtil.getId(project);
+		idUtil.putId(props, id);
+		factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
 		assertNotNull(factory);
-		
-		// Configure registry
-		Registry registry = configurationHelper(Registry.class,
-				EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props, timeout);
+		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+				props, timeout);
+		// ensure it's provided
 		assertNotNull(registry);
+	}
 
+	@Test
+	void shouldConfigureOsgi() throws Exception {
 		// Configure change listener
 		EclipseResourcesChangeListenerProvider provider = (EclipseResourcesChangeListenerProvider)configurationHelper(IResourceChangeListener.class, EclipseApi.IResourceChangeListener.Component.CONFIG_PID, props, timeout);
 		assertNotNull(provider);	
@@ -126,27 +134,7 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	
 	@Test
 	void shouldAddRemoveChangeMarkersViaOsgiProvider() throws Exception {
-		// Properties
-		final Map<String, Object> props = new HashMap<>();
-		final String fullPath = project.getFullPath().toPortableString();
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, fullPath);
-		props.put(EclipseApi.IResourceChangeListener.Properties.MARKER_TYPE, MARKER_TYPE);
-		String transactionId = "shouldAddRemoveChangeMarkersViaOsgiProvider";
-		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
-
-		// Configure initializer
-//		configurationHelper(ResourceInitializer.class, EclipseApi.ResourceInitializer.Component.CONFIG_PID, props, timeout);
-
-		// Configure factory
-		Factory factory = configurationHelper(Factory.class,
-				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
-		assertNotNull(factory);
-
-		// Configure registry
-		Registry registry = configurationHelper(Registry.class,
-				EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID, props, timeout);
-		assertNotNull(registry);	
-		TransactionalEditingDomain domain = registry.getEditingDomain(transactionId);
+		TransactionalEditingDomain domain = registry.getEditingDomain(id);
 		
 		// Configure change listener
 		EclipseResourcesChangeListenerProvider provider = (EclipseResourcesChangeListenerProvider)configurationHelper(IResourceChangeListener.class, EclipseApi.IResourceChangeListener.Component.CONFIG_PID, props, timeout);
@@ -185,9 +173,9 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	}
 
 	us.coastalhacking.corvus.semiotics.IResource createIResource(Resource resource, String fullPath, boolean contain) {
-		IWorkspaceRoot root = factory.createIWorkspaceRoot();
+		IWorkspaceRoot root = semioticsFactory.createIWorkspaceRoot();
 		resource.getContents().add(root);
-		us.coastalhacking.corvus.semiotics.IResource iResource = factory.createIResource();
+		us.coastalhacking.corvus.semiotics.IResource iResource = semioticsFactory.createIResource();
 		iResource.setFullPath(fullPath);
 		if (contain) {
 			root.getMembers().add(iResource);
@@ -200,7 +188,7 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 	}
 
 	us.coastalhacking.corvus.semiotics.IMarker createMarker(long id, us.coastalhacking.corvus.semiotics.IResource iResource) {
-		us.coastalhacking.corvus.semiotics.IMarker marker = factory.createIMarker();
+		us.coastalhacking.corvus.semiotics.IMarker marker = semioticsFactory.createIMarker();
 		marker.setId(id);
 		if (iResource != null) {
 			iResource.getMarkers().add(marker);
@@ -507,7 +495,7 @@ class EclipseResourcesChangeListenerProviderTest extends AbstractProjectTest {
 		assertNotNull(existingResource.getEObject(changeFragment));
 		assertNull(existingResource.getEObject(addedFragment));
 		EclipseResourcesChangeListenerProvider base = new EclipseResourcesChangeListenerProvider();
-		base.processIMarkerDeltas(deltas, factory, existingResource);
+		base.processIMarkerDeltas(deltas, semioticsFactory, existingResource);
 		assertNull(existingResource.getEObject(removeFragment));
 		assertNotNull(existingResource.getEObject(changeFragment));
 		assertNotNull(existingResource.getEObject(addedFragment));

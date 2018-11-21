@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
@@ -30,10 +31,15 @@ import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionChangeDescription;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.ServiceRegistration;
 
 import us.coastalhacking.corvus.emf.EmfApi;
+import us.coastalhacking.corvus.emf.ResourceInitializer;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
+import us.coastalhacking.corvus.test.util.UtilFactory;
 
 class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 
@@ -41,22 +47,31 @@ class ResourceModifiedListenerProviderTest extends AbstractProjectTest {
 		super();
 	}
 
-	@Test
-	void shouldConfigure() throws Exception {
-		Hashtable<String, Object> props = new Hashtable<>();
-		String transId = "test.eclipseresources.modified.listener";
-		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, transId);
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, project.getFullPath().toPortableString());
+	TransactionIdUtil idUtil;
+	Map<String, Object> props;
+	String id;
+	Factory factory;
+	Registry registry;
 
-		// Configure factory
-		configurationHelper(Factory.class, EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
-
-		// Configure registry
-		Registry registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
+	@BeforeEach
+	void subBeforeEach() throws Exception {
+		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
+		assertNotNull(idUtil);
+		props = new HashMap<>();
+		id = idUtil.getId(project);
+		idUtil.putId(props, id);
+		factory = configurationHelper(Factory.class,
+				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		assertNotNull(factory);
+		registry = configurationHelper(Registry.class, EmfApi.CorvusTransactionalRegistry.Component.CONFIG_PID,
 				props, timeout);
 		// ensure it's provided
 		assertNotNull(registry);
+	}
 
+	@Test
+	void shouldConfigure() throws Exception {
+		// Execute & verify
 		ResourceModifiedListenerProvider provider = (ResourceModifiedListenerProvider) configurationHelper(
 				ResourceSetListener.class, EmfApi.ResourceModifiedListener.Component.CONFIG_PID, props, timeout);
 		assertNotNull(provider);

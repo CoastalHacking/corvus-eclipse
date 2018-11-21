@@ -24,7 +24,8 @@ public class TransactionIdUtilProvider implements TransactionIdUtil {
 
 	@Override
 	public URI getUri(String id) {
-		return URI.createPlatformResourceURI(id, true);
+		// Do not gratuitously encode
+		return URI.createPlatformResourceURI(id, false);
 	}
 
 	@Override
@@ -35,5 +36,6 @@ public class TransactionIdUtilProvider implements TransactionIdUtil {
 	@Override
 	public void putId(Map<String, Object> props, String id) {
 		props.put(EmfApi.TransactionalEditingDomain.Properties.ID, id);
+		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, id);
 	}
 }

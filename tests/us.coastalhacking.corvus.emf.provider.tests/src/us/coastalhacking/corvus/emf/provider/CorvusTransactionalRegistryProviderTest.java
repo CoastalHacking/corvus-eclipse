@@ -13,10 +13,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.ServiceRegistration;
 
 import us.coastalhacking.corvus.emf.EmfApi;
 import us.coastalhacking.corvus.emf.ResourceInitializer;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
 import us.coastalhacking.corvus.test.util.UtilFactory;
 
@@ -26,12 +29,16 @@ class CorvusTransactionalRegistryProviderTest extends AbstractProjectTest {
 		super();
 	}
 
-	@Test
-	void shouldConfigure() throws Exception {
+	TransactionIdUtil idUtil;
+	Map<String, Object> props;
+	String id;
+	Factory factory;
 
-		final String logical = "test:" + getClass().getName();
-		final String projectName = project.getFullPath().toPortableString();
-		final String physical = "shouldConfigure.xmi"; //project.getFile("shouldConfigure.xmi").getFullPath().toPortableString();
+	final String logical = "test:" + getClass().getName();
+	final String physical = "physical.xmi";
+
+	@BeforeEach
+	void subBeforeEach() throws Exception {
 
 		ResourceInitializer testInitializer = new ResourceInitializer() {
 			@Override
@@ -50,14 +57,25 @@ class CorvusTransactionalRegistryProviderTest extends AbstractProjectTest {
 			}
 		};
 
-		Map<String, Object> props = new HashMap<>();
-		props.put(EmfApi.ResourceInitializer.Properties.PROJECT, projectName);
-		serviceRegistrations.add(
-				getBundleContext().registerService(ResourceInitializer.class, testInitializer, new Hashtable<>(props)));
+		// Then register the service afterward to test dynamic / greedy OSGi reference binding
+		ServiceRegistration<ResourceInitializer> reg = getBundleContext().registerService(ResourceInitializer.class, testInitializer, new Hashtable<>());
+		serviceRegistrations.add(reg);
+		ResourceInitializer actualInitializer = getBundleContext().getService(reg.getReference());
+		assertEquals(testInitializer, actualInitializer);
 
-		// Configure factory
-		configurationHelper(Factory.class,
+		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
+		assertNotNull(idUtil);
+		props = new HashMap<>();
+		id = idUtil.getId(project);
+		idUtil.putId(props, id);
+		factory = configurationHelper(Factory.class,
 				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		assertNotNull(factory);
+
+	}
+	
+	@Test
+	void shouldConfigure() throws Exception {
 
 		// Configure registry
 		CorvusTransactionalRegistryProvider provider = (CorvusTransactionalRegistryProvider)configurationHelper(Registry.class,

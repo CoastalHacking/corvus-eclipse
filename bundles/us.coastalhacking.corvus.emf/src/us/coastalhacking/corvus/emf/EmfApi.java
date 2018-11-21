@@ -7,8 +7,13 @@ public interface EmfApi {
 			String CONFIG_PID = "corvus.emf.domainprovider";
 		}
 		interface Reference {
-			String RESOURCE_SET_LISTENERS = "corvus.emf.domainprovider.rsl";
-			String INITIALIZERS = "corvus.emf.domainprovider.initializers";
+			// Use ResourceSetListener.Ref... NAME
+			@Deprecated
+			String RESOURCE_SET_LISTENERS = EmfApi.IEditingDomainProvider.Component.CONFIG_PID + ".rsl";
+			// Use ResourceInitializer.Refe.. NAME
+			@Deprecated
+			String INITIALIZERS = EmfApi.IEditingDomainProvider.Component.CONFIG_PID  + ".initializers";
+			String NAME = EmfApi.IEditingDomainProvider.Component.CONFIG_PID  + ".name";
 		}
 	}
 

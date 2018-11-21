@@ -30,12 +30,16 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
+import us.coastalhacking.corvus.emf.TransactionIdUtil;
 
 @Component(service=ILaunchConfigurationTab2.class, scope=ServiceScope.PROTOTYPE)
 public class CorvusTabProvider extends AbstractLaunchConfigurationTab {
 
 	@Reference
 	IWorkspace workspace;
+	
+	@Reference
+	TransactionIdUtil idUtil;
 	
 	ButtonListener buttonListener = new ButtonListener();
 	
@@ -52,11 +56,13 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab {
 		// called once
 		String projectName = null;
 		try {
-			projectName = configuration.getAttribute(EmfApi.ResourceInitializer.Properties.PROJECT, projectName);
+			projectName = configuration.getAttribute(EmfApi.TransactionalEditingDomain.Properties.ID, projectName);
 			if (projectName != null) {
 				IProject maybeProject = workspace.getRoot().getProject(projectName);
 				if (maybeProject != null) {
 					projectText.setText(projectName);
+				} else {
+					// TODO log
 				}
 			}
 		} catch (CoreException e) {
@@ -69,11 +75,11 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab {
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (!projectText.getText().isEmpty()) {
-			final String projectName = projectText.getText();
-			String id = URI.encodeSegment(projectName, true);
-			configuration.rename(id);
+			final String id = projectText.getText();
+			// Remove first forward slash
+			configuration.rename(id.substring(1));
 			configuration.setAttribute(EmfApi.TransactionalEditingDomain.Properties.ID, id);
-			configuration.setAttribute(EmfApi.ResourceInitializer.Properties.PROJECT, projectName);
+			configuration.setAttribute(EmfApi.ResourceInitializer.Properties.PROJECT, id);
 		}
 	}
 
@@ -116,12 +122,11 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab {
 		public void widgetSelected(SelectionEvent e) {
 			ILabelProvider labelProvider =  new LabelProvider() {
 				public String getText(Object element) {
-				if (element instanceof IProject) {
-					return ((IProject)element).getFullPath().toPortableString();
+					if (element instanceof IProject) {
+						return ((IProject)element).getFullPath().toPortableString();
+					}
+					return null;
 				}
-				return null;
-			}
-
 			};
 			ElementListSelectionDialog dialog = new ElementListSelectionDialog(getShell(), labelProvider);
 			dialog.setTitle("Corvus Project Selection");
@@ -131,8 +136,8 @@ public class CorvusTabProvider extends AbstractLaunchConfigurationTab {
 			if (dialog.open() == Window.OK) {
 				IProject project = (IProject) dialog.getFirstResult();
 				if (project != null) {
-					String projectName = project.getFullPath().toPortableString();
-					CorvusTabProvider.this.projectText.setText(projectName);
+					String id = idUtil.getId(project);
+					CorvusTabProvider.this.projectText.setText(id);
 				}
 			}
 		}

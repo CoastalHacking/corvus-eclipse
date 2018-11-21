@@ -55,10 +55,12 @@ class TransactionIdUtilProviderTest extends AbstractProjectTest {
 	@Test
 	void shouldGetUriString() {
 		TransactionIdUtilProvider provider = new TransactionIdUtilProvider();
+		assertTrue(expectedId.startsWith("/"));
 		URI actualUri = provider.getUri(expectedId);
+		assertFalse(actualUri.toString().contains("%"));
 		assertEquals(expectedUri, actualUri);
 	}
-	
+
 	@Test
 	void shouldGetIdIProject() {
 		TransactionIdUtilProvider provider = new TransactionIdUtilProvider();
