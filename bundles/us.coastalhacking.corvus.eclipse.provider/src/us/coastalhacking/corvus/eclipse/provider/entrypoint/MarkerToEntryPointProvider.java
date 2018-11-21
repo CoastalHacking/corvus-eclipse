@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.transaction.NotificationFilter;
+import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
 import org.eclipse.emf.transaction.TriggerListener;
@@ -30,12 +31,12 @@ import us.coastalhacking.corvus.semiotics.SemioticsFactory;
 import us.coastalhacking.corvus.semiotics.SemioticsPackage;
 import us.coastalhacking.corvus.semiotics.Signified;
 
-@Component(service = TriggerListener.class, configurationPid = EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true)
+@Component(service = ResourceSetListener.class, configurationPid = EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true)
 public class MarkerToEntryPointProvider extends TriggerListener {
 
-	private String transId;
+//	private String transId;
 	// accessible for testing
-	protected TransactionalEditingDomain domain;
+//	protected TransactionalEditingDomain domain;
 	private NotificationFilter filter;
 	URI epLogicalUri;
 
@@ -44,20 +45,20 @@ public class MarkerToEntryPointProvider extends TriggerListener {
 		epLogicalUri = URI.createURI(EmfApi.ResourceInitializer.EntryPoint.Properties.LOGICAL);
 	}
 
-	@Reference(name = EmfApi.CorvusTransactionalRegistry.Reference.NAME)
-	Registry registry;
-
-	@Activate
-	void activate(Map<String, Object> props) {
-		transId = (String) props.get(EmfApi.TransactionalEditingDomain.Properties.ID);
-		domain = registry.getEditingDomain(transId);
-		domain.addResourceSetListener(this);
-	}
-
-	@Deactivate
-	void deactivate() {
-		domain.removeResourceSetListener(this);
-	}
+//	@Reference(name = EmfApi.CorvusTransactionalRegistry.Reference.NAME)
+//	Registry registry;
+//
+//	@Activate
+//	void activate(Map<String, Object> props) {
+//		transId = (String) props.get(EmfApi.TransactionalEditingDomain.Properties.ID);
+//		domain = registry.getEditingDomain(transId);
+//		domain.addResourceSetListener(this);
+//	}
+//
+//	@Deactivate
+//	void deactivate() {
+//		domain.removeResourceSetListener(this);
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override

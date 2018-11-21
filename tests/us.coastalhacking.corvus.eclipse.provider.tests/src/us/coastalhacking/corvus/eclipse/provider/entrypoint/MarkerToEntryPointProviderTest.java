@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
@@ -88,7 +89,7 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 		epLogical = URI.createURI("test:ep.logical");
 		markerLogical = URI.createURI("test:marker.logical");
 		provider = new MarkerToEntryPointProvider();
-		provider.domain = domain;
+//		provider.domain = domain;
 		provider.epLogicalUri = epLogical;
 		epPhysical = URI.createPlatformResourceURI(
 				project.getFile(EcoreUtil.generateUUID()).getFullPath().toPortableString(), true);
@@ -125,7 +126,7 @@ class MarkerToEntryPointProviderTest extends AbstractProjectTest {
 
 	@Test
 	void shouldConfigureForOsgi() throws Exception {
-		MarkerToEntryPointProvider provider = (MarkerToEntryPointProvider) configurationHelper(TriggerListener.class,
+		MarkerToEntryPointProvider provider = (MarkerToEntryPointProvider) configurationHelper(ResourceSetListener.class,
 				EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID, props, timeout);
 		assertNotNull(provider);
 	}
