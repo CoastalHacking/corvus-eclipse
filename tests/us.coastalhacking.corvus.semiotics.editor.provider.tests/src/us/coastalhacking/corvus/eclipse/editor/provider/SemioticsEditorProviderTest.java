@@ -64,12 +64,9 @@ class SemioticsEditorProviderTest extends AbstractProjectTest {
 		String id = idUtil.getId(project);
 		idUtil.putId(props, id);
 
-		factory = configurationHelper(Factory.class, EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props,
-				timeout);
+		factory = serviceTrackerHelper(Factory.class);
 		assertNotNull(factory);
-
-		registry = configurationHelper(Registry.class, EmfApi.Registry.Component.CONFIG_PID, props,
-				timeout);
+		registry = serviceTrackerHelper(Registry.class);
 		assertNotNull(registry);
 
 		domainProvider = configurationHelper(IEditingDomainProvider.class,

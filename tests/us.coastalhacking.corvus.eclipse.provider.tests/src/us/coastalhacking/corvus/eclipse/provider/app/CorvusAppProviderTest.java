@@ -48,12 +48,9 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		id = idUtil.getId(project);
 		idUtil.putId(props, id);
 
-		factory = configurationHelper(Factory.class,
-				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		factory = serviceTrackerHelper(Factory.class);
 		assertNotNull(factory);
-		registry = configurationHelper(Registry.class, EmfApi.Registry.Component.CONFIG_PID,
-				props, timeout);
-		// ensure it's provided
+		registry = serviceTrackerHelper(Registry.class);
 		assertNotNull(registry);
 		
 		domainProvider = configurationHelper(IEditingDomainProvider.class, EmfApi.IEditingDomainProvider.Component.CONFIG_PID, props, timeout*2);
@@ -75,8 +72,6 @@ class CorvusAppProviderTest extends AbstractProjectTest {
 		// Since the app does not require the below services directly test for them differently
 		final Map<Class<?>, Boolean> found = new HashMap<>();
 		// Needs to stay in sync with app's manually configured PIDs
-		found.put(Factory.class, false);
-		found.put(Registry.class, false);
 		found.put(IEditingDomainProvider.class, false);
 		found.put(IResourceChangeListener.class, false);
 

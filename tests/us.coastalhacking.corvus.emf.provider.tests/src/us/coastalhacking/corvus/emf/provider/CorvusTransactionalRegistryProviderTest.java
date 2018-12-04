@@ -17,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.osgi.framework.ServiceRegistration;
 
-import us.coastalhacking.corvus.emf.EmfApi;
 import us.coastalhacking.corvus.emf.ResourceInitializer;
 import us.coastalhacking.corvus.emf.TransactionIdUtil;
 import us.coastalhacking.corvus.test.util.AbstractProjectTest;
@@ -47,18 +46,20 @@ class CorvusTransactionalRegistryProviderTest extends AbstractProjectTest {
 			}
 
 			@Override
-			public String getPhysical() {
+			public String getFilename() {
 				return physical;
 			}
-			
+
 			@Override
 			public EObject getRoot() {
 				return UtilFactory.eINSTANCE.createTestRoot();
 			}
 		};
 
-		// Then register the service afterward to test dynamic / greedy OSGi reference binding
-		ServiceRegistration<ResourceInitializer> reg = getBundleContext().registerService(ResourceInitializer.class, testInitializer, new Hashtable<>());
+		// Then register the service afterward to test dynamic / greedy OSGi reference
+		// binding
+		ServiceRegistration<ResourceInitializer> reg = getBundleContext().registerService(ResourceInitializer.class,
+				testInitializer, new Hashtable<>());
 		serviceRegistrations.add(reg);
 		ResourceInitializer actualInitializer = getBundleContext().getService(reg.getReference());
 		assertEquals(testInitializer, actualInitializer);
@@ -68,19 +69,18 @@ class CorvusTransactionalRegistryProviderTest extends AbstractProjectTest {
 		props = new HashMap<>();
 		id = idUtil.getId(project);
 		idUtil.putId(props, id);
-		factory = configurationHelper(Factory.class,
-				EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		factory = serviceTrackerHelper(Factory.class);
 		assertNotNull(factory);
-
 	}
-	
+
 	@Test
 	void shouldConfigure() throws Exception {
 
 		// Configure registry
-		CorvusTransactionalRegistryProvider provider = (CorvusTransactionalRegistryProvider)configurationHelper(Registry.class,
-				EmfApi.Registry.Component.CONFIG_PID, props, timeout);
-		
+		CorvusTransactionalRegistryProvider provider = (CorvusTransactionalRegistryProvider) serviceTrackerHelper(
+				Registry.class);
+		assertNotNull(provider);
+
 		// Verify
 		assertNotNull(provider);
 		assertTrue(provider.registries.isEmpty());
@@ -91,16 +91,16 @@ class CorvusTransactionalRegistryProviderTest extends AbstractProjectTest {
 		assertEquals(domain, provider.registries.get(transactionalId));
 
 		TransactionalEditingDomain removedDomain = provider.remove(transactionalId);
-		assertTrue(provider.registries.isEmpty());		
+		assertTrue(provider.registries.isEmpty());
 		assertNotNull(removedDomain);
 		assertEquals(domain, removedDomain);
-		
+
 		// Simulate clean-up
 		provider.add(transactionalId, domain);
 		assertFalse(provider.registries.isEmpty());
 		provider.deactivate();
 		assertTrue(provider.registries.isEmpty());
-		
+
 	}
 
 }

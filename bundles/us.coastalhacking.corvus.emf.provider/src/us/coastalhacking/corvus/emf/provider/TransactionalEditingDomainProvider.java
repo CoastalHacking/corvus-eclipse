@@ -1,12 +1,19 @@
 package us.coastalhacking.corvus.emf.provider;
 
+import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.eclipse.emf.common.command.Command;
+import org.eclipse.core.runtime.jobs.JobGroup;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.command.DragAndDropCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -21,6 +28,7 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 import us.coastalhacking.corvus.emf.EmfApi;
+import us.coastalhacking.corvus.emf.GetMaybeAddCommand;
 import us.coastalhacking.corvus.emf.ResourceInitializer;
 import us.coastalhacking.corvus.emf.TransactionIdUtil;
 
@@ -31,6 +39,9 @@ public class TransactionalEditingDomainProvider implements IEditingDomainProvide
 	AtomicBoolean deactivated = new AtomicBoolean(false);
 	final List<ResourceSetListener> listeners = new CopyOnWriteArrayList<>();
 	final List<ResourceInitializer> initializers = new CopyOnWriteArrayList<>();
+	static final int NOT_USED = -1;
+
+	JobGroup jobGroup;
 	TransactionalEditingDomain editingDomain;
 	String transactionId;
 	URI projectUri;
@@ -38,10 +49,10 @@ public class TransactionalEditingDomainProvider implements IEditingDomainProvide
 	@Reference
 	TransactionIdUtil transactionIdUtil;
 
-	@Reference(name = EmfApi.Registry.Reference.NAME)
+	@Reference
 	Registry registry;
 
-	@Reference(name = EmfApi.IEditingDomainProvider.Reference.RESOURCE_SET_LISTENERS, cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, policyOption = ReferencePolicyOption.GREEDY)
+	@Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, policyOption = ReferencePolicyOption.GREEDY)
 	void setResourceSetListeners(ResourceSetListener listener) throws Exception {
 		if (activated.get()) {
 			editingDomain.addResourceSetListener(listener);
@@ -58,10 +69,10 @@ public class TransactionalEditingDomainProvider implements IEditingDomainProvide
 		}
 	}
 
-	@Reference(name = EmfApi.IEditingDomainProvider.Reference.INITIALIZERS, cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, policyOption = ReferencePolicyOption.GREEDY)
+	@Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, policyOption = ReferencePolicyOption.GREEDY)
 	void setInitializer(ResourceInitializer initializer) {
 		if (activated.get()) {
-			initializeResource(initializer);
+			initializeResource(editingDomain, projectUri, Collections.singletonList(initializer));
 		} else {
 			initializers.add(initializer);
 		}
@@ -73,27 +84,20 @@ public class TransactionalEditingDomainProvider implements IEditingDomainProvide
 		}
 	}
 
-	void initializeResource(ResourceInitializer initializer) {
-		final URI logical = URI.createURI(initializer.getLogical());
-		final URI physical = projectUri.appendSegment(initializer.getPhysical());
-		Command command = new InitializingCommand(getEditingDomain(), logical, physical, initializer.getRoot());
-		getEditingDomain().getCommandStack().execute(command);
-	}
-
 	@Activate
 	void activate(Map<String, Object> props) {
 		transactionId = transactionIdUtil.getId(props);
 		projectUri = transactionIdUtil.getUri(transactionId);
-
 		editingDomain = registry.getEditingDomain(transactionId);
+		jobGroup = new JobGroup(MessageFormat.format("Initializing resources for transaction ID {0}", transactionId), 0,
+				0);
 		activated.set(true);
+
 		for (ResourceSetListener listener : listeners) {
 			editingDomain.addResourceSetListener(listener);
 		}
 		listeners.clear();
-		for (ResourceInitializer initializer : initializers) {
-			initializeResource(initializer);
-		}
+		initializeResource(editingDomain, projectUri, initializers);
 		initializers.clear();
 	}
 
@@ -107,7 +111,31 @@ public class TransactionalEditingDomainProvider implements IEditingDomainProvide
 	}
 
 	@Override
-	public TransactionalEditingDomain getEditingDomain() {
+	public synchronized TransactionalEditingDomain getEditingDomain() {
 		return editingDomain;
+	}
+
+	// TODO: move this to a ResourceInitializerItemProvider.createCommand...
+	void initializeResource(EditingDomain editingDomain, URI projectUri, List<ResourceInitializer> initializers) {
+		final Map<URI, URI> entries = new HashMap<>();
+		final Map<URI, EObject> roots = new HashMap<>();
+
+		for (ResourceInitializer ri : initializers) {
+			final URI logicalUri = URI.createURI(ri.getLogical());
+			final URI physicalUri = projectUri.appendSegment(ri.getFilename());
+			entries.put(logicalUri, physicalUri);
+			roots.put(logicalUri, ri.getRoot());
+		}
+
+		final CompoundCommand compound = new CompoundCommand(CompoundCommand.LAST_COMMAND_ALL);
+
+		compound.append(DragAndDropCommand.create(editingDomain, editingDomain.getResourceSet(), NOT_USED, NOT_USED,
+				NOT_USED, entries.entrySet()));
+
+		roots.entrySet().stream().forEach(es -> {
+			compound.append(GetMaybeAddCommand.createCommand(editingDomain, es.getKey(), es.getValue()));
+		});
+
+		editingDomain.getCommandStack().execute(compound.unwrap());
 	}
 }

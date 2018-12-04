@@ -9,17 +9,23 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.common.command.BasicCommandStack;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalCommandStack;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Factory;
 import org.eclipse.emf.transaction.TransactionalEditingDomain.Registry;
+import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +42,7 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 		super();
 	}
 	
+	ComposedAdapterFactory adapterFactory;
 	TransactionalEditingDomainProvider provider;
 	Map<String, Object> props;
 	String transactionId;
@@ -47,7 +54,7 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 	URI projectUri;
 	ResourceSetListener listener;
 	ResourceInitializer initializer;
-	TransactionalEditingDomain editingDomain;
+	TransactionalEditingDomainImpl editingDomain;
 	TransactionalCommandStack stack;
 	String logical;
 	String physical;
@@ -57,20 +64,22 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 	protected void beforeEach() throws Exception {
 		super.beforeEach();
 
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new DecoratedResourceItemProviderAdapterFactory());
 		props = new HashMap<>();
 		idUtil = serviceTrackerHelper(TransactionIdUtil.class);
 		assertNotNull(idUtil);
 		transactionId = idUtil.getId(project);
 		projectUri = idUtil.getUri(transactionId);
 		idUtil.putId(props, transactionId);
-		//props.put(EmfApi.ResourceInitializer.Properties.PROJECT, transactionId);
-		factory = configurationHelper(Factory.class, EmfApi.CorvusTransactionalFactory.Component.CONFIG_PID, props, timeout);
+		factory = serviceTrackerHelper(Factory.class);
 		assertNotNull(factory);
-		registry = configurationHelper(Registry.class, EmfApi.Registry.Component.CONFIG_PID, props, timeout);
+		registry = serviceTrackerHelper(Registry.class);
 		assertNotNull(registry);
 		listener = mock(ResourceSetListener.class);
 		stack = mock(TransactionalCommandStack.class);
-		editingDomain = mock(TransactionalEditingDomain.class);
+		editingDomain = mock(TransactionalEditingDomainImpl.class);
+		when(editingDomain.getAdapterFactory()).thenReturn(adapterFactory);
 		when(editingDomain.getCommandStack()).thenReturn(stack);
 		mockRegistry = mock(Registry.class);
 		when(mockRegistry.getEditingDomain(transactionId)).thenReturn(editingDomain);
@@ -79,7 +88,7 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 		logical = String.format("test:%s", getClass());
 		physical = "test.semiotics";
 		when(initializer.getLogical()).thenReturn(logical);
-		when(initializer.getPhysical()).thenReturn(physical);
+		when(initializer.getFilename()).thenReturn(physical);
 		root = UtilFactory.eINSTANCE.createTestRoot();
 		when(initializer.getRoot()).thenReturn(root);
 		
@@ -147,7 +156,7 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 		provider.activated.set(true);
 		provider.setInitializer(initializer);
 		verify(initializer, times(1)).getLogical();
-		verify(initializer, times(1)).getPhysical();
+		verify(initializer, times(1)).getFilename();
 		verify(initializer, times(1)).getRoot();
 		verify(stack, times(1)).execute(any());
 	}
@@ -194,6 +203,21 @@ class TransactionalEditingDomainProviderTest extends AbstractProjectTest {
 		provider.deactivate();
 		verify(provider.registry, times(1)).remove(transactionId);
 		verify(provider.editingDomain, times(1)).dispose();
+	}
+	
+	@Test
+	void shouldInitializeResource() {
+		CommandStack stack = new BasicCommandStack();
+		AdapterFactoryEditingDomain editingDomain = new AdapterFactoryEditingDomain(adapterFactory, stack);
+		
+		provider.initializeResource(editingDomain, projectUri, Collections.singletonList(initializer));		
+//		verify(initializer, times(1)).getLogical();
+//		verify(initializer, times(1)).getFilename();
+//		verify(initializer, times(1)).getRoot();
+//		verify(stack, times(1)).execute(any());
+		Command command = stack.getMostRecentCommand();
+		System.out.println(command);
+		
 	}
 
 }
