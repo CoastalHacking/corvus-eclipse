@@ -7,10 +7,13 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.osgi.service.cm.Configuration;
+import org.osgi.service.component.ComponentFactory;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.log.Logger;
+import org.osgi.service.log.LoggerFactory;
 
 import us.coastalhacking.corvus.eclipse.EclipseApi;
 import us.coastalhacking.corvus.emf.EmfApi;
@@ -23,6 +26,10 @@ public class CorvusAppFactoryProvider {
 	protected final List<Configuration> configurations = new CopyOnWriteArrayList<>();
 
 	@Reference
+	LoggerFactory loggerFactory;
+	Logger logger;
+	
+	@Reference
 	ConfigurationAdminHelper helper;
 	
 	@Reference
@@ -32,6 +39,8 @@ public class CorvusAppFactoryProvider {
 
 	@Activate
 	void activate(Map<String, Object> props) throws Exception {
+		logger = loggerFactory.getLogger(ComponentFactory.class);
+
 		Hashtable<String, Object> newProps = new Hashtable<>(props);
 		transactionId = idUtil.getId(props);
 		String[] targets = { EmfApi.IEditingDomainProvider.Reference.NAME };
@@ -42,10 +51,8 @@ public class CorvusAppFactoryProvider {
 		String[] pids = { EmfApi.IEditingDomainProvider.Component.CONFIG_PID,
 				// https://github.com/CoastalHacking/corvus-eclipse/issues/35
 				//EmfApi.ResourceModifiedListener.Component.CONFIG_PID,
-				// Would need a prototype-scope
 				EclipseApi.IResourceChangeListener.Component.CONFIG_PID,
-				//EclipseApi.TriggerListener.EntryPoint.Component.CONFIG_PID
-				};
+		};
 		configurePids(helper, pids, newProps, configurations);
 	}
 
@@ -55,8 +62,7 @@ public class CorvusAppFactoryProvider {
 			try {
 				helper.configure(pid, props, configurations);
 			} catch (Exception e) {
-				// TODO log
-				e.printStackTrace();
+				logger.warn("Could not configure PID {}", pid, e);
 			}
 		});
 	}
