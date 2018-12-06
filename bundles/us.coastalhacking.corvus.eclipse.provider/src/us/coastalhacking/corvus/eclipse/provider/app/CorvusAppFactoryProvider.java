@@ -28,10 +28,10 @@ public class CorvusAppFactoryProvider {
 	@Reference
 	LoggerFactory loggerFactory;
 	Logger logger;
-	
+
 	@Reference
 	ConfigurationAdminHelper helper;
-	
+
 	@Reference
 	TransactionIdUtil idUtil;
 
@@ -44,15 +44,14 @@ public class CorvusAppFactoryProvider {
 		Hashtable<String, Object> newProps = new Hashtable<>(props);
 		transactionId = idUtil.getId(props);
 		String[] targets = { EmfApi.IEditingDomainProvider.Reference.NAME };
-		helper.target(newProps, Arrays.stream(targets).sequential(),
-				EmfApi.TransactionalEditingDomain.Properties.ID, transactionId);
+		helper.target(newProps, Arrays.stream(targets).sequential(), EmfApi.TransactionalEditingDomain.Properties.ID,
+				transactionId);
 
 		// Ordered
 		String[] pids = { EmfApi.IEditingDomainProvider.Component.CONFIG_PID,
 				// https://github.com/CoastalHacking/corvus-eclipse/issues/35
-				//EmfApi.ResourceModifiedListener.Component.CONFIG_PID,
-				EclipseApi.IResourceChangeListener.Component.CONFIG_PID,
-		};
+				// EmfApi.ResourceModifiedListener.Component.CONFIG_PID,
+				EclipseApi.IResourceChangeListener.Component.CONFIG_PID, };
 		configurePids(helper, pids, newProps, configurations);
 	}
 
