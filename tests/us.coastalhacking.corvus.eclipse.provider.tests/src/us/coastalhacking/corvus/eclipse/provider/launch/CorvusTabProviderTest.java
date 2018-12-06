@@ -191,7 +191,6 @@ class CorvusTabProviderTest extends AbstractProjectTest {
 		verify(mockLogger, times(1)).warn(anyString(), messageCaptor.capture());
 		assertEquals(mockException, messageCaptor.getValue());
 	}
-
 	
 	@Disabled
 	@Test
